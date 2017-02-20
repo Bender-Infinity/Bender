@@ -11,5 +11,5 @@ app.use(function(req, res, next) {
 app.use(routes);
 
 app.listen(port, () => {
-  console.log('Listening on ' + port);
+  console.log('Working on Bender∞ on port ' + port);
 });

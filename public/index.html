@@ -6,18 +6,29 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="https://unpkg.com/webrtc-adapter/out/adapter.js"></script>
     <script src="./build.js"></script>
+    <script src="./aframe-cubemap-component.js"></script>
   </head>
   <body>
     <div id="app"></div>
     <!-- Render video stream onto plane -->
 	    <a-scene>
-	      <a-video-billboard id="guest1" video-billboard="minWidth: 10;" position="-8 1.25 -11" rotation ="0 7 0"></a-video-billboard>
+				<a-assets>	
+				<img id="wood-texture" src="./images/textures/circle-wood.jpg">
+			  </a-assets>
+			  <!-- background image -->
+			   <a-entity cubemap="folder: /images/textures/SanFrancisco4/"></a-entity>
 
-	      <a-video-billboard id="guest2" video-billboard="minWidth: 10;" position="8 1.25 -11" rotation ="0 -7 0"></a-video-billboard>
+			   <!-- table top -->
 
-	      <a-sky color="#ECECEC"></a-sky>
+			   <a-cylinder transparent="true" opacity="2" color="#424242" height="3" radius="1.5" scale="5 0.05 5" position="0 -2.12 0"></a-cylinder>
+			  
+	      <a-video-billboard id="guest1" video-billboard="minWidth: 10;" position="-8.66 1.25 -5" rotation ="0 60 0"></a-video-billboard>
 
-	      <a-entity id="camera-wrapper" position="0 0 0">
+	      <a-video-billboard id="guest2" video-billboard="minWidth: 10;" position="8.66 1.25 -5" rotation ="0 -60 0"></a-video-billboard>
+
+	      <!-- <a-sky color="#ECECEC"></a-sky> -->
+
+	      <a-entity id="camera-wrapper" position="0 0 10">
 	      	<a-camera wasd-controls-enabled="false"></a-camera>
 	      </a-entity>
 	    </a-scene>

@@ -46,7 +46,7 @@
 				<form id="sendMessage" action="">
 					<!-- <button id="enable">Enable Speech to Text </button>
 					<button id="disable">Disable Speech to Text </button> -->
-					<input type="text" x-webkit-speech id="m" autocomplete="off" /><button>Send</button>
+					<input type="text" x-webkit-speech id="m" autocomplete="off" /><button id="sendTextMessage">Send</button>
 				</form>
 	   </div>
 
@@ -58,7 +58,7 @@
 			<script>
 				var socket = io();
 
-		  	$('#sendMessage').submit(function(e){
+		  	$('#sendTextMessage').click(function(e){
 		  		console.log('socket', socket)
 		  		e.preventDefault();
 		    	socket.emit('chat message', $('#m').val());

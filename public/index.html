@@ -6,12 +6,15 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="https://unpkg.com/webrtc-adapter/out/adapter.js"></script>
     <script src="./build.js"></script>
+    <script src="./app.js"></script>
     <script src="./aframe-cubemap-component.js"></script>
   </head>
   <body>
     <div id="app"></div>
+    <!-- A frame scene  -->
+    <div>
     <!-- Render video stream onto plane -->
-	    <a-scene>
+	    <a-scene embedded>
 				<a-assets>	
 				<img id="wood-texture" src="./images/textures/circle-wood.jpg">
 			  </a-assets>
@@ -32,6 +35,41 @@
 	      	<a-camera wasd-controls-enabled="false"></a-camera>
 	      </a-entity>
 	    </a-scene>
+	   </div>
+	   <!-- end aframe scene -->
+	   <!-- Text chat that will be used as meeting notes -->
+	   <div id="message-log">
+		   	<ul id="messages">
+				</ul>
+			</div>
+			<div>
+				<form id="sendMessage" action="">
+					<!-- <button id="enable">Enable Speech to Text </button>
+					<button id="disable">Disable Speech to Text </button> -->
+					<input type="text" x-webkit-speech id="m" autocomplete="off" /><button>Send</button>
+				</form>
+	   </div>
+
     <script type="text/javascript" src="bundle.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		  crossorigin="anonymous"></script>
+
+		<script src="/socket.io/socket.io.js"></script>
+			<script>
+				var socket = io();
+
+		  	$('#sendMessage').submit(function(e){
+		  		console.log('socket', socket)
+		  		e.preventDefault();
+		    	socket.emit('chat message', $('#m').val());
+		    $('#m').val('');
+		    return false;
+		  	});
+		  	socket.on('chat message', function(msg){
+		   		$('#messages').append($('<li>').text(socket.id + ' says: ' + msg));
+		  		console.log('message to append: ', msg)
+		  	});
+			</script>
+		</script>
   </body>
 </html>

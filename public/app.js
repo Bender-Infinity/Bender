@@ -40,20 +40,26 @@ if (!('webkitSpeechRecognition' in window)) {
   };
 
   recognition.onend = function() {
+
+    console.log('speech recognition ending')
+    console.log('socket :')
     recognizing = false;
-    if (ignore_onend) {
-      return;
-    }
-    if (!final_transcript) {
-      // showInfo('info_start');
-      return;
-    }
-    if (window.getSelection) {
-      window.getSelection().removeAllRanges();
-      var range = document.createRange();
-      range.selectNode(document.getElementById('final_span'));
-      window.getSelection().addRange(range);
-    }
+    // if (ignore_onend) {
+    //   return;
+    // }
+    // if (!final_transcript) {
+    //   // showInfo('info_start');
+    //   return;
+    // }
+    // if (window.getSelection) {
+
+    //   console.log('window getSelection: ',window.getSelection)
+    //   window.getSelection().removeAllRanges();
+    //   console.log('remove ranges:', window.getSelection().removeAllRanges())
+    //   var range = document.createRange();
+    //   range.selectNode(document.getElementById('final_span'));
+    //   window.getSelection().addRange(range);
+    // }
     // if (create_email) {
     //   create_email = false;
     //   createEmail();

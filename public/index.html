@@ -14,7 +14,15 @@
   </head>
   <body>
     <div id="app"></div>
+	  <div id="drawingContainer">
+	  	<canvas id="canvas">
+	  	</canvas>
+  	<input id="clearDrawing" type="button" value="Clear" name="clear" onclick="clearIt()">
+	  <h3 style="float: right;">Draw with friends</h3>
+
+	  </div>
     <!-- A frame scene + chat -->
+
     <div id="scene-and-chat">
     <!-- A frame scene  -->
 	    <div id="aframe-div">
@@ -23,10 +31,10 @@
 				  </a-assets>
 				  <!-- background image -->
 				   <a-entity cubemap="folder: /images/textures/SanFrancisco4/"></a-entity>
-
+				   <a-collada-model src="#table" position="0 -15 0" scale="20 20 20" transparent="true" opacity="0.2"></a-collada-model>
 				   <!-- table top -->
-
-				   <a-cylinder transparent="true" opacity="2" color="#424242" height="3" radius="1.5" scale="5 0.05 5" position="0 -2.12 0"></a-cylinder>
+				 
+				   <!-- <a-cylinder transparent="true" opacity="2" color="#424242" height="3" radius="1.5" scale="5 0.05 5" position="0 -2.12 0"></a-cylinder> -->
 				  
 		      <a-video-billboard id="guest1" video-billboard="minWidth: 10;" position="-8.66 1.25 -5" rotation ="0 60 0"></a-video-billboard>
 
@@ -37,8 +45,10 @@
 		    </a-scene>
 	    </div>
 		  <!-- end aframe scene -->
-		  <!-- Text chat -->
+		  		  <!-- Text chat -->
+
 		  <div id="chat">
+		  <h3 style="float: inherit; margin-left: 6px;">Chat</h3>
 		  	<div id="message-log">
 			   	<ul id="messages">
 					</ul>
@@ -52,7 +62,12 @@
 		   </div>
 		  </div>
 	  <!-- End text chat -->
+
+
+	  <!-- End Shared drawing pad -->
 	  </div>
+	  	  <!-- Shared drawing pad -->
+
 	  <!-- End A frame scene + chat -->
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -60,19 +75,159 @@
 
 		<script src="/socket.io/socket.io.js"></script>
 			<script>
-				var socket = io();
+				
+					var socket = io();
 
-		  	$('#sendTextMessage').click(function(e){
-		  		console.log('socket', socket)
-		  		e.preventDefault();
-		    	socket.emit('chat message', $('#m').val());
-		    $('#m').val('');
-		    return false;
-		  	});
-		  	socket.on('chat message', function(msg){
-		   		$('#messages').append($('<li>').text(socket.id + ' says: ' + msg));
-		  		console.log('message to append: ', msg)
-		  	});
+			  	$('#sendTextMessage').click(function(e){
+			  		console.log('text message sent');
+			  		e.preventDefault();
+			    	socket.emit('chat message', $('#m').val());
+				    $('#m').val('');
+				    return false;
+			  	});
+			  		
+			  	socket.on('chat message', function(msg){
+			  		var time = new Date();
+    				time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
+			  		console.log('chatting in socket');
+				    var ul = document.getElementById('messages');
+				    var input = document.getElementById('m');
+
+				    li = document.createElement('LI');
+				    li.innerHTML = socket.nsp + ' says: ' + msg + '\n' + time;
+				    ul.appendChild(li);
+				    li.scrollIntoView();
+				    // if(ul.offsetHeight >= div.offsetHeight){
+				    //     ul.style.height = div.offsetHeight + "px";
+				    //   }
+			   		//$('#messages').append($('<li>').text(socket.nsp + ' says: ' + msg));
+			  		console.log('message to append: ', msg)
+			  	});
+				  	
+				  	//********************************* shared drawing ****************************
+					var mouse = { 
+			      click: false,
+			      move: false,
+			      pos: {x:0, y:0},
+			      pos_prev: false
+					};
+				   // get canvas element and create context
+				   var canvas  = document.getElementById('canvas');
+				   var context = canvas.getContext('2d');
+				   var width   = 200;
+				   var height  = 250;
+				   var socket  = io.connect();
+				   var radius = 10;
+				   context.lineWidth = radius * 2;
+
+				   // set canvas to full browser width/height
+				   canvas.width = width;
+				   canvas.height = height;
+
+				   canvas.onmousedown = function(e){ 
+      console.log('mouse down')
+      mouse.click = true; };
+   canvas.onmouseup = function(e){ mouse.click = false; };
+
+   canvas.onmousemove = function(e) {
+         console.log('drawing')
+      // normalize mouse position to range 0.0 - 1.0
+      mouse.pos.x = e.clientX / width;
+      mouse.pos.y = e.clientY / height;
+      mouse.move = true;
+   };
+
+   // draw line received from server
+   socket.on('draw_line', function (data) {
+      var line = data.line;
+      context.beginPath();
+      context.moveTo(line[0].x * width, line[0].y * height);
+      context.lineTo(line[1].x * width, line[1].y * height);
+      context.stroke();
+   });
+   
+   // main loop, running every 25ms
+   function mainLoop() {
+      // check if the user is drawing
+      if (mouse.click && mouse.move && mouse.pos_prev) {
+      console.log('sending to server socket')
+         // send line to to the server
+         socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
+         mouse.move = false;
+      }
+      mouse.pos_prev = {x: mouse.pos.x, y: mouse.pos.y};
+      setTimeout(mainLoop, 25);
+   }
+   mainLoop();
+				 //   var putPoint = function (e) {
+				 //   	if(mouse.drawing) {
+					//    	console.log('drawing')
+					//     mouse.click = true; 
+					//     mouse.pos.x = e.offsetX / width
+					//     mouse.pos.y = e.offsetY / height
+					//     context.lineTo(e.offsetX, e.offsetY)
+					//     var secondPoint = (context.lineTo(e.offsetX, e.offsetY))
+					//     context.stroke();
+					//     context.beginPath();
+					//     //context.arc(e.offsetX, e.offsetY,radius, 0, Math.PI*2);
+					//     context.lineCap="round"
+					//     context.fill();
+					//     context.beginPath();
+					//     context.moveTo(e.offsetX, e.offsetY);
+					//     var secondPoint = (context.moveTo(e.offsetX, e.offsetY))
+					//     //socket.emit('draw_line', { line: [prev, current],  });
+					//     console.log('client socket emit to server');
+				 //   	}
+				 //   };
+
+				 //   //commenting out drawing a point 
+				 //   var engage = function (e) {
+				 //   	console.log('point added, start drawing')
+				 //   	mouse.drawing = true;
+				 //   	putPoint(e);
+				 //   	socket.broadcast.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
+				 //   	console.log('client socket emit to server')
+				 //   };
+
+				 //   var disengage = function () {
+				 //   	console.log('not drawing')
+				 //   	mouse.drawing = false;
+				 //   	context.beginPath();
+				 //   };
+
+				 //  canvas.addEventListener('mousemove', putPoint);
+				 //  canvas.addEventListener('mousedown', engage);
+				 //  canvas.addEventListener('mouseup', disengage)
+
+					// // socket.on('draw_line', function (data) {
+					// // 	console.log('receiving drawing from everyone', data)
+			  // //     var line = data.line;
+			  // //     context.beginPath();
+			  // //     context.moveTo(line[0].x * width, line[0].y * height);
+			  // //     context.lineTo(line[1].x * width, line[1].y * height);
+			  // //     context.stroke();
+				 // //   });
+
+					function clearIt () {
+						context.clearRect(0,0,width,height)
+						socket.emit('clear drawing');
+					};
+
+					// function mainLoop() {
+     //  		// check if the user is drawing
+     //  			if (mouse.click && mouse.move && mouse.pos_prev) {
+     //  				console.log('drawing and sending to server socket')
+	    //      	// send line to to the server
+	    //      	socket.broadcast.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
+     //     		mouse.move = false;
+				 //  	}
+				 //      mouse.pos_prev = {x: mouse.pos.x, y: mouse.pos.y};
+				 //      setTimeout(mainLoop, 25);
+				 //  	}
+   		// 			mainLoop();
+
+			
+				   //****************************** end shared drawing ****************************
 			</script>
 		</script>
   </body>

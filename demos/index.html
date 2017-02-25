@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Bender ∞</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://unpkg.com/webrtc-adapter/out/adapter.js"></script>
+    <!-- <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script> -->
+    <!-- <script type="text/javascript" src="bundle.js" charset="utf-8"></script> -->
+    <script src="./build.js"></script>
+    <script src="./app.js"></script>
+    <script src="https://unpkg.com/aframe-video-billboard"></script> 
+    <script src="./aframe-cubemap-component.js"></script>
+  </head>
+  <body onload="startTime()">
+    <article>
+        <div class="github-stargazers"></div>
+        <section class="experiment">
+            <div class="make-center">
+                <input type="text" id="room-id" value="abcdef" autocorrect=off autocapitalize=off size=20>
+                <button id="open-room">Open Room</button>
+                <button id="join-room">Join Room</button>
+                <button id="open-or-join-room">Auto Open Or Join Room</button>
+                <div id="room-urls">
+                </div>
+            </div>
+            <div id="videos-container"></div>
+        </section>
+        <script src="/RTCMultiConnection.min.js"></script>
+        <script src="https://cdn.webrtc-experiment.com/getMediaElement.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+
+        <script>
+            // ......................................................
+            // .......................UI Code........................
+            // ......................................................
+
+            document.getElementById('open-room').onclick = function() {
+                disableInputButtons();
+                connection.open(document.getElementById('room-id').value, function() {
+                    showRoomURL(connection.sessionid);
+                });
+            };
+
+            document.getElementById('join-room').onclick = function() {
+                disableInputButtons();
+                connection.join(document.getElementById('room-id').value);
+            };
+
+            document.getElementById('open-or-join-room').onclick = function() {
+                disableInputButtons();
+                connection.openOrJoin(document.getElementById('room-id').value, function(isRoomExists, roomid) {
+                    if(!isRoomExists) {
+                        showRoomURL(roomid);
+                    }
+                });
+            };
+
+            // ......................................................
+            // ..................RTCMultiConnection Code.............
+            // ......................................................
+
+            var connection = new RTCMultiConnection();
+
+            // by default, socket.io server is assumed to be deployed on your own URL
+            connection.socketURL = '/';
+
+            connection.socketMessageEvent = 'video-conference-demo';
+
+            connection.session = {
+                audio: true,
+                video: true
+            };
+
+            connection.sdpConstraints.mandatory = {
+                OfferToReceiveAudio: true,
+                OfferToReceiveVideo: true
+            };
+
+            connection.videosContainer = document.getElementById('videos-container');
+            connection.onstream = function(event) {
+                var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
+                var mediaElement = getMediaElement(event.mediaElement, {
+                    title: event.userid,
+                    buttons: ['full-screen'],
+                    width: width,
+                    showOnMouseEnter: false
+                });
+
+                connection.videosContainer.appendChild(mediaElement);
+
+                setTimeout(function() {
+                    mediaElement.media.play();
+                }, 5000);
+
+                mediaElement.id = event.streamid;
+            };
+
+            connection.onstreamended = function(event) {
+                var mediaElement = document.getElementById(event.streamid);
+                if(mediaElement) {
+                    mediaElement.parentNode.removeChild(mediaElement);
+                }
+            };
+
+            function disableInputButtons() {
+                document.getElementById('open-or-join-room').disabled = true;
+                document.getElementById('open-room').disabled = true;
+                document.getElementById('join-room').disabled = true;
+                document.getElementById('room-id').disabled = true;
+            }
+
+            // ......................................................
+            // ......................Handling Room-ID................
+            // ......................................................
+
+            function showRoomURL(roomid) {
+                var roomHashURL = '#' + roomid;
+                var roomQueryStringURL = '?roomid=' + roomid;
+
+                var html = '<h2>Unique URL for your room:</h2><br>';
+
+                html += 'Hash URL: <a href="' + roomHashURL + '" target="_blank">' + roomHashURL + '</a>';
+                html += '<br>';
+                html += 'QueryString URL: <a href="' + roomQueryStringURL + '" target="_blank">' + roomQueryStringURL + '</a>';
+
+                var roomURLsDiv = document.getElementById('room-urls');
+                roomURLsDiv.innerHTML = html;
+
+                roomURLsDiv.style.display = 'block';
+            }
+
+            (function() {
+                var params = {},
+                    r = /([^&=]+)=?([^&]*)/g;
+
+                function d(s) {
+                    return decodeURIComponent(s.replace(/\+/g, ' '));
+                }
+                var match, search = window.location.search;
+                while (match = r.exec(search.substring(1)))
+                    params[d(match[1])] = d(match[2]);
+                window.params = params;
+            })();
+
+            var roomid = '';
+            if (localStorage.getItem(connection.socketMessageEvent)) {
+                roomid = localStorage.getItem(connection.socketMessageEvent);
+            } else {
+                roomid = connection.token();
+            }
+            document.getElementById('room-id').value = roomid;
+            document.getElementById('room-id').onkeyup = function() {
+                localStorage.setItem(connection.socketMessageEvent, this.value);
+            };
+
+            var hashString = location.hash.replace('#', '');
+            if(hashString.length && hashString.indexOf('comment-') == 0) {
+              hashString = '';
+            }
+
+            var roomid = params.roomid;
+            if(!roomid && hashString.length) {
+                roomid = hashString;
+            }
+
+            if(roomid && roomid.length) {
+                document.getElementById('room-id').value = roomid;
+                localStorage.setItem(connection.socketMessageEvent, roomid);
+
+                // auto-join-room
+                (function reCheckRoomPresence() {
+                    connection.checkPresence(roomid, function(isRoomExists) {
+                        if(isRoomExists) {
+                            connection.join(roomid);
+                            return;
+                        }
+
+                        setTimeout(reCheckRoomPresence, 5000);
+                    });
+                })();
+
+                disableInputButtons();
+            }
+        </script>
+    </article>
+    <div id="aframe-div">
+        <a-scene id="aframe-scene">
+                <a-assets>  
+              </a-assets>
+              <!-- background image -->
+               <a-entity cubemap="folder: /images/textures/SanFrancisco4/"></a-entity>
+               <a-collada-model src="#table" position="0 -15 0" scale="20 20 20" transparent="true" opacity="0.2"></a-collada-model>
+               <!-- table top -->
+             
+               <!-- <a-cylinder transparent="true" opacity="2" color="#424242" height="3" radius="1.5" scale="5 0.05 5" position="0 -2.12 0"></a-cylinder> -->
+              
+          <a-video-billboard id="guest1" video-billboard="minWidth: 10;" position="-8.66 1.25 -5" rotation ="0 60 0"></a-video-billboard>
+
+          <a-video-billboard id="guest2" video-billboard="minWidth: 10;" position="8.66 1.25 -5" rotation ="0 -60 0"></a-video-billboard>
+          <a-entity id="camera-wrapper" position="0 0 10">
+            <a-camera wasd-controls-enabled="true"></a-camera>
+          </a-entity>
+        </a-scene>
+    </div>
+</body>
+</html>

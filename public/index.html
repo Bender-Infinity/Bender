@@ -12,7 +12,8 @@
     <script src="https://unpkg.com/aframe-video-billboard"></script> 
     <script src="./aframe-cubemap-component.js"></script>
   </head>
-  <body>
+  <body onload="startTime()">
+  	<div id="clock"></div>
     <div id="app"></div>
 	  <div id="drawingContainer">
 	  	<canvas id="canvas">
@@ -48,7 +49,11 @@
 		  		  <!-- Text chat -->
 
 		  <div id="chat">
-		  <h3 style="float: inherit; margin-left: 6px;">Chat</h3>
+		  	<ul>
+				  <li><h3 style="float: inherit; margin-left: 6px;">Chat</h3></li>
+				  <li><h3 id="startVoice" style="float: inherit; margin-left: 6px;">Start Voice Chat</h3></li>
+				  <li><h3 id="endVoice" style="float: inherit; margin-left: 6px;">End Voice Chat</h3></li>
+				</ul>
 		  	<div id="message-log">
 			   	<ul id="messages">
 					</ul>
@@ -75,7 +80,17 @@
 
 		<script src="/socket.io/socket.io.js"></script>
 			<script>
-				
+					//start voice chat
+					$('#startVoice').click(function () {
+						console.log('voice chat activated');
+						recognition.start();
+					});
+
+					$('#endVoice').click(function () {
+						recognition.stop();
+						console.log('voice chat stopped');
+					})
+
 					var socket = io();
 
 			  	$('#sendTextMessage').click(function(e){
@@ -124,42 +139,42 @@
 				   canvas.width = width;
 				   canvas.height = height;
 
-				   canvas.onmousedown = function(e){ 
-      console.log('mouse down')
-      mouse.click = true; };
-   canvas.onmouseup = function(e){ mouse.click = false; };
+				  canvas.onmousedown = function(e){ 
+      		console.log('mouse down')
+      		mouse.click = true; };
+   				canvas.onmouseup = function(e){ mouse.click = false; };
 
-   canvas.onmousemove = function(e) {
-         console.log('drawing')
-      // normalize mouse position to range 0.0 - 1.0
-      mouse.pos.x = e.clientX / width;
-      mouse.pos.y = e.clientY / height;
-      mouse.move = true;
-   };
+			   	canvas.onmousemove = function(e) {
+			         console.log('drawing')
+			      // normalize mouse position to range 0.0 - 1.0
+			      mouse.pos.x = e.clientX / width;
+			      mouse.pos.y = e.clientY / height;
+			      mouse.move = true;
+			   	};
 
-   // draw line received from server
-   socket.on('draw_line', function (data) {
-      var line = data.line;
-      context.beginPath();
-      context.moveTo(line[0].x * width, line[0].y * height);
-      context.lineTo(line[1].x * width, line[1].y * height);
-      context.stroke();
-   });
+   				// draw line received from server
+				   socket.on('draw_line', function (data) {
+				      var line = data.line;
+				      context.beginPath();
+				      context.moveTo(line[0].x * width, line[0].y * height);
+				      context.lineTo(line[1].x * width, line[1].y * height);
+				      context.stroke();
+				   });
    
-   // main loop, running every 25ms
-   function mainLoop() {
-      // check if the user is drawing
-      if (mouse.click && mouse.move && mouse.pos_prev) {
-      console.log('sending to server socket')
-         // send line to to the server
-         socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
-         mouse.move = false;
-      }
-      mouse.pos_prev = {x: mouse.pos.x, y: mouse.pos.y};
-      setTimeout(mainLoop, 25);
-   }
-   mainLoop();
-				 //   var putPoint = function (e) {
+					   // main loop, running every 25ms
+					   function mainLoop() {
+					      // check if the user is drawing
+					      if (mouse.click && mouse.move && mouse.pos_prev) {
+					      console.log('sending to server socket')
+					         // send line to to the server
+					         socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
+					         mouse.move = false;
+					      }
+					      mouse.pos_prev = {x: mouse.pos.x, y: mouse.pos.y};
+					      setTimeout(mainLoop, 25);
+					   }
+					   mainLoop();
+				 //   var putPoint = function (e) {c
 				 //   	if(mouse.drawing) {
 					//    	console.log('drawing')
 					//     mouse.click = true; 

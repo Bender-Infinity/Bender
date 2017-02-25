@@ -10,6 +10,7 @@
     <script src="./aframe-cubemap-component.js"></script>
   </head>
   <body onload="startTime()">
+  	<!-- <h1>Bender ∞</h1> -->
   	<div id="clock"></div>
     <div id="app"></div>
 	  <div id="drawingContainer">
@@ -139,15 +140,17 @@
 				   canvas.height = height;
 
 				  canvas.onmousedown = function(e){ 
-      		console.log('mouse down')
-      		mouse.click = true; };
+	      		console.log('mouse down')
+	      		mouse.click = true; 
+	      	};
+   				
    				canvas.onmouseup = function(e){ mouse.click = false; };
 
 			   	canvas.onmousemove = function(e) {
 			         console.log('drawing')
 			      // normalize mouse position to range 0.0 - 1.0
-			      mouse.pos.x = e.clientX / width;
-			      mouse.pos.y = e.clientY / height;
+			      mouse.pos.x = e.clientX / width
+			      mouse.pos.y = e.clientY / height
 			      mouse.move = true;
 			   	};
 

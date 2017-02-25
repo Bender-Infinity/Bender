@@ -216,17 +216,10 @@ function capitalize(s) {
 
 //*************************DISPLAY CLOCK ************************
 function startTime() {
-    var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    var ampm = h >= 12 ? 'pm' : 'am';
-    hours = h % 12;
-    hours = h ? h : 12
-    m = checkTime(m);
-    s = checkTime(s);
-    document.getElementById('clock').innerHTML =
-    h + ":" + m + ":" + s + ampm;
+  var time = new Date();
+    time = time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', second: 'numeric', hour12: true });
+
+    document.getElementById('clock').innerHTML = time
     var t = setTimeout(startTime, 500);
 }
 function checkTime(i) {

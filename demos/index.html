@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>WebRTC Video Conferencing</title>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Bender ∞</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://unpkg.com/webrtc-adapter/out/adapter.js"></script>
+    <!-- <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script> -->
+    <!-- <script type="text/javascript" src="bundle.js" charset="utf-8"></script> -->
+    <script src="./build.js"></script>
+    <script src="./app.js"></script>
+    <script src="https://unpkg.com/aframe-video-billboard"></script> 
+    <script src="./aframe-cubemap-component.js"></script>
+  </head>
+  <body onload="startTime()">
     <article>
         <div class="github-stargazers"></div>
         <section class="experiment">
@@ -175,5 +184,24 @@
             }
         </script>
     </article>
+    <div id="aframe-div">
+        <a-scene id="aframe-scene">
+                <a-assets>  
+              </a-assets>
+              <!-- background image -->
+               <a-entity cubemap="folder: /images/textures/SanFrancisco4/"></a-entity>
+               <a-collada-model src="#table" position="0 -15 0" scale="20 20 20" transparent="true" opacity="0.2"></a-collada-model>
+               <!-- table top -->
+             
+               <!-- <a-cylinder transparent="true" opacity="2" color="#424242" height="3" radius="1.5" scale="5 0.05 5" position="0 -2.12 0"></a-cylinder> -->
+              
+          <a-video-billboard id="guest1" video-billboard="minWidth: 10;" position="-8.66 1.25 -5" rotation ="0 60 0"></a-video-billboard>
+
+          <a-video-billboard id="guest2" video-billboard="minWidth: 10;" position="8.66 1.25 -5" rotation ="0 -60 0"></a-video-billboard>
+          <a-entity id="camera-wrapper" position="0 0 10">
+            <a-camera wasd-controls-enabled="true"></a-camera>
+          </a-entity>
+        </a-scene>
+    </div>
 </body>
 </html>

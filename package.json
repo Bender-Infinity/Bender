@@ -1,67 +1,55 @@
 {
-  "_args": [
-    [
-      {
-        "raw": "rtcmulticonnection-v3",
-        "scope": null,
-        "escapedName": "rtcmulticonnection-v3",
-        "name": "rtcmulticonnection-v3",
-        "rawSpec": "",
-        "spec": "latest",
-        "type": "tag"
-      },
-      "/home"
-    ]
-  ],
-  "_from": "rtcmulticonnection-v3@latest",
-  "_id": "rtcmulticonnection-v3@3.4.3",
-  "_inCache": true,
-  "_location": "/rtcmulticonnection-v3",
-  "_nodeVersion": "7.0.0",
-  "_npmOperationalInternal": {
-    "host": "packages-18-east.internal.npmjs.com",
-    "tmp": "tmp/rtcmulticonnection-v3-3.4.3.tgz_1480099282289_0.2023204006254673"
+  "name": "thesis",
+  "version": "1.0.0",
+  "description": "thesis",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js --watch"
   },
-  "_npmUser": {
-    "name": "muaz-khan",
-    "email": "muazkh@gmail.com"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/im-buff/bender.git"
   },
-  "_npmVersion": "3.10.8",
-  "_phantomChildren": {},
-  "_requested": {
-    "raw": "rtcmulticonnection-v3",
-    "scope": null,
-    "escapedName": "rtcmulticonnection-v3",
-    "name": "rtcmulticonnection-v3",
-    "rawSpec": "",
-    "spec": "latest",
-    "type": "tag"
-  },
-  "_requiredBy": [
-    "#USER"
-  ],
-  "_resolved": "https://registry.npmjs.org/rtcmulticonnection-v3/-/rtcmulticonnection-v3-3.4.3.tgz",
-  "_shasum": "df814a740fc47788975385ae26ac0a6c51aed634",
-  "_shrinkwrap": null,
-  "_spec": "rtcmulticonnection-v3",
-  "_where": "/home",
-  "analyze": false,
-  "author": {
-    "name": "Muaz Khan",
-    "email": "muazkh@gmail.com",
-    "url": "http://www.muazkhan.com/"
-  },
+  "author": "",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/muaz-khan/RTCMultiConnection/issues",
-    "email": "muazkh@gmail.com"
+    "url": "https://github.com/im-buff/bender/issues"
   },
+  "homepage": "https://github.com/im-buff/bender#readme",
   "dependencies": {
-    "body-parser": "^1.16.1",
-    "express": "^4.14.1",
-    "socket.io": "latest"
+    "aframe-video-billboard": "^1.0.2",
+    "cuid": "^1.3.8",
+    "deep-equal": "^1.0.1",
+    "simple-statistics": "^2.1.0",
+    "socket.io": "^1.7.3"
   },
-  "description": "RTCMultiConnection is a WebRTC JavaScript wrapper library runs top over RTCPeerConnection API to support all possible peer-to-peer features.",
   "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.14.0",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.0",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "body-parser": "^1.16.1",
+    "chai": "^3.5.0",
+    "changelog-verify": "^1.0.4",
+    "exorcist": "^0.4.0",
+    "express": "^4.14.1",
+    "in-publish": "^2.0.0",
+    "jasmine": "^2.5.3",
+    "mocha": "^3.2.0",
+    "morgan": "^1.8.1",
+    "nodemon": "^1.11.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-router": "^3.0.2",
+    "sinon": "^1.17.7",
+    "version-changelog": "^2.0.1",
+    "webpack": "^2.2.1",
     "grunt": "0.4.5",
     "grunt-bump": "0.7.0",
     "grunt-cli": "0.1.13",
@@ -72,74 +60,5 @@
     "grunt-jsbeautifier": "0.2.10",
     "grunt-replace": "0.11.0",
     "load-grunt-tasks": "3.4.0"
-  },
-  "directories": {},
-  "dist": {
-    "shasum": "df814a740fc47788975385ae26ac0a6c51aed634",
-    "tarball": "https://registry.npmjs.org/rtcmulticonnection-v3/-/rtcmulticonnection-v3-3.4.3.tgz"
-  },
-  "engines": {
-    "node": "7.0.0"
-  },
-  "gitHead": "caa634879b16f5da80bc715a20ee12a594b1fd70",
-  "homepage": "https://rtcmulticonnection.herokuapp.com/",
-  "keywords": [
-    "peer-to-peer",
-    "peer2peer",
-    "peer",
-    "webrtc",
-    "rtcmulticonnection",
-    "webrtc-library",
-    "library",
-    "javascript",
-    "chrome",
-    "firefox",
-    "opera",
-    "ie",
-    "internet-explorer",
-    "android",
-    "rtcweb",
-    "rtcmulticonnection.js",
-    "multirtc",
-    "webrtc-experiment",
-    "javascript-library",
-    "muaz",
-    "muaz-khan"
-  ],
-  "license": "MIT",
-  "main": "RTCMultiConnection.js",
-  "maintainers": [
-    {
-      "name": "muaz-khan",
-      "email": "muazkh@gmail.com"
-    }
-  ],
-  "name": "rtcmulticonnection-v3",
-  "optionalDependencies": {},
-  "preferGlobal": false,
-  "readme": "ERROR: No README data found!",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/muaz-khan/RTCMultiConnection.git"
-  },
-  "scripts": {
-    "start": "node server.js"
-  },
-  "version": "3.4.3",
-  "warnings": [
-    {
-      "code": "ENOTSUP",
-      "required": {
-        "node": "7.0.0"
-      },
-      "pkgid": "rtcmulticonnection-v3@3.4.3"
-    },
-    {
-      "code": "ENOTSUP",
-      "required": {
-        "node": "7.0.0"
-      },
-      "pkgid": "rtcmulticonnection-v3@3.4.3"
-    }
-  ]
+  }
 }

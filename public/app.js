@@ -4,6 +4,9 @@ var ignore_onend;
 var final_span = '';
 var interim_span = '';
 
+
+
+
 if (!('webkitSpeechRecognition' in window)) {
   upgrade();
 } else {
@@ -11,7 +14,10 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.continuous = true;
   recognition.interimResults = false;
 
-  recognition.onstart = function() {
+  recognition.onstart = function(event) {
+    var time = new Date();
+    time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
+    console.log('speech recognition starting ' + time)
     recognizing = true;
     // showInfo('info_speak_now');
   };
@@ -40,9 +46,9 @@ if (!('webkitSpeechRecognition' in window)) {
   };
 
   recognition.onend = function() {
-
-    console.log('speech recognition ending')
-    console.log('socket :')
+    var time = new Date();
+    time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
+    console.log('speech recognition ending ' + time)
     recognizing = false;
     // if (ignore_onend) {
     //   return;
@@ -67,6 +73,8 @@ if (!('webkitSpeechRecognition' in window)) {
   };
 
   recognition.onresult = function(event) {
+    var time = new Date();
+    time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
     var interim_transcript = '';
     if (typeof(event.results) == 'undefined') {
       recognition.onend = null;
@@ -85,8 +93,14 @@ if (!('webkitSpeechRecognition' in window)) {
     final_span.innerHTML = linebreak(final_transcript);
     interim_span.innerHTML = linebreak(interim_transcript);
     if (final_transcript || interim_transcript && final_transcript !== "") {
-      console.log('final_transcript: ',final_transcript)
-      $('#messages').append($('<li>').text(socket.id + ' says: ' + final_transcript));
+      console.log('speech chat:', final_transcript );
+      var ul = document.getElementById('messages');
+      var li;
+      li = document.createElement('LI');
+      li.innerHTML = socket.nsp + ' says: ' + final_transcript + '\n' + time;
+      ul.appendChild(li);
+      li.scrollIntoView();
+      //$('#messages').append($('<li>').text(socket.id + ' says: ' + final_transcript + '\n' + time));
       final_transcript = " ";
     }
   };

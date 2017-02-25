@@ -4,24 +4,39 @@
     <meta charset="utf-8" />
     <title>Bender ∞</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" 
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" 
+      crossorigin="anonymous">
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="https://unpkg.com/webrtc-adapter/out/adapter.js"></script>
-    <!-- <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script> -->
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
     <!-- <script type="text/javascript" src="bundle.js" charset="utf-8"></script> -->
-    <script src="./build.js"></script>
+    <!-- <script src="./build.js"></script> -->
     <script src="./app.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v1.2.1/dist/aframe-physics-system.min.js"></script>
     <script src="https://unpkg.com/aframe-video-billboard"></script> 
+    <script src="https://unpkg.com/aframe-click-drag-component"></script>
     <script src="./aframe-cubemap-component.js"></script>
   </head>
-  <body onload="startTime()">
-  	<div id="clock"></div>
-    <div id="app"></div>
-	  <div id="drawingContainer">
-	  	<canvas id="canvas">
-	  	</canvas>
-  	<input id="clearDrawing" type="button" value="Clear" name="clear" onclick="clearIt()">
-	  <h3 style="float: right;">Draw with friends</h3>
 
-	  </div>
+  <div id="collapseUI">
+    <button id="dcCollapse" onClick="collapse('drawingContainer')">draw</button>
+    <button id="chatCollapse" onClick="collapse('chat')">chat</button>
+    <button id="clockCollapse" onClick="collapse('clock')">clock</button>
+  </div>
+
+  <body onload="startTime()">
+  	<div id="clockContainer" style="background: white">
+      <div id="clock"></div>
+    </div>
+    <div id="app"></div>
+  	  <div id="drawingContainer">
+        <canvas id="canvas">
+  	  	</canvas>
+    	  <input id="clearDrawing" type="button" value="Clear" name="clear" onclick="clearIt()">
+  	    <h3 style="float: right;">Draw with friends</h3>
+      </div>
     <!-- A frame scene + chat -->
 
     <div id="scene-and-chat">
@@ -32,10 +47,10 @@
 				  </a-assets>
 				  <!-- background image -->
 				   <a-entity cubemap="folder: /images/textures/SanFrancisco4/"></a-entity>
-				   <a-collada-model src="#table" position="0 -15 0" scale="20 20 20" transparent="true" opacity="0.2"></a-collada-model>
+				   <!-- <a-collada-model src="#table" position="0 -15 0" scale="20 20 20" transparent="true" opacity="0.2"></a-collada-model> -->
 				   <!-- table top -->
 				 
-				   <!-- <a-cylinder transparent="true" opacity="2" color="#424242" height="3" radius="1.5" scale="5 0.05 5" position="0 -2.12 0"></a-cylinder> -->
+				   <a-cylinder static-body transparent="true" opacity="2" color="#424242" height="0.5" radius="10" position="0 -3 0"></a-cylinder>
 				  
 		      <a-video-billboard id="guest1" video-billboard="minWidth: 10;" position="-8.66 1.25 -5" rotation ="0 60 0"></a-video-billboard>
 
@@ -43,6 +58,12 @@
 		      <a-entity id="camera-wrapper" position="0 0 10">
 		      	<a-camera wasd-controls-enabled="true"></a-camera>
 		      </a-entity>
+
+          <a-box click-drag dynamic-body color="red" position="0 5 0"></a-box>
+          <a-box click-drag dynamic-body color="green" position="0.5 7 0"></a-box>
+          <a-box click-drag dynamic-body color="yellow" position="-0.5 9 0"></a-box>
+          <a-box click-drag dynamic-body color="blue" position="0 11 0.5"></a-box>
+          <a-box click-drag dynamic-body color="purple" position="0 13 -0.5"></a-box>
 		    </a-scene>
 	    </div>
 		  <!-- end aframe scene -->
@@ -74,12 +95,14 @@
 	  	  <!-- Shared drawing pad -->
 
 	  <!-- End A frame scene + chat -->
-
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-		  crossorigin="anonymous"></script>
-
-		<script src="/socket.io/socket.io.js"></script>
 			<script>
+          
+          var collapse = function(elem) {
+            var elemDisplay = document.getElementById(elem).style.display
+            if (elemDisplay == 'none') { document.getElementById(elem).style.display = 'block'; }
+            else { document.getElementById(elem).style.display = 'none'}
+          }
+
 					//start voice chat
 					$('#startVoice').click(function () {
 						console.log('voice chat activated');

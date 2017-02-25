@@ -16,9 +16,9 @@ white - white;*/
 #message-log {
 	
 	height:200px;
-      border-radius: 25px;
-	overflow: scroll;
-      opacity: 0.5
+  border-radius: 25px;
+	overflow: hidden;
+  opacity: 0.5
 }
 
 #aframe-scene {
@@ -74,11 +74,12 @@ h3 {
     position: absolute;
     font-size: 32px;
     z-index: 9999;
-    color: #89f0ef;
+    color: #626D58;
     font-border: both;
-    margin-left: 85%;
-    margin-top: 50%;
+    margin-left: 88%;
+    margin-top: 0%;
     font-family: Eurostile;
+    font-weight: bold;
     -webkit-text-stroke-color: white;
     -webkit-text-stroke-width: 0.25px;
 }

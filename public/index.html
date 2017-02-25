@@ -5,8 +5,11 @@
     <title>Bender ∞</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="https://unpkg.com/webrtc-adapter/out/adapter.js"></script>
+    <!-- <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script> -->
+    <!-- <script type="text/javascript" src="bundle.js" charset="utf-8"></script> -->
     <script src="./build.js"></script>
     <script src="./app.js"></script>
+    <script src="https://unpkg.com/aframe-video-billboard"></script> 
     <script src="./aframe-cubemap-component.js"></script>
   </head>
   <body>
@@ -25,8 +28,6 @@
 	    <div id="aframe-div">
 	    	<a-scene id="aframe-scene">
 					<a-assets>	
-					<img id="wood-texture" src="./images/textures/circle-wood.jpg">
-					<a-asset-item id="table" src="./models/table-01.dae">
 				  </a-assets>
 				  <!-- background image -->
 				   <a-entity cubemap="folder: /images/textures/SanFrancisco4/"></a-entity>
@@ -39,7 +40,7 @@
 
 		      <a-video-billboard id="guest2" video-billboard="minWidth: 10;" position="8.66 1.25 -5" rotation ="0 -60 0"></a-video-billboard>
 		      <a-entity id="camera-wrapper" position="0 0 10">
-		      	<a-camera wasd-controls-enabled="false"></a-camera>
+		      	<a-camera wasd-controls-enabled="true"></a-camera>
 		      </a-entity>
 		    </a-scene>
 	    </div>
@@ -68,7 +69,7 @@
 	  	  <!-- Shared drawing pad -->
 
 	  <!-- End A frame scene + chat -->
-    <script type="text/javascript" src="bundle.js" charset="utf-8"></script>
+
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 		  crossorigin="anonymous"></script>
 

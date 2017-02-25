@@ -1,11 +1,10 @@
+
+//****************************** Speech recognition ******************
 var final_transcript = '';
 var recognizing = false;
 var ignore_onend;
 var final_span = '';
 var interim_span = '';
-
-
-
 
 if (!('webkitSpeechRecognition' in window)) {
   upgrade();
@@ -20,6 +19,13 @@ if (!('webkitSpeechRecognition' in window)) {
     console.log('speech recognition starting ' + time)
     recognizing = true;
     // showInfo('info_speak_now');
+    var ul = document.getElementById('messages');
+      var li;
+      li = document.createElement('LI');
+      li.className = ('chatConsole');
+      li.innerHTML = socket.nsp + ' activated Speech to Text chat.' + '\n' + time;
+      ul.appendChild(li);
+      li.scrollIntoView();
   };
 
   recognition.onerror = function(event) {
@@ -49,6 +55,13 @@ if (!('webkitSpeechRecognition' in window)) {
     var time = new Date();
     time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
     console.log('speech recognition ending ' + time)
+    var ul = document.getElementById('messages');
+      var li;
+      li = document.createElement('LI');
+      li.className = ('chatConsole')
+      li.innerHTML = socket.nsp + ' deactivated Speech to Text chat ' + '\n' + time;
+      ul.appendChild(li);
+      li.scrollIntoView();
     recognizing = false;
     // if (ignore_onend) {
     //   return;
@@ -198,4 +211,25 @@ function capitalize(s) {
 //   email_info.style.display = 'none';
 // }
 
-recognition.start()
+// recognition.start();
+
+
+//*************************DISPLAY CLOCK ************************
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    var ampm = h >= 12 ? 'pm' : 'am';
+    hours = h % 12;
+    hours = h ? h : 12
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('clock').innerHTML =
+    h + ":" + m + ":" + s + ampm;
+    var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}

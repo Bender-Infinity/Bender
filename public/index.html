@@ -19,6 +19,7 @@
     <!-- <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v1.2.1/dist/aframe-physics-system.min.js"></script> -->
     <!-- <script src="https://unpkg.com/aframe-video-billboard"></script>  -->
     <!-- <script src="https://unpkg.com/aframe-click-drag-component"></script> -->
+    <script src="./clickdrag.js"></script>
     <script src="./aframe-cubemap-component.js"></script>
   </head>
 
@@ -57,7 +58,7 @@
     <!-- A frame scene  -->
     <div id="scene-and-chat">
 	    <div id="aframe-div">
-	    	<a-scene id="aframe-scene">
+	    	<a-scene id="aframe-scene" vr-mode-ui="enabled: false">
 					<a-assets>	
 				  </a-assets>
 				  <!-- background image -->
@@ -74,11 +75,11 @@
 		      	<a-camera wasd-controls-enabled="true"></a-camera>
 		      </a-entity>
 
-          <a-box click-drag dynamic-body color="red" position="0 5 0"></a-box>
+<!--           <a-box click-drag dynamic-body color="red" position="0 5 0"></a-box>
           <a-box click-drag dynamic-body color="green" position="0.5 7 0"></a-box>
           <a-box click-drag dynamic-body color="yellow" position="-0.5 9 0"></a-box>
           <a-box click-drag dynamic-body color="blue" position="0 11 0.5"></a-box>
-          <a-box click-drag dynamic-body color="purple" position="0 13 -0.5"></a-box>
+          <a-box click-drag dynamic-body color="purple" position="0 13 -0.5"></a-box> -->
 		    </a-scene>
 	    </div>
 	  </div>

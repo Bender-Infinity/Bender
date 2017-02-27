@@ -24,19 +24,33 @@
 
   <body onload="startTime()">
     <!-- nav bar -->
-    <div id="collapseUI">
-      <button id="dcCollapse" onClick="collapse('drawingContainer')">draw</button>
-      <button id="chatCollapse" onClick="collapse('chat')">chat</button>
-      <button id="clockCollapse" onClick="collapse('clock')">clock</button>
-      <!-- <section class="experiment"> -->
-      <!-- <div class="make-center"> -->
-      <input type="text" id="room-id" value="abcdef" autocorrect=off autocapitalize=off size=20>
-      <button id="open-room">Open Room</button>
-      <button id="join-room">Join Room</button>
-      <button id="open-or-join-room">Auto Open Or Join Room</button>
-      <div id="room-urls"></div>
-    </div>
-
+    <div id="nav">
+      <ul id="collapseUI" style="z-index: 5; position: absolute;">
+        <li class="ui">
+          <img onClick="collapse('drawingContainer')" id="dcCollapse" title="Draw with friends" src="./images/icons/draw.png"/>
+        </li>
+        <li class="ui">
+          <img id="chatCollapse" onClick="collapse('chat')" title="Chat" src="./images/icons/enable_chat.png" />
+        </li>
+        <!-- <button id="clockCollapse" onClick="collapse('clock')">clock</button> -->
+        <!-- <section class="experiment"> -->
+        <!-- <div class="make-center"> -->
+        <li class="ui">
+          <p style="color:#89f0ef">Room name</p>
+          <input style="border-radius:5px" type="text" id="room-id" value="abcdef" autocorrect=off autocapitalize=off size=20>
+        </li>
+        <li class="ui">
+          <img id="open-room" title="Create a Room" src="./images/icons/create-room.png"/>
+        </li>
+        <li class="ui">
+          <img id="join-room" title="Join a Room" src="./images/icons/join_room.png"/>
+        </li>
+  <!--       <li>
+          <button id="open-or-join-room">Auto Open Or Join Room</button>
+        </li>
+        <div id="room-urls"></div> -->
+      </ul>
+  </div>
     <!-- A SMOKING CRATER -->
 <!--     <div class="github-TEAMBENDERBITCHES"></div>
       <section class="experiment">
@@ -60,7 +74,8 @@
 					<a-assets>	
 				  </a-assets>
 				  <!-- background image -->
-				   <a-entity cubemap="folder: /images/textures/SanFrancisco4/"></a-entity>
+
+				   <a-entity cubemap="folder: /images/textures/DallasW/"></a-entity>
 				   <!-- <a-collada-model src="#table" position="0 -15 0" scale="20 20 20" transparent="true" opacity="0.2"></a-collada-model> -->
 				   <!-- table top -->
 				 
@@ -72,12 +87,12 @@
 		      <a-entity id="camera-wrapper" position="0 0 10">
 		      	<a-camera wasd-controls-enabled="true"></a-camera>
 		      </a-entity>
-
+<!-- 
           <a-box click-drag dynamic-body color="red" position="0 5 0"></a-box>
           <a-box click-drag dynamic-body color="green" position="0.5 7 0"></a-box>
           <a-box click-drag dynamic-body color="yellow" position="-0.5 9 0"></a-box>
           <a-box click-drag dynamic-body color="blue" position="0 11 0.5"></a-box>
-          <a-box click-drag dynamic-body color="purple" position="0 13 -0.5"></a-box>
+          <a-box click-drag dynamic-body color="purple" position="0 13 -0.5"></a-box> -->
 		    </a-scene>
 	    </div>
 	  </div>
@@ -109,7 +124,7 @@
         <ul id="messages"></ul>
       </div>
       <div>
-        <form id="sendMessage" action="">
+        <form id="sendMessage" placeholder="send message">
           <input type="text" x-webkit-speech id="m" autocomplete="off" /><button id="sendTextMessage">Send</button>
         </form>
        </div>
@@ -117,35 +132,39 @@
 
 
 			<script>
-          
+          //***************** Collapse UI *******************
           var collapse = function(elem) {
             var elemDisplay = document.getElementById(elem).style.display
             if (elemDisplay == 'none' || !elemDisplay) { document.getElementById(elem).style.display = 'block'; }
             else { document.getElementById(elem).style.display = 'none'}
           }
+					
+          
+          var socket = io();
 
-					//start voice chat
-					$('#startVoice').click(function () {
-						console.log('voice chat activated');
-						recognition.start();
-					});
+          //start voice chat
+          $('#startVoice').click(function () {
+            console.log('voice chat activated');
+            recognition.start();
+          });
 
-					$('#endVoice').click(function () {
-						recognition.stop();
-						console.log('voice chat stopped');
-					})
+          $('#endVoice').click(function () {
+            recognition.stop();
+            console.log('voice chat stopped');
+          })
 
-					var socket = io();
 
 			  	$('#sendTextMessage').click(function(e){
-			  		console.log('text message sent');
-			  		e.preventDefault();
-			    	socket.emit('chat message', $('#m').val());
+            e.preventDefault();
+
+            socket.emit('chat message', $('#m').val());
+			  		console.log('text message sent from socket', socket);
 				    $('#m').val('');
 				    return false;
 			  	});
 			  		
 			  	socket.on('chat message', function(msg){
+            console.log('chat messaged received', msg)
 			  		var time = new Date();
     				time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
 			  		console.log('chatting in socket');
@@ -221,73 +240,12 @@
 					      setTimeout(mainLoop, 25);
 					   }
 					   mainLoop();
-				 //   var putPoint = function (e) {c
-				 //   	if(mouse.drawing) {
-					//    	console.log('drawing')
-					//     mouse.click = true; 
-					//     mouse.pos.x = e.offsetX / width
-					//     mouse.pos.y = e.offsetY / height
-					//     context.lineTo(e.offsetX, e.offsetY)
-					//     var secondPoint = (context.lineTo(e.offsetX, e.offsetY))
-					//     context.stroke();
-					//     context.beginPath();
-					//     //context.arc(e.offsetX, e.offsetY,radius, 0, Math.PI*2);
-					//     context.lineCap="round"
-					//     context.fill();
-					//     context.beginPath();
-					//     context.moveTo(e.offsetX, e.offsetY);
-					//     var secondPoint = (context.moveTo(e.offsetX, e.offsetY))
-					//     //socket.emit('draw_line', { line: [prev, current],  });
-					//     console.log('client socket emit to server');
-				 //   	}
-				 //   };
-
-				 //   //commenting out drawing a point 
-				 //   var engage = function (e) {
-				 //   	console.log('point added, start drawing')
-				 //   	mouse.drawing = true;
-				 //   	putPoint(e);
-				 //   	socket.broadcast.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
-				 //   	console.log('client socket emit to server')
-				 //   };
-
-				 //   var disengage = function () {
-				 //   	console.log('not drawing')
-				 //   	mouse.drawing = false;
-				 //   	context.beginPath();
-				 //   };
-
-				 //  canvas.addEventListener('mousemove', putPoint);
-				 //  canvas.addEventListener('mousedown', engage);
-				 //  canvas.addEventListener('mouseup', disengage)
-
-					// // socket.on('draw_line', function (data) {
-					// // 	console.log('receiving drawing from everyone', data)
-			  // //     var line = data.line;
-			  // //     context.beginPath();
-			  // //     context.moveTo(line[0].x * width, line[0].y * height);
-			  // //     context.lineTo(line[1].x * width, line[1].y * height);
-			  // //     context.stroke();
-				 // //   });
+				
 
 					function clearIt () {
 						context.clearRect(0,0,width,height)
 						socket.emit('clear drawing');
 					};
-
-					// function mainLoop() {
-     //  		// check if the user is drawing
-     //  			if (mouse.click && mouse.move && mouse.pos_prev) {
-     //  				console.log('drawing and sending to server socket')
-	    //      	// send line to to the server
-	    //      	socket.broadcast.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
-     //     		mouse.move = false;
-				 //  	}
-				 //      mouse.pos_prev = {x: mouse.pos.x, y: mouse.pos.y};
-				 //      setTimeout(mainLoop, 25);
-				 //  	}
-   		// 			mainLoop();
-
 			
 				   //****************************** end shared drawing ****************************
            //****************************** webRTC GHETTO *********************************

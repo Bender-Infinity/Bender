@@ -49,10 +49,10 @@
         <li class="ui">
           <img id="join-room" title="Join a Room" src="./images/icons/join_room.png"/>
         </li>
-  <!--       <li>
+        <li>
           <button id="open-or-join-room">Auto Open Or Join Room</button>
         </li>
-        <div id="room-urls"></div> -->
+        <div id="room-urls"></div>
       </ul>
   </div>
     <!-- A SMOKING CRATER -->
@@ -144,8 +144,6 @@
           }
 
 
-
-
           //***************** Collapse UI *******************
           var collapse = function(elem) {
             var elemDisplay = document.getElementById(elem).style.display
@@ -153,7 +151,7 @@
             else { document.getElementById(elem).style.display = 'none'}
           }
 					
-          $('#spawnCube').click(function() { spawnCube() }) ;
+          // $('#spawnCube').click(function() { spawnCube() }) ;
           
           var socket = io();
 
@@ -313,14 +311,16 @@
             connection.videosContainer = document.getElementById('videos-container');
             connection.onstream = function(event) {
                 var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
+                console.log('MEDIA ELEMENT', event.mediaElement.getAttribute('src'))
                 var mediaElement = getMediaElement(event.mediaElement, {
                     title: event.userid,
-                    buttons: ['full-screen'],
+                    buttons: [],
                     width: width,
                     showOnMouseEnter: false
                 });
-
-                connection.videosContainer.appendChild(mediaElement);
+                console.log('CONTAINER', connection)
+                // connection.videosContainer.appendChild(mediaElement);
+                document.getElementById('guest1').appendChild(mediaElement);
 
                 setTimeout(function() {
                     mediaElement.media.play();

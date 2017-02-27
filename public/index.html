@@ -28,6 +28,7 @@
       <button id="dcCollapse" onClick="collapse('drawingContainer')">draw</button>
       <button id="chatCollapse" onClick="collapse('chat')">chat</button>
       <button id="clockCollapse" onClick="collapse('clock')">clock</button>
+      <button onClick="spawnCube()">spawn cube</button>
       <!-- <section class="experiment"> -->
       <!-- <div class="make-center"> -->
       <input type="text" id="room-id" value="abcdef" autocorrect=off autocapitalize=off size=20>
@@ -117,6 +118,12 @@
 
 
 			<script>
+          var spawnCube = function() {
+            var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+            var randomColor = colors[Math.floor(Math.random() * colors.length)];
+            console.log('randomcolor', randomColor)
+            document.getElementById('aframe-scene').append('<a-box click-drag dynamic-body color="' + randomColor + '"position="0 5 0"></a-box>')
+          }
           
           var collapse = function(elem) {
             var elemDisplay = document.getElementById(elem).style.display

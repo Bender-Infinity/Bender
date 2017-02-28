@@ -13,6 +13,7 @@ import Cubemap from './aframe-cubemap-component.js'
 import registerVideoBillboard from 'aframe-video-billboard';
 import aframeDraggableComponent from 'aframe-click-drag-component';
 import Fazicks from 'aframe-physics-system';
+import Draw from './Draw.jsx';
 
 class VRScene extends React.Component {
 	constructor(props) {
@@ -28,11 +29,17 @@ class VRScene extends React.Component {
     aframeDraggableComponent(window.AFRAME);
   };
 
+  clearIt() {
+    context.clearRect(0,0,width,height)
 
+  };
 
 	render() {
     return (
     <div>
+      <div id="drawing-container">
+        <Draw clearIt={this.clearIt}>
+      </div>
       <Scene id="aframe-scene">
 
   			<a-assets>	

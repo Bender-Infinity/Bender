@@ -20,11 +20,12 @@ class App extends React.Component {
   spawnCube() {
 	  var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
 	  var randomColor = colors[Math.floor(Math.random() * colors.length)];
-	  var someString = '<a-box color="' + randomColor + '" position="0 10 0"></a-box>'
+	  var someString = '<a-box color="' + randomColor + '" position="0 5 0"></a-box>'
 	  var wrapper = document.createElement('div');
 	  wrapper.innerHTML = someString;
 	  var newElem = wrapper.firstChild;
 	  document.getElementById('aframe-scene').appendChild(newElem)
+    console.log(newElem);
 	  newElem.setAttribute('dynamic-body', '')
 	  newElem.setAttribute('click-drag', '')
 	}
@@ -39,13 +40,12 @@ class App extends React.Component {
     });
     return src;
   }
-					
 
 	render() {
 		return (
     <div>
-		<AFrame />
     <Nav collapse={this.collapse} spawnCube={this.spawnCube} changeRoom={this.changeRoom} />
+    <AFrame />
     </div>
 		)
 	}

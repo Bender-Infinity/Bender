@@ -1,27 +1,27 @@
 import 'aframe';
 // import 'aframe-animation-component';
 // import 'aframe-text-component';
-import 'babel-polyfill';
-import {Entity, Scene} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Cubemap from './aframe-cubemap-component.js'
+// import Aframe from 'aframe';
+import 'babel-polyfill';
+import {Entity, Scene} from 'aframe-react';
 import Camera from './Camera.jsx';
 // import Text from './components/Text';
 // import Sky from './components/Sky';
-import aframe from 'aframe';
+import Cubemap from './aframe-cubemap-component.js'
 import registerVideoBillboard from 'aframe-video-billboard';
 import aframeDraggableComponent from 'aframe-click-drag-component';
 
 class VRScene extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-		}
-	}
+    this.state = {
+    }
+  }
 
   componentWillMount () {
-
+    console.log(__dirname, 'did mount');
     registerVideoBillboard(window.AFRAME);
     aframeDraggableComponent(window.AFRAME);
   };
@@ -31,7 +31,7 @@ class VRScene extends React.Component {
 	render() {
     return (
     <div>
-      <Scene>
+      <Scene id="aframe-scene">
 
   			<a-assets>	
     		</a-assets>

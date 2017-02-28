@@ -100,6 +100,7 @@ h3 {
     font-weight: bold;
     -webkit-text-stroke-color: white;
     -webkit-text-stroke-width: 0.25px;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
 #startVoice, #endVoice {
@@ -126,3 +127,16 @@ p {
 .chatConsole {
   font-size: 8pt;
 }
+
+/*.ui > p {
+  color: #89f0ef
+}
+
+.ui > input {
+  border-radius: 5px
+  autocorrect: off,
+  autocapitalize="off",
+  size: 20px
+}*/
+
+

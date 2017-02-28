@@ -11,10 +11,17 @@ class App extends React.Component {
 		};
 	}
 
+	collapse(elem) {
+    var elemDisplay = document.getElementById(elem).style.display
+    if (elemDisplay == 'none' || !elemDisplay) { document.getElementById(elem).style.display = 'block'; }
+    else { document.getElementById(elem).style.display = 'none'}
+  }
+					
+
 	render() {
 		return (
 		
-		<Nav />
+		<Nav collapse={this.collapse} />
 		
 		)
 	}

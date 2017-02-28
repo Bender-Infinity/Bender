@@ -39,7 +39,6 @@ class App extends React.Component {
     });
     return src;
   }
-					
 
 	render() {
 		return (

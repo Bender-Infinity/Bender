@@ -127,3 +127,16 @@ p {
 .chatConsole {
   font-size: 8pt;
 }
+
+/*.ui > p {
+  color: #89f0ef
+}
+
+.ui > input {
+  border-radius: 5px
+  autocorrect: off,
+  autocapitalize="off",
+  size: 20px
+}*/
+
+

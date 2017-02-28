@@ -22,6 +22,7 @@ class VRScene extends React.Component {
   }
 
   componentWillMount () {
+    console.log('FAZICKS', Fazicks)
     Fazicks.registerAll(window.AFRAME);
     registerVideoBillboard(window.AFRAME);
     aframeDraggableComponent(window.AFRAME);

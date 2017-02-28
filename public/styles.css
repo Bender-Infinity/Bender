@@ -75,6 +75,7 @@ h3 {
       font-family: Eurostile, Courier;
       color: white;
       margin-top:6px;
+      text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
 #clearDrawing {

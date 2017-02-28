@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Nav from './components/Nav.jsx';
-// import AFrame from './components/A-Frame.js'
+import AFrame from './components/AFrame.jsx';
 
 class App extends React.Component {
 	constructor(props) {
@@ -42,9 +42,10 @@ class App extends React.Component {
 
 	render() {
 		return (
-		
-		<Nav collapse={this.collapse} spawnCube={this.spawnCube} changeRoom={this.changeRoom} />
-		
+    <div>
+		<AFrame />
+    <Nav collapse={this.collapse} spawnCube={this.spawnCube} changeRoom={this.changeRoom} />
+    </div>
 		)
 	}
 }

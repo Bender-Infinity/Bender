@@ -6,9 +6,14 @@ import AFrame from './components/AFrame.jsx';
 class App extends React.Component {
 	constructor(props) {
 		super(props);
+		
 		this.state = {
-
+			cubeMapSrc:'folder: /images/textures/SanFrancisco4/'
 		};
+		 var context  = this
+	}
+
+	componentWillMount () {
 	}
 
 	collapse(elem) {
@@ -30,22 +35,39 @@ class App extends React.Component {
 	  newElem.setAttribute('click-drag', '')
 	}
 
-  changeRoom(src) {
-    src = 'folder: /images/textures/' + roomIndex + '/'
-    var roomIndex = roomUrls[0];
-    var roomSrc = 'folder: /images/textures/' + roomIndex + '/';
+
+  changeRoom() {
+  	console.log('clicked changeRoom')
+  	var newRoomSrc 
     var roomUrls = ['SanFrancisco4','Colosseum', 'DallasW', 'GoldenGateBridge', 'GoldenGateBridge2', 'LancellottiChapel', 'NissiBeach', 'NissiBeach2', 'Rainbow', 'SaintPetersBasilica', 'Skansen2', 'Tantolunden6'];
-    $('#roomEnvironment').click(function (index) {
-      roomIndex = roomIndex[0 + 1]
-    });
-    return src;
+    var roomSrc = 'folder: /images/textures/' + roomUrls[0] + '/';
+    for(var i = 0; i < roomUrls.length; i++) {
+    	if('folder: /images/textures/' + roomUrls[i] + '/' === this.state.cubeMapSrc) {
+		    	if(!roomUrls[i + 1]) {
+		    		console.log('starting over')
+		    		newRoomSrc = 'folder: /images/textures/' + roomUrls[0] +'/'
+		    		document.getElementById('roomEnvironment').setAttribute('cubemap', newRoomSrc);
+		    		return
+		    		}
+    		
+    		newRoomSrc = 'folder: /images/textures/' + roomUrls[i + 1] + '/'
+    		
+    		this.setState({cubeMapSrc: newRoomSrc})
+    		
+    		document.getElementById('roomEnvironment').setAttribute('cubemap', newRoomSrc);
+  
+    		return
+    	}
+
+    }
   }
 
 	render() {
 		return (
     <div>
-    <Nav collapse={this.collapse} spawnCube={this.spawnCube} changeRoom={this.changeRoom} />
-    <AFrame />
+    <Nav collapse={this.collapse} spawnCube={this.spawnCube} changeRoom={this.changeRoom.bind(this)} />
+
+    <AFrame cubeMapSrc={this.state.cubeMapSrc}/>
     </div>
 		)
 	}

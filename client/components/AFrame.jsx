@@ -18,6 +18,7 @@ class VRScene extends React.Component {
 	constructor(props) {
 		super(props);
     this.state = {
+      cubeMapSrc: this.props.cubeMapSrc
     }
   }
 
@@ -31,14 +32,15 @@ class VRScene extends React.Component {
 
 
 	render() {
-    return (
+
+    return ( 
     <div>
       <Scene id="aframe-scene">
 
   			<a-assets>	
     		</a-assets>
      		
-        <a-entity id="roomEnvironment" cubemap="folder: /images/textures/SanFrancisco4/"></a-entity>
+        <a-entity id="roomEnvironment" cubemap={this.state.cubeMapSrc}></a-entity>
 
     		<a-cylinder static-body transparent="true" opacity="0.5" color="#424242" height="0.5" radius="10" position="0 -3 0"></a-cylinder>
 
@@ -53,7 +55,7 @@ class VRScene extends React.Component {
 	}
 }
 
-export default VRScene;
+export default VRScene
 
 
 

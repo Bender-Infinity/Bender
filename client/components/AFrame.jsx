@@ -12,6 +12,7 @@ import Camera from './Camera.jsx';
 import Cubemap from './aframe-cubemap-component.js'
 import registerVideoBillboard from 'aframe-video-billboard';
 import aframeDraggableComponent from 'aframe-click-drag-component';
+import Fazicks from 'aframe-physics-system';
 
 class VRScene extends React.Component {
 	constructor(props) {
@@ -21,6 +22,7 @@ class VRScene extends React.Component {
   }
 
   componentWillMount () {
+    Fazicks.registerAll(window.AFRAME);
     registerVideoBillboard(window.AFRAME);
     aframeDraggableComponent(window.AFRAME);
   };

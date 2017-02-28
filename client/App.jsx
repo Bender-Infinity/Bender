@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import Nav from './components/Nav.jsx';
-import AFrame from './components/AFrame.jsx'
+import Nav from './components/Nav.jsx';
+import AFrame from './components/AFrame.jsx';
 
 class App extends React.Component {
 	constructor(props) {
@@ -20,4 +20,4 @@ class App extends React.Component {
 	}
 }
 
-ReactDOM.render(<AFrame />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'))

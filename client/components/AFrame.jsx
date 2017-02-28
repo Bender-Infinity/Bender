@@ -21,12 +21,9 @@ class VRScene extends React.Component {
 	}
 
   componentWillMount () {
-    console.log('dirname', __dirname)
+
     registerVideoBillboard(window.AFRAME);
     aframeDraggableComponent(window.AFRAME);
-  };
-
-  componentDidMount () {
   };
 
 

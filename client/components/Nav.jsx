@@ -1,5 +1,8 @@
 import React from 'react';
 
+
+
+
 export default (props) => (
   <div id="nav">
     <ul id="collapseUI">
@@ -25,7 +28,7 @@ export default (props) => (
       <li className="ui">
         <img id="join-room" title="Join a Room" src="./images/icons/join_room.png"/>
       </li>
-      <li className="ui">
+      <li className="ui" id="AutoJoinRoom" >
         <h3>Auto Join Room</h3>
       </li>
       <div id="room-urls">

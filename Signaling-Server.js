@@ -85,16 +85,22 @@ module.exports = exports = function(app, socketCallback) {
           //then save to the database
         });
 
-        socket.on('chat message', function(msg){
-          console.log('chat message sent: ', msg)
-          io.emit('chat message', msg);
-        });
+        // socket.on('chat message', function(msg){
+        //   console.log('chat message sent: ', msg)
+        //   io.emit('chat message from server', msg);
+        // });
 
         socket.on('clear drawing', function(){
           console.log('clearing drawing for everyone')
           line_history = [];
           io.emit('clearit', true);
         });
+        //Speech recognition socket
+        socket.on('voice chat', function (li) {
+          console.log('server received speech chat, emitting to all clients:', li);
+          socket.broadcast.emit('speech chat message from server',li)
+        })
+
         //
       //shared drawing socket - send drawing to user so they can see updated drawing
         var line_history = [];

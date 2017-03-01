@@ -27,7 +27,7 @@ if (!('webkitSpeechRecognition' in window)) {
       li.innerHTML = socket.nsp + ' activated Speech to Text chat.' + '\n' + time;
       ul.appendChild(li);
       li.scrollIntoView();
-      //add socket emit
+      //add socket emit 
   };
 
   recognition.onerror = function(event) {
@@ -117,8 +117,28 @@ if (!('webkitSpeechRecognition' in window)) {
       li.scrollIntoView();
       //$('#messages').append($('<li>').text(socket.id + ' says: ' + final_transcript + '\n' + time));
       final_transcript = " ";
+      socket.emit('voice chat', li)
+      console.log('emit speech to server', li)
     }
   };
+  socket.on('speech chat message from server', function (msg) {
+    console.log('voice chat messaged received from server', msg)
+      var time = new Date();
+      time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
+      console.log('chatting in socket');
+      var ul = document.getElementById('messages');
+      var input = document.getElementById('m');
+
+      li = document.createElement('LI');
+      li.innerHTML = socket.nsp + ' says: ' + msg + '\n' + time;
+      ul.appendChild(li);
+      li.scrollIntoView();
+      // if(ul.offsetHeight >= div.offsetHeight){
+      //     ul.style.height = div.offsetHeight + "px";
+      //   }
+      //$('#messages').append($('<li>').text(socket.nsp + ' says: ' + msg));
+      console.log('message to append: ', msg)
+  })
 }
 
 function upgrade() {

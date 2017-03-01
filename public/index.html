@@ -125,8 +125,8 @@
 				    return false;
 			  	});
 			  		
-			  	socket.on('chat message', function(msg){
-            console.log('chat messaged received', msg)
+			  	socket.on('chat message from server', function(msg){
+            console.log('chat messaged sent', msg)
 			  		var time = new Date();
     				time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
 			  		console.log('chatting in socket');

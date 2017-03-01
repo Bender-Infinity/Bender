@@ -109,16 +109,17 @@ if (!('webkitSpeechRecognition' in window)) {
     interim_span.innerHTML = linebreak(interim_transcript);
     if (final_transcript || interim_transcript && final_transcript !== "") {
       console.log('speech chat:', final_transcript );
-      var ul = document.getElementById('messages');
-      var li;
-      li = document.createElement('LI');
-      li.innerHTML = socket.nsp + ' says: ' + final_transcript + '\n' + time;
-      ul.appendChild(li);
+      // var ul = document.getElementById('messages');
+      // var li;
+      // li = document.createElement('LI');
+      // li.innerHTML = socket.nsp + ' says: ' + final_transcript + '\n' + time;
+      // ul.appendChild(li);
       li.scrollIntoView();
       //$('#messages').append($('<li>').text(socket.id + ' says: ' + final_transcript + '\n' + time));
+      var outgoing = final_transcript
       final_transcript = " ";
-      socket.emit('voice chat', li)
-      console.log('emit speech to server', li)
+      socket.emit('voice chat', outgoing)
+      console.log('emit speech to server', outgoing)
     }
   };
   socket.on('speech chat message from server', function (msg) {

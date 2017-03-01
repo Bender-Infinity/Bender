@@ -13,22 +13,22 @@ class App extends React.Component {
 	}
 
 	componentDidMount () {
-	 document.getElementById('open-room').onclick = function() {
-    disableInputButtons();
-    console.log('connection', connection)
-    connection.open(document.getElementById('room-id').value, function() {
-    	showRoomURL(connection.sessionid);
-    });
-  };
+	  document.getElementById('open-room').onclick = function() {
+      disableInputButtons();
+      console.log('connection', connection)
+      connection.open(document.getElementById('room-id').value, function() {
+      	showRoomURL(connection.sessionid);
+      });
+    };
 
-  document.getElementById('join-room').onclick = function() {
-    disableInputButtons();
-    connection.join(document.getElementById('room-id').value);
-  };
+    document.getElementById('join-room').onclick = function() {
+      disableInputButtons();
+      connection.join(document.getElementById('room-id').value);
+    };
 
-	document.getElementById('AutoJoinRoom').onclick = function() {
-	  disableInputButtons();
-	  connection.openOrJoin(document.getElementById('room-id').value, function(isRoomExists, roomid) {
+	  document.getElementById('AutoJoinRoom').onclick = function() {
+  	  disableInputButtons();
+  	  connection.openOrJoin(document.getElementById('room-id').value, function(isRoomExists, roomid) {
 	      if(!isRoomExists) {
 	        showRoomURL(roomid);
 	      }

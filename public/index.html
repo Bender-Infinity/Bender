@@ -145,7 +145,7 @@
 			  	});
 				  	
 				  	//********************************* shared drawing ****************************
-					var mouse = { 
+				  var mouse = { 
 			      click: false,
 			      move: false,
 			      pos: {x:0, y:0},
@@ -204,10 +204,10 @@
 					   mainLoop();
 				
 
-					function clearIt () {
-						context.clearRect(0,0,width,height)
-						socket.emit('clear drawing');
-					};
+					// function clearIt () {
+					// 	context.clearRect(0,0,width,height)
+					// 	socket.emit('clear drawing');
+					// };
 			
 				   //****************************** end shared drawing ****************************
            //****************************** webRTC GHETTO *********************************

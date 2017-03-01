@@ -44,9 +44,9 @@ class VRScene extends React.Component {
 
     		<a-cylinder static-body transparent="true" opacity="0.5" color="#424242" height="0.5" radius="10" position="0 -3 0"></a-cylinder>
 
-    		<a-video-billboard click-drag id="guest1" video-billboard="minWidth: 10;" position="-8.66 1.25 -5" rotation ="0 60 0"></a-video-billboard>
+    		<a-video-billboard side="" click-drag id="guest1" video-billboard="minWidth: 10;" position="-8.66 1.25 -5" rotation ="0 60 0"></a-video-billboard>
 
-    		<a-video-billboard click-drag id="guest2" video-billboard="minWidth: 10;" position="8.66 1.25 -5" rotation ="0 -60 0"></a-video-billboard>
+    		<a-video-billboard side="" click-drag id="guest2" video-billboard="minWidth: 10;" position="8.66 1.25 -5" rotation ="0 -60 0"></a-video-billboard>
 
     		<Camera position="0 0 10"></Camera>
       </Scene>

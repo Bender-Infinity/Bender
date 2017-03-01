@@ -61,8 +61,7 @@
     </div>
 
     <!-- speech transcription chat -->
-    <!-- Refractoring to react -->
-    <!-- <div id="chat" style="display: none">
+    <div id="chat" style="display: none">
       <ul>
         <li><h3 style="float: inherit; margin-left: 6px;">Chat</h3></li>
         <li><h3 id="startVoice" style="float: inherit; margin-left: 6px;">Start Voice Chat</h3></li>
@@ -76,9 +75,9 @@
           <input type="text" x-webkit-speech id="m" autocomplete="off" /><button id="sendTextMessage">Send</button>
         </form>
        </div>
-      </div>     -->
+      </div>    
 
-
+      <script src="./bundle.js"></script>
 			<script>
           //*********************** Drop it like it's hot *******************
           var spawnCube = function() {
@@ -126,8 +125,8 @@
 				    return false;
 			  	});
 			  		
-			  	socket.on('chat message', function(msg){
-            console.log('chat messaged received', msg)
+			  	socket.on('chat message from server', function(msg){
+            console.log('chat messaged sent', msg)
 			  		var time = new Date();
     				time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
 			  		console.log('chatting in socket');
@@ -216,26 +215,27 @@
             // .......................UI Code........................
             // ......................................................
 
-            document.getElementById('open-room').onclick = function() {
-                disableInputButtons();
-                connection.open(document.getElementById('room-id').value, function() {
-                    showRoomURL(connection.sessionid);
-                });
-            };
+            // document.getElementById('open-room').onclick = function() {
+            //     console.log('clicked')
+            //     disableInputButtons();
+            //     connection.open(document.getElementById('room-id').value, function() {
+            //         showRoomURL(connection.sessionid);
+            //     });
+            // };
 
-            document.getElementById('join-room').onclick = function() {
-                disableInputButtons();
-                connection.join(document.getElementById('room-id').value);
-            };
+            // document.getElementById('join-room').onclick = function() {
+            //     disableInputButtons();
+            //     connection.join(document.getElementById('room-id').value);
+            // };
 
-            document.getElementById('open-or-join-room').onclick = function() {
-                disableInputButtons();
-                connection.openOrJoin(document.getElementById('room-id').value, function(isRoomExists, roomid) {
-                    if(!isRoomExists) {
-                        showRoomURL(roomid);
-                    }
-                });
-            };
+            // document.getElementById('open-or-join-room').onclick = function() {
+            //     disableInputButtons();
+            //     connection.openOrJoin(document.getElementById('room-id').value, function(isRoomExists, roomid) {
+            //         if(!isRoomExists) {
+            //             showRoomURL(roomid);
+            //         }
+            //     });
+            // };
 
             // ......................................................
             // ..................RTCMultiConnection Code.............
@@ -287,10 +287,10 @@
             };
 
             function disableInputButtons() {
-                document.getElementById('open-or-join-room').disabled = true;
-                document.getElementById('open-room').disabled = true;
-                document.getElementById('join-room').disabled = true;
-                document.getElementById('room-id').disabled = true;
+              document.getElementById('AutoJoinRoom').disabled = true;
+              document.getElementById('open-room').disabled = true;
+              document.getElementById('join-room').disabled = true;
+              // document.getElementById('room-id').disabled = true;
             }
 
             // ......................................................
@@ -366,6 +366,6 @@
                 disableInputButtons();
             }
 			</script>
-      <script src="./bundle.js"></script> 
+       
   </body>
 </html>

@@ -114,7 +114,7 @@ if (!('webkitSpeechRecognition' in window)) {
       // li = document.createElement('LI');
       // li.innerHTML = socket.nsp + ' says: ' + final_transcript + '\n' + time;
       // ul.appendChild(li);
-      li.scrollIntoView();
+      // li.scrollIntoView();
       //$('#messages').append($('<li>').text(socket.id + ' says: ' + final_transcript + '\n' + time));
       var outgoing = final_transcript
       final_transcript = " ";

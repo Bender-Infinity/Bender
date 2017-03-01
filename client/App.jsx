@@ -10,7 +10,6 @@ class App extends React.Component {
 		this.state = {
 			cubeMapSrc:'folder: /images/textures/SanFrancisco4/'
 		};
-		 var context  = this
 	}
 
 	componentWillMount () {
@@ -37,28 +36,21 @@ class App extends React.Component {
 
 
   changeRoom() {
-  	console.log('clicked changeRoom')
   	var newRoomSrc 
     var roomUrls = ['SanFrancisco4','Colosseum', 'DallasW', 'GoldenGateBridge', 'GoldenGateBridge2', 'LancellottiChapel', 'NissiBeach', 'NissiBeach2', 'Rainbow', 'SaintPetersBasilica', 'Skansen2', 'Tantolunden6'];
     var roomSrc = 'folder: /images/textures/' + roomUrls[0] + '/';
     for(var i = 0; i < roomUrls.length; i++) {
     	if('folder: /images/textures/' + roomUrls[i] + '/' === this.state.cubeMapSrc) {
-		    	if(!roomUrls[i + 1]) {
-		    		console.log('starting over')
-		    		newRoomSrc = 'folder: /images/textures/' + roomUrls[0] +'/'
-		    		document.getElementById('roomEnvironment').setAttribute('cubemap', newRoomSrc);
-		    		return
-		    		}
-    		
+		    if(!roomUrls[i + 1]) {
+	    		newRoomSrc = 'folder: /images/textures/' + roomUrls[0] +'/'
+	    		document.getElementById('roomEnvironment').setAttribute('cubemap', newRoomSrc);
+	    		return
+	    		}
     		newRoomSrc = 'folder: /images/textures/' + roomUrls[i + 1] + '/'
-    		
     		this.setState({cubeMapSrc: newRoomSrc})
-    		
     		document.getElementById('roomEnvironment').setAttribute('cubemap', newRoomSrc);
-  
-    		return
+    		return;
     	}
-
     }
   }
 

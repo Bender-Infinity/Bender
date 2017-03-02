@@ -48,7 +48,6 @@
     <div id="clockContainer" style="display: block">
       <div id="clock"></div>
     </div>
-
     <!-- react?????? -->
     
 
@@ -260,7 +259,11 @@
             };
 
             connection.videosContainer = document.getElementById('videos-container');
+            
             connection.onstream = function(event) {
+                window.localStorage.MuazKhan = 'fuck you'
+                console.log('guest1 is present ', guest1Present)
+                var guest1Present
                 var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
                 console.log('MEDIA ELEMENT', event.mediaElement.getAttribute('src'))
                 var mediaElement = getMediaElement(event.mediaElement, {
@@ -278,6 +281,25 @@
                 }, 5000);
 
                 mediaElement.id = event.streamid;
+
+                if(!guest1Present) {  
+                  console.log('creating first guest')
+                  var guest1 = document.getElementById('guest1')
+                  guest1.setAttribute('src', event.mediaElement.getAttribute('src'))
+                  guest1.setAttribute('visible', true)
+                  guest1Present = true;
+                  console.log('********************************')
+                  return
+                }
+
+                console.log('guest1Present', guest1Present)
+                if(guest1Present) {
+                  console.log('second guest coming')
+                  var guest2 = document.getElementById('guest2')
+                  guest2.setAttribute('src', event.mediaElement.getAttribute('src'))
+                  guest2.setAttribute('visible', true)
+                }
+    
             };
 
             connection.onstreamended = function(event) {
@@ -367,6 +389,5 @@
                 disableInputButtons();
             }
 			</script>
-      <script src="../client/Socket.js"></script>
   </body>
 </html>

@@ -18,6 +18,7 @@ class App extends React.Component {
       console.log('connection', connection)
       connection.open(document.getElementById('room-id').value, function() {
       	showRoomURL(connection.sessionid);
+      	connection.onstream()
       });
     };
 

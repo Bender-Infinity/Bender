@@ -29,28 +29,49 @@ class VRScene extends React.Component {
     aframeDraggableComponent(window.AFRAME);
   };
 
+  componentDidMount () {
+    console.log('no guests present')
+    var guest1 = document.getElementById('guest1')
+    var guest2 = document.getElementById('guest2')
+    guest1.addEventListener('video-play',(user) => {
+      // Find the <option> that matches the playing source
+      console.log('user stream', user)
+      var guest1Stream = user.detail.stream.id
+      guest1.setAttribute('src', null)
+      guest1.setAttribute('visible', false)
+      console.log('guest1', guest1)
+    })
+
+    guest2.addEventListener('video-play', () => {
+      guest2.setAttribute('visible', false)
+      guest2.setAttribute('src', null)
+
+    })
+  }
+
+
 
 
 	render() {
 
     return ( 
-    <div>
-      <Scene id="aframe-scene">
+      <div>
+        <Scene id="aframe-scene">
 
-  			<a-assets>	
-    		</a-assets>
-     		
-        <a-entity id="roomEnvironment" cubemap={this.state.cubeMapSrc}></a-entity>
+    			<a-assets>	
+      		</a-assets>
+       		
+          <a-entity id="roomEnvironment" cubemap={this.state.cubeMapSrc}></a-entity>
 
-    		<a-cylinder static-body transparent="true" opacity="0.5" color="#424242" height="0.5" radius="10" position="0 -3 0"></a-cylinder>
+      		<a-cylinder static-body transparent="true" opacity="0.5" color="#424242" height="0.5" radius="10" position="0 -3 0"></a-cylinder>
 
-    		<a-video-billboard side="" click-drag id="guest1" video-billboard="minWidth: 10;" position="-8.66 1.25 -5" rotation ="0 60 0"></a-video-billboard>
+      		<a-video-billboard click-drag id="guest1" video-billboard="minWidth: 10;" position="-8.66 1.25 -5" rotation ="0 60 0"></a-video-billboard>
 
-    		<a-video-billboard side="" click-drag id="guest2" video-billboard="minWidth: 10;" position="8.66 1.25 -5" rotation ="0 -60 0"></a-video-billboard>
+      		<a-video-billboard click-drag id="guest2" video-billboard="minWidth: 10;" position="8.66 1.25 -5" rotation ="0 -60 0"></a-video-billboard>
 
-    		<Camera position="0 0 10"></Camera>
-      </Scene>
-    </div>
+      		<Camera position="0 0 10"></Camera>
+        </Scene>
+      </div>
     )
 	}
 }

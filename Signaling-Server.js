@@ -80,15 +80,16 @@ module.exports = exports = function(app, socketCallback) {
           console.log('user ' + socket.id + ' disconnected')
         });
 
-        io.on('chat message', function(msg){
-          io.emit('chat message:', msg);
-          //then save to the database
-        });
-
-        // socket.on('chat message', function(msg){
-        //   console.log('chat message sent: ', msg)
-        //   io.emit('chat message from server', msg);
+        // io.on('chat message', function(msg){
+        //   io.emit('chat message:', msg);
+        //   console.log('we got a chat message', msg)
+        //   //then save to the database
         // });
+
+        socket.on('chat message', function(msg){
+          console.log('chat message sent: ', msg)
+          io.emit('chat message from server', msg);
+        });
 
         socket.on('clear drawing', function(){
           console.log('clearing drawing for everyone')

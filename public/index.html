@@ -154,8 +154,8 @@
 				   // get canvas element and create context
 				   var canvas  = document.getElementById('canvas');
 				   var context = canvas.getContext('2d');
-				   var width   = 200;
-				   var height  = 250;
+				   var width   = 290;
+				   var height  = 190;
 				   var socket  = io.connect();
 				   var radius = 10;
 				   context.lineWidth = radius * 2;
@@ -210,6 +210,14 @@
 						context.clearRect(0,0,width,height)
 						socket.emit('clear drawing');
 					};
+
+          function clearResponse() {
+            context.clearRect(0,0,width,height)
+          };
+
+          socket.on('clearit', function() {
+            clearResponse();
+          });
 			
 				   //****************************** end shared drawing ****************************
            //****************************** webRTC GHETTO *********************************

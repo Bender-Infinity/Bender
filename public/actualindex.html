@@ -48,7 +48,6 @@
     <div id="clockContainer" style="display: block">
       <div id="clock"></div>
     </div>
-
     <!-- react?????? -->
     
 
@@ -78,6 +77,11 @@
       </div>    
 
       <script src="./bundle.js"></script>
+      
+      <a-scene>
+        <a-video-billboard id="test" position="0 0 -10" width="5"></a-video-billboard>
+      </a-scene>
+
 			<script>
           //*********************** Drop it like it's hot *******************
           var spawnCube = function() {
@@ -144,7 +148,7 @@
 			  		console.log('message to append: ', msg)
 			  	});
 				  	
-				  	//********************************* shared drawing ****************************
+				 //  	//********************************* shared drawing ****************************
 					var mouse = { 
 			      click: false,
 			      move: false,
@@ -154,15 +158,17 @@
 				   // get canvas element and create context
 				   var canvas  = document.getElementById('canvas');
 				   var context = canvas.getContext('2d');
-				   var width   = 200;
-				   var height  = 250;
+				   var width   = 290;
+				   var height  = 190;
 				   var socket  = io.connect();
 				   var radius = 10;
 				   context.lineWidth = radius * 2;
 
 				   // set canvas to full browser width/height
-				   canvas.width = width;
-				   canvas.height = height;
+				   // canvas.width = width;
+				   // canvas.height = height;
+           canvas.width = width;
+           canvas.height = height;
 
 				  canvas.onmousedown = function(e){ 
 	      		console.log('mouse down')
@@ -208,6 +214,14 @@
 						context.clearRect(0,0,width,height)
 						socket.emit('clear drawing');
 					};
+
+          function clearResponse() {
+            context.clearRect(0,0,width,height)
+          };
+
+          socket.on('clearit', function() {
+            clearResponse();
+          });
 			
 				   //****************************** end shared drawing ****************************
            //****************************** webRTC GHETTO *********************************
@@ -258,25 +272,53 @@
                 OfferToReceiveVideo: true
             };
 
-            connection.videosContainer = document.getElementById('guest1');
+            connection.videosContainer = document.getElementById('videos-container');
+            
             connection.onstream = function(event) {
+                console.log('ONSTREAM EVENT STREAM', event.stream)
+                window.localStorage.testStream = event.stream;
+                var test = document.getElementById('test');
+                console.log('test selected:', test)
+                test.setAttribute('deviceId', event.stream)
+                // window.localStorage.MuazKhan = 'fuck you'
+                // console.log('guest1 is present ', guest1Present)
+                // var guest1Present
                 var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
-                console.log('MEDIA ELEMENT', event.mediaElement)
+                // console.log('MEDIA ELEMENT', event.mediaElement.getAttribute('src'))
                 var mediaElement = getMediaElement(event.mediaElement, {
                     title: event.userid,
                     buttons: [],
                     width: width,
                     showOnMouseEnter: false
                 });
-                console.log('CONTAINER', connection)
+                // console.log('CONTAINER', connection)
                 // connection.videosContainer.appendChild(mediaElement);
-                // document.getElementById('guest1').appendChild(mediaElement);
+                // document.getElementById('guest1').setAttribute('src', 'blahblahblah');
 
-                setTimeout(function() {
-                    mediaElement.media.play();
-                }, 5000);
+                // setTimeout(function() {
+                //     mediaElement.media.play();
+                // }, 5000);
 
                 mediaElement.id = event.streamid;
+
+                // if(!guest1Present) {  
+                //   console.log('creating first guest')
+                //   var guest1 = document.getElementById('guest1')
+                //   guest1.setAttribute('src', event.mediaElement.getAttribute('src'))
+                //   guest1.setAttribute('visible', true)
+                //   guest1Present = true;
+                //   console.log('********************************')
+                //   return
+                // }
+
+                // console.log('guest1Present', guest1Present)
+                // if(guest1Present) {
+                //   console.log('second guest coming')
+                //   var guest2 = document.getElementById('guest2')
+                //   guest2.setAttribute('src', event.mediaElement.getAttribute('src'))
+                //   guest2.setAttribute('visible', true)
+                // }
+    
             };
 
             connection.onstreamended = function(event) {
@@ -366,6 +408,5 @@
                 disableInputButtons();
             }
 			</script>
-       
   </body>
 </html>

@@ -48,16 +48,17 @@
     <div id="clockContainer" style="display: block">
       <div id="clock"></div>
     </div>
+
     <!-- react?????? -->
     
 
     <!-- drawing -->
-<!--     <div id="drawingContainer" style="display: none">
+    <div id="drawingContainer" style="display: none">
       <canvas id="canvas">
       </canvas>
       <input id="clearDrawing" type="button" value="Clear" name="clear" onclick="clearIt()">
       <h3 style="float: right;">Draw with friends</h3>
-    </div> -->
+    </div>
 
     <!-- speech transcription chat -->
     <div id="chat" style="display: none">
@@ -77,28 +78,27 @@
       </div>    
 
       <script src="./bundle.js"></script>
-
 			<script>
           //*********************** Drop it like it's hot *******************
-          // var spawnCube = function() {
-          //   var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
-          //   var randomColor = colors[Math.floor(Math.random() * colors.length)];
-          //   var someString = '<a-box color="' + randomColor + '" position="0 10 0"></a-box>'
-          //   var wrapper = document.createElement('div');
-          //   wrapper.innerHTML = someString;
-          //   var newElem = wrapper.firstChild;
-          //   document.getElementById('aframe-scene').appendChild(newElem)
-          //   newElem.setAttribute('dynamic-body', '')
-          //   newElem.setAttribute('click-drag', '')
-          // }
+          var spawnCube = function() {
+            var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+            var randomColor = colors[Math.floor(Math.random() * colors.length)];
+            var someString = '<a-box color="' + randomColor + '" position="0 10 0"></a-box>'
+            var wrapper = document.createElement('div');
+            wrapper.innerHTML = someString;
+            var newElem = wrapper.firstChild;
+            document.getElementById('aframe-scene').appendChild(newElem)
+            newElem.setAttribute('dynamic-body', '')
+            newElem.setAttribute('click-drag', '')
+          }
 
           //******************************* Collapse UI ************************
 
-          // var collapse = function(elem) {
-          //   var elemDisplay = document.getElementById(elem).style.display
-          //   if (elemDisplay == 'none' || !elemDisplay) { document.getElementById(elem).style.display = 'block'; }
-          //   else { document.getElementById(elem).style.display = 'none'}
-          // }
+          var collapse = function(elem) {
+            var elemDisplay = document.getElementById(elem).style.display
+            if (elemDisplay == 'none' || !elemDisplay) { document.getElementById(elem).style.display = 'block'; }
+            else { document.getElementById(elem).style.display = 'none'}
+          }
 					
           // $('#spawnCube').click(function() { spawnCube() }) ;
           
@@ -144,7 +144,7 @@
 			  		console.log('message to append: ', msg)
 			  	});
 				  	
-				 //  	//********************************* shared drawing ****************************
+				  	//********************************* shared drawing ****************************
 					var mouse = { 
 			      click: false,
 			      move: false,
@@ -161,10 +161,8 @@
 				   context.lineWidth = radius * 2;
 
 				   // set canvas to full browser width/height
-				   // canvas.width = width;
-				   // canvas.height = height;
-           canvas.width = 290;
-           canvas.height = 190;
+				   canvas.width = width;
+				   canvas.height = height;
 
 				  canvas.onmousedown = function(e){ 
 	      		console.log('mouse down')
@@ -206,10 +204,10 @@
 					   mainLoop();
 				
 
-					// function clearIt () {
-					// 	context.clearRect(0,0,width,height)
-					// 	socket.emit('clear drawing');
-					// };
+					function clearIt () {
+						context.clearRect(0,0,width,height)
+						socket.emit('clear drawing');
+					};
 			
 				   //****************************** end shared drawing ****************************
            //****************************** webRTC GHETTO *********************************
@@ -260,14 +258,10 @@
                 OfferToReceiveVideo: true
             };
 
-            connection.videosContainer = document.getElementById('videos-container');
-            
+            connection.videosContainer = document.getElementById('guest1');
             connection.onstream = function(event) {
-                window.localStorage.MuazKhan = 'fuck you'
-                console.log('guest1 is present ', guest1Present)
-                var guest1Present
                 var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
-                console.log('MEDIA ELEMENT', event.mediaElement.getAttribute('src'))
+                console.log('MEDIA ELEMENT', event.mediaElement)
                 var mediaElement = getMediaElement(event.mediaElement, {
                     title: event.userid,
                     buttons: [],
@@ -276,32 +270,13 @@
                 });
                 console.log('CONTAINER', connection)
                 // connection.videosContainer.appendChild(mediaElement);
-                document.getElementById('guest1').appendChild(mediaElement);
+                // document.getElementById('guest1').appendChild(mediaElement);
 
                 setTimeout(function() {
                     mediaElement.media.play();
                 }, 5000);
 
                 mediaElement.id = event.streamid;
-
-                if(!guest1Present) {  
-                  console.log('creating first guest')
-                  var guest1 = document.getElementById('guest1')
-                  guest1.setAttribute('src', event.mediaElement.getAttribute('src'))
-                  guest1.setAttribute('visible', true)
-                  guest1Present = true;
-                  console.log('********************************')
-                  return
-                }
-
-                console.log('guest1Present', guest1Present)
-                if(guest1Present) {
-                  console.log('second guest coming')
-                  var guest2 = document.getElementById('guest2')
-                  guest2.setAttribute('src', event.mediaElement.getAttribute('src'))
-                  guest2.setAttribute('visible', true)
-                }
-    
             };
 
             connection.onstreamended = function(event) {
@@ -391,5 +366,6 @@
                 disableInputButtons();
             }
 			</script>
+       
   </body>
 </html>

@@ -80,14 +80,15 @@ module.exports = exports = function(app, socketCallback) {
           console.log('user ' + socket.id + ' disconnected')
         });
 
-        io.on('chat message', function(msg){
-          io.emit('chat message:', msg);
-          //then save to the database
-        });
+        // io.on('chat message', function(msg){
+        //   io.emit('chat message:', msg);
+        //   console.log('we got a chat message', msg)
+        //   //then save to the database
+        // });
 
         socket.on('chat message', function(msg){
           console.log('chat message sent: ', msg)
-          io.emit('chat message', msg);
+          io.emit('chat message from server', msg);
         });
 
         socket.on('clear drawing', function(){
@@ -95,6 +96,12 @@ module.exports = exports = function(app, socketCallback) {
           line_history = [];
           io.emit('clearit', true);
         });
+        //Speech recognition socket
+        socket.on('voice chat', function (li) {
+          console.log('server received speech chat, emitting to all clients:', li);
+          socket.broadcast.emit('speech chat message from server',li)
+        })
+
         //
       //shared drawing socket - send drawing to user so they can see updated drawing
         var line_history = [];

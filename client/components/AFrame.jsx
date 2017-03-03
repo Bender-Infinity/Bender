@@ -42,14 +42,14 @@ class VRScene extends React.Component {
       // Find the <option> that matches the playing source
       console.log('user stream', user)
       var guest1Stream = user.detail.stream.id
-      guest1.setAttribute('src', null)
-      guest1.setAttribute('visible', false)
+      guest1.setAttribute('visible', true)
+      guest1.setAttribute('src', '')
       console.log('guest1', guest1)
     });
 
     guest2.addEventListener('video-play', () => {
-      guest2.setAttribute('visible', false)
-      guest2.setAttribute('src', null)
+      guest2.setAttribute('visible', true)
+      guest2.setAttribute('src', '')
 
     });
   }

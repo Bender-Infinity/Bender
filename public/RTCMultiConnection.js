@@ -555,9 +555,11 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
                     }
 
                     if (isPluginRTC && window.PluginRTC) {
-                        var mediaElement = document.createElement('video');
-                        var body = connection.videosContainer;
-                        body.insertBefore(mediaElement, body.firstChild);
+                        // mediaElement = document.getElementById('test')
+                        // console.log('did we get mediaelement?', mediaElement)
+                        // // var mediaElement = document.createElement('video');
+                        // // var body = connection.videosContainer;
+                        // // body.insertBefore(mediaElement, body.firstChild);
                         setTimeout(function() {
                             window.PluginRTC.attachMediaStream(mediaElement, stream);
                         }, 3000);
@@ -4059,6 +4061,7 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
         };
 
         mPeer.onGettingRemoteMedia = function(stream, remoteUserId) {
+            console.log('MPEER ONGETTINGREMOTEMEDIA', stream)
             try {
                 stream.type = 'remote';
             } catch (e) {}

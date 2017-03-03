@@ -1,4 +1,5 @@
 // var server = require(isUseHTTPs ? 'https' : 'http');
+const https = require('https')
 const http = require('http').Server(app)
 // var url = require('url');
 // var isUseHTTPs = false;
@@ -6,7 +7,7 @@ var express = require('express');
 var app = express();
 // const io = require('socket.io')(http);
 
-var port = 3000;
+var port = 443;
 
 var fs = require('fs');
 var path = require('path');
@@ -157,7 +158,7 @@ require('./Signaling-Server.js')(server, function(socket) {
 
 // var io = require('socket.io').listen(server);
 //dummy, nonfunctional
-var io = require('socket.io')(http);
+// var io = require('socket.io')(http);
 
 // io.on('connection', function (socket) {
   

@@ -13,12 +13,6 @@ export default (props) => (
         <img id="chatCollapse" onClick={() => props.collapse('chat')} title="Chat" src="../images/icons/enable_chat.png" />
       </li>
       <li className="ui">
-        <img title="drop it like it's hot" src="../images/icons/spawnCube.png" id="spawnCube"/>
-      </li>
-      <li className="ui"> 
-        <img title="change background" src="../images/icons/change_room.png" />
-      </li>
-      <li className="ui">
         <p>Room name</p>
         <input type="text" id="room-id"/>
       </li>

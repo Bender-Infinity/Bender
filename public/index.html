@@ -13,8 +13,11 @@
     </script>
     <script src="https://unpkg.com/webrtc-adapter/out/adapter.js"></script>
     <script src="./speech.js"></script> 
+    
+    <script src="https://www.gstatic.com/realtime/realtime-client-utils.js"></script>
+    <script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
   </head>
-
+  <div id="videos-container"></div>
   <body onload="startTime()">
     <div id="app"></div>
 
@@ -37,6 +40,12 @@
       <h3 style="float: right;">Draw with friends</h3>
     </div>
 
+    <!-- shared google doc -->
+    <textarea id="text_area_1"></textarea>
+    <textarea id="text_area_2"></textarea>
+    <button id="auth_button">Authorize</button>
+
+
     <!-- speech transcription chat -->
     <div id="chat" style="display: none">
       <ul>
@@ -57,29 +66,7 @@
       <script src="./bundle.js"></script>
 
 			<script>
-          //*********************** Drop it like it's hot *******************
-          // var spawnCube = function() {
-          //   var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
-          //   var randomColor = colors[Math.floor(Math.random() * colors.length)];
-          //   var someString = '<a-box color="' + randomColor + '" position="0 10 0"></a-box>'
-          //   var wrapper = document.createElement('div');
-          //   wrapper.innerHTML = someString;
-          //   var newElem = wrapper.firstChild;
-          //   document.getElementById('aframe-scene').appendChild(newElem)
-          //   newElem.setAttribute('dynamic-body', '')
-          //   newElem.setAttribute('click-drag', '')
-          // }
 
-          //******************************* Collapse UI ************************
-
-          // var collapse = function(elem) {
-          //   var elemDisplay = document.getElementById(elem).style.display
-          //   if (elemDisplay == 'none' || !elemDisplay) { document.getElementById(elem).style.display = 'block'; }
-          //   else { document.getElementById(elem).style.display = 'none'}
-          // }
-					
-          // $('#spawnCube').click(function() { spawnCube() }) ;
-          
           var socket = io();
 
           //start voice chat
@@ -182,19 +169,6 @@
 					//       setTimeout(mainLoop, 25);
 					//    }
 					//    mainLoop();
-				
-					// function clearIt () {
-					// 	context.clearRect(0,0,width,height)
-					// 	socket.emit('clear drawing');
-					// };
-
-     //      function clearResponse() {
-     //        context.clearRect(0,0,width,height)
-     //      };
-
-     //      socket.on('clearit', function() {
-     //        clearResponse();
-     //      });
 			
 				   //****************************** end shared drawing ****************************
            //****************************** webRTC GHETTO *********************************
@@ -250,8 +224,10 @@
             connection.onstream = function(event) {
                 // console.log('ONSTREAM EVENT STREAM', event.stream)
                 // window.localStorage.testStream = event.stream;
-                // window.localStorage.MuazKhan = 'fuck you'
-                // console.log('guest1 is present ', guest1Present)
+
+                window.localStorage.MuazKhan = 'likes spaghetti'
+                console.log('window.localStorage ', window.localStorage.MuazKhan)
+
                 // var guest1Present
                 var width = 300;
                 // var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
@@ -264,6 +240,7 @@
                 });
 
                 // console.log('CONTAINER', connection)
+        
                 connection.videosContainer.appendChild(mediaElement);
                 // document.getElementById('guest1').setAttribute('src', 'blahblahblah');
 
@@ -273,23 +250,6 @@
 
                 mediaElement.id = event.streamid;
 
-                // if(!guest1Present) {  
-                //   console.log('creating first guest')
-                //   var guest1 = document.getElementById('guest1')
-                //   guest1.setAttribute('src', event.mediaElement.getAttribute('src'))
-                //   guest1.setAttribute('visible', true)
-                //   guest1Present = true;
-                //   console.log('********************************')
-                //   return
-                // }
-
-                // console.log('guest1Present', guest1Present)
-                // if(guest1Present) {
-                //   console.log('second guest coming')
-                //   var guest2 = document.getElementById('guest2')
-                //   guest2.setAttribute('src', event.mediaElement.getAttribute('src'))
-                //   guest2.setAttribute('visible', true)
-                // }
     
             };
 
@@ -379,6 +339,94 @@
 
                 disableInputButtons();
             }
+
+            // ********************************* Google Doc API *****************************
+
+          window.gapi.load('auth:client,drive-realtime,drive-share', start);
+
+          var clientId = 'AIzaSyAWgaa-I9VFoEQmt5XJSWzvCNoXpSafZ0c';
+
+          if (!/^([0-9])$/.test(clientId[0])) {
+            alert('Invalid Client ID - did you forget to insert your application Client ID?');
+          }
+
+
+
+          function start() {
+            var doc = gapi.drive.realtime.newInMemoryDocument();
+            var model = doc.getModel();
+            var collaborativeString = model.createString();
+            collaborativeString.setText('Welcome to the Quickstart App!');
+            model.getRoot().set('demo_string', collaborativeString);
+            wireTextBoxes(collaborativeString);
+            document.getElementById('json_button').addEventListener('click', function(){
+              document.getElementById('json_textarea').value = model.toJson();
+            });
+          }
+
+             var realtimeUtils = new utils.RealtimeUtils({ clientId: clientId });
+
+            authorize();
+
+            function authorize() {
+              // Attempt to authorize
+              realtimeUtils.authorize(function(response){
+                if(response.error){
+                  // Authorization failed because this is the first time the user has used your application,
+                  // show the authorize button to prompt them to authorize manually.
+                  var button = document.getElementById('auth_button');
+                  button.classList.add('visible');
+                  button.addEventListener('click', function () {
+                    realtimeUtils.authorize(function(response){
+                      start();
+                    }, true);
+                  });
+                } else {
+                    start();
+                }
+              }, false);
+            }
+
+            function start() {
+              // With auth taken care of, load a file, or create one if there
+              // is not an id in the URL.
+              var id = realtimeUtils.getParam('id');
+              if (id) {
+                // Load the document id from the URL
+                realtimeUtils.load(id.replace('/', ''), onFileLoaded, onFileInitialize);
+              } else {
+                // Create a new document, add it to the URL
+                realtimeUtils.createRealtimeFile('New Quickstart File', function(createResponse) {
+                  window.history.pushState(null, null, '?id=' + createResponse.id);
+                  realtimeUtils.load(createResponse.id, onFileLoaded, onFileInitialize);
+                });
+              }
+            }
+
+            // The first time a file is opened, it must be initialized with the
+            // document structure. This function will add a collaborative string
+            // to our model at the root.
+            function onFileInitialize(model) {
+              var string = model.createString();
+              string.setText('Welcome to the Quickstart App!');
+              model.getRoot().set('demo_string', string);
+            }
+
+            // After a file has been initialized and loaded, we can access the
+            // document. We will wire up the data model to the UI.
+            function onFileLoaded(doc) {
+              var collaborativeString = doc.getModel().getRoot().get('demo_string');
+              wireTextBoxes(collaborativeString);
+            }
+
+
+           function wireTextBoxes(collaborativeString) {
+            var textArea1 = document.getElementById('text_area_1');
+            var textArea2 = document.getElementById('text_area_2');
+            gapi.drive.realtime.databinding.bindString(collaborativeString, textArea1);
+            gapi.drive.realtime.databinding.bindString(collaborativeString, textArea2);
+          }
+
 			</script>
   </body>
 </html>

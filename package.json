@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/im-buff/bender#readme",
   "dependencies": {
-    "socket.io": "^1.7.3",
+    "socket.io": "^1.7.3"
   },
   "devDependencies": {
     "babel": "^6.23.0",

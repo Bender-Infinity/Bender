@@ -61,21 +61,18 @@ white - white;*/
 }
 
 #drawingContainer {
-  height: 200px;
-  width: 300px;
-  border: 5px solid rgba(255, 255, 255, 0.7);
-  border-radius: 5px;
-  position: absolute;
+  height: 500px;
+  width: 500px;
+  border: 2px solid rgba(0, 0, 0, 0.7);
+  border-radius: 0px;
   z-index: 999999;
   margin: 5px !important;
 }
 
 #canvas {
-  height: 100%;
-  width:100%;
   display: block;
   z-index: 999999;
-  background-color: #89f0ef;
+  /*background-color: #89f0ef;*/
   opacity: 0.5;
       
 }
@@ -87,7 +84,7 @@ h3 {
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
-#clearDrawing {
+/*#clearDrawing {
   position: relative;
   margin: 6px;
   z-index: 9999;
@@ -96,7 +93,7 @@ h3 {
   border: none;
   color:white;
   font-family: Eurostile, Courier;
-}
+}*/
 
 #clock {
   position: absolute;

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Nav from './components/Nav.jsx';
 import './lib/sockets.js';
-import Draw from './components/Draw.jsx';
+import Sketch from './components/Sketch.jsx';
 import Streams from './components/Streams.jsx';
 
 class App extends React.Component {
@@ -67,9 +67,9 @@ class App extends React.Component {
 	render() {
 		return (
     <div>
+      <Sketch />
       <Streams />
       <Nav />
-      <Draw clearIt={this.clearIt}/>
     </div>
 		)
 	}

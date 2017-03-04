@@ -13,6 +13,7 @@ import Cubemap from './aframe-cubemap-component.js'
 import registerVideoBillboard from 'aframe-video-billboard';
 import aframeDraggableComponent from 'aframe-click-drag-component';
 import Fazicks from 'aframe-physics-system';
+import Draw from './Draw.jsx';
 
 class VRScene extends React.Component {
 	constructor(props) {
@@ -29,32 +30,22 @@ class VRScene extends React.Component {
     aframeDraggableComponent(window.AFRAME);
   };
 
+
+  // clearIt() {
+  //   context.clearRect(0,0,width,height)
+
   componentDidMount () {
-    // console.log('no guests present')
-    // var guest1 = document.getElementById('guest1')
-    // var guest2 = document.getElementById('guest2')
-    // guest1.addEventListener('video-play',(user) => {
-    //   // Find the <option> that matches the playing source
-    //   console.log('user stream', user)
-    //   var guest1Stream = user.detail.stream.id
-    //   guest1.setAttribute('visible', true)
-    //   guest1.setAttribute('src', '')
-    //   console.log('guest1', guest1)
-    // })
-
-    // guest2.addEventListener('video-play', () => {
-    //   guest2.setAttribute('visible', true)
-    //   guest2.setAttribute('src', '')
-
-    // })
   }
 
 
-
-
 	render() {
-
-    return ( 
+    // return (
+    // <div>
+    //   <div id="drawing-container">
+    //     <Draw clearIt={this.clearIt}>
+    //   </div>
+    //   <Scene id="aframe-scene">
+    return (
       <div>
         <Scene id="aframe-scene">
 
@@ -77,12 +68,3 @@ class VRScene extends React.Component {
 }
 
 export default VRScene
-
-
-
-
-
-
-
-
-

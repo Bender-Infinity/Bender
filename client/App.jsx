@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Nav from './components/Nav.jsx';
+import './lib/sockets.js';
+import Draw from './components/Draw.jsx';
+import Streams from './components/Streams.jsx';
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 		
 		this.state = {
-			cubeMapSrc:'folder: /images/textures/SanFrancisco4/'
+      dummy: 'dummy'
 		};
 	}
 
@@ -42,29 +45,31 @@ class App extends React.Component {
     else { document.getElementById(elem).style.display = 'none'}
   }
 
-  changeRoom() {
-  	var newRoomSrc 
-    var roomUrls = ['SanFrancisco4','Colosseum', 'DallasW', 'GoldenGateBridge', 'GoldenGateBridge2', 'LancellottiChapel', 'NissiBeach', 'NissiBeach2', 'Rainbow', 'SaintPetersBasilica', 'Skansen2', 'Tantolunden6'];
-    var roomSrc = 'folder: /images/textures/' + roomUrls[0] + '/';
-    for(var i = 0; i < roomUrls.length; i++) {
-    	if('folder: /images/textures/' + roomUrls[i] + '/' === this.state.cubeMapSrc) {
-		    if(!roomUrls[i + 1]) {
-	    		newRoomSrc = 'folder: /images/textures/' + roomUrls[0] +'/'
-	    		document.getElementById('roomEnvironment').setAttribute('cubemap', newRoomSrc);
-	    		return
-	    		}
-    		newRoomSrc = 'folder: /images/textures/' + roomUrls[i + 1] + '/'
-    		this.setState({cubeMapSrc: newRoomSrc})
-    		document.getElementById('roomEnvironment').setAttribute('cubemap', newRoomSrc);
-    		return;
-    	}
-    }
-  }
+  // changeRoom() {
+  // 	var newRoomSrc 
+  //   var roomUrls = ['SanFrancisco4','Colosseum', 'DallasW', 'GoldenGateBridge', 'GoldenGateBridge2', 'LancellottiChapel', 'NissiBeach', 'NissiBeach2', 'Rainbow', 'SaintPetersBasilica', 'Skansen2', 'Tantolunden6'];
+  //   var roomSrc = 'folder: /images/textures/' + roomUrls[0] + '/';
+  //   for(var i = 0; i < roomUrls.length; i++) {
+  //   	if('folder: /images/textures/' + roomUrls[i] + '/' === this.state.cubeMapSrc) {
+		//     if(!roomUrls[i + 1]) {
+	 //    		newRoomSrc = 'folder: /images/textures/' + roomUrls[0] +'/'
+	 //    		document.getElementById('roomEnvironment').setAttribute('cubemap', newRoomSrc);
+	 //    		return
+	 //    		}
+  //   		newRoomSrc = 'folder: /images/textures/' + roomUrls[i + 1] + '/'
+  //   		this.setState({cubeMapSrc: newRoomSrc})
+  //   		document.getElementById('roomEnvironment').setAttribute('cubemap', newRoomSrc);
+  //   		return;
+  //   	}
+  //   }
+  // }
 
 	render() {
 		return (
     <div>
-    <Nav collapse={this.collapse} changeRoom={this.changeRoom.bind(this)} />
+      <Streams />
+      <Nav />
+      <Draw clearIt={this.clearIt}/>
     </div>
 		)
 	}

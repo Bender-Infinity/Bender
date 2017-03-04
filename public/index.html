@@ -18,8 +18,9 @@
   <body onload="startTime()">
     <div id="app"></div>
 
-    <!-- ugh -->
-    <div id="videos-container"></div>
+    <!-- ugh dummy divs-->
+    <!-- <div id="videos-container" height="100" width="100"></div> -->
+    <div id="room-id" height="100" width="100"></div>
 
     <!-- clock -->
     <div id="clockContainer" style="display: block">
@@ -122,82 +123,78 @@
 			  	});
 				  	
 				 //  	//********************************* shared drawing ****************************
-					var mouse = { 
-			      click: false,
-			      move: false,
-			      pos: {x:0, y:0},
-			      pos_prev: false
-					};
-				   // get canvas element and create context
-				   var canvas  = document.getElementById('canvas');
-				   var context = canvas.getContext('2d');
-				   var width   = 290;
-				   var height  = 190;
-				   var socket  = io.connect();
-				   var radius = 10;
-				   context.lineWidth = radius * 2;
+					// var mouse = { 
+			  //     click: false,
+			  //     move: false,
+			  //     pos: {x:0, y:0},
+			  //     pos_prev: false
+					// };
+				 //   // get canvas element and create context
+				 //   var canvas  = document.getElementById('canvas');
+				 //   var context = canvas.getContext('2d');
+				 //   var width   = 290;
+				 //   var height  = 190;
+				 //   var socket  = io.connect();
+				 //   var radius = 10;
+				 //   context.lineWidth = radius * 2;
 
-				   // set canvas to full browser width/height
-				   // canvas.width = width;
-				   // canvas.height = height;
-           canvas.width = width;
-           canvas.height = height;
+				 //   // set canvas to full browser width/height
+				 //   // canvas.width = width;
+				 //   // canvas.height = height;
+     //       canvas.width = width;
+     //       canvas.height = height;
 
-				  canvas.onmousedown = function(e){ 
-	      		console.log('mouse down')
-	      		mouse.click = true; 
-	      	};
+				 //  canvas.onmousedown = function(e){ 
+	    //   		console.log('mouse down')
+	    //   		mouse.click = true; 
+	    //   	};
    				
-   				canvas.onmouseup = function(e){ mouse.click = false; };
+   		// 		canvas.onmouseup = function(e){ mouse.click = false; };
 
-			   	canvas.onmousemove = function(e) {
-			         // console.log('drawing')
-			      // normalize mouse position to range 0.0 - 1.0
-			      mouse.pos.x = e.clientX / width
-			      mouse.pos.y = e.clientY / height
-			      mouse.move = true;
-			   	};
+			  //  	canvas.onmousemove = function(e) {
+			  //        // console.log('drawing')
+			  //     // normalize mouse position to range 0.0 - 1.0
+			  //     mouse.pos.x = e.clientX / width
+			  //     mouse.pos.y = e.clientY / height
+			  //     mouse.move = true;
+			  //  	};
 
-   				// draw line received from server
-				   socket.on('draw_line', function (data) {
-            console.log('WE DREW A LINE')
-				      var line = data.line;
-				      context.beginPath();
-				      context.moveTo(line[0].x * width, line[0].y * height);
-				      context.lineTo(line[1].x * width, line[1].y * height);
-				      context.stroke();
-				   });
+   		// 		// draw line received from server
+				 //   socket.on('draw_line', function (data) {
+     //        console.log('WE DREW A LINE')
+				 //      var line = data.line;
+				 //      context.beginPath();
+				 //      context.moveTo(line[0].x * width, line[0].y * height);
+				 //      context.lineTo(line[1].x * width, line[1].y * height);
+				 //      context.stroke();
+				 //   });
    
-					   // main loop, running every 25ms
-					   function mainLoop() {
-					      // check if the user is drawing
-					      if (mouse.click && mouse.move && mouse.pos_prev) {
-					      console.log('sending to server socket')
-					         // send line to to the server
-					         socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
-					         mouse.move = false;
-					      }
-					      mouse.pos_prev = {x: mouse.pos.x, y: mouse.pos.y};
-					      setTimeout(mainLoop, 25);
-					   }
-					   mainLoop();
+					//    // main loop, running every 25ms
+					//    function mainLoop() {
+					//       // check if the user is drawing
+					//       if (mouse.click && mouse.move && mouse.pos_prev) {
+					//       console.log('sending to server socket')
+					//          // send line to to the server
+					//          socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
+					//          mouse.move = false;
+					//       }
+					//       mouse.pos_prev = {x: mouse.pos.x, y: mouse.pos.y};
+					//       setTimeout(mainLoop, 25);
+					//    }
+					//    mainLoop();
 				
-<<<<<<< HEAD
+					// function clearIt () {
+					// 	context.clearRect(0,0,width,height)
+					// 	socket.emit('clear drawing');
+					// };
 
-=======
->>>>>>> b1cd157d62f088abceb38c9d6ed48d8b28724c9e
-					function clearIt () {
-						context.clearRect(0,0,width,height)
-						socket.emit('clear drawing');
-					};
+     //      function clearResponse() {
+     //        context.clearRect(0,0,width,height)
+     //      };
 
-          function clearResponse() {
-            context.clearRect(0,0,width,height)
-          };
-
-          socket.on('clearit', function() {
-            clearResponse();
-          });
+     //      socket.on('clearit', function() {
+     //        clearResponse();
+     //      });
 			
 				   //****************************** end shared drawing ****************************
            //****************************** webRTC GHETTO *********************************
@@ -251,15 +248,13 @@
             connection.videosContainer = document.getElementById('videos-container');
             
             connection.onstream = function(event) {
-                console.log('ONSTREAM EVENT STREAM', event.stream)
-                window.localStorage.testStream = event.stream;
-                var test = document.getElementById('test');
-                console.log('test selected:', test)
-                test.setAttribute('deviceId', event.stream)
+                // console.log('ONSTREAM EVENT STREAM', event.stream)
+                // window.localStorage.testStream = event.stream;
                 // window.localStorage.MuazKhan = 'fuck you'
                 // console.log('guest1 is present ', guest1Present)
                 // var guest1Present
-                var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
+                var width = 300;
+                // var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
                 // console.log('MEDIA ELEMENT', event.mediaElement.getAttribute('src'))
                 var mediaElement = getMediaElement(event.mediaElement, {
                     title: event.userid,
@@ -269,7 +264,7 @@
                 });
 
                 // console.log('CONTAINER', connection)
-                // connection.videosContainer.appendChild(mediaElement);
+                connection.videosContainer.appendChild(mediaElement);
                 // document.getElementById('guest1').setAttribute('src', 'blahblahblah');
 
                 // setTimeout(function() {

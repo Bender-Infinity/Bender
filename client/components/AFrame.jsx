@@ -35,23 +35,6 @@ class VRScene extends React.Component {
   //   context.clearRect(0,0,width,height)
 
   componentDidMount () {
-    console.log('no guests present')
-    var guest1 = document.getElementById('guest1')
-    var guest2 = document.getElementById('guest2')
-    guest1.addEventListener('video-play',(user) => {
-      // Find the <option> that matches the playing source
-      console.log('user stream', user)
-      var guest1Stream = user.detail.stream.id
-      guest1.setAttribute('visible', true)
-      guest1.setAttribute('src', '')
-      console.log('guest1', guest1)
-    });
-
-    guest2.addEventListener('video-play', () => {
-      guest2.setAttribute('visible', true)
-      guest2.setAttribute('src', '')
-
-    });
   }
 
 

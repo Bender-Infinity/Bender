@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Nav from './components/Nav.jsx';
-import AFrame from './components/AFrame.jsx';
 
 class App extends React.Component {
 	constructor(props) {
@@ -43,20 +42,6 @@ class App extends React.Component {
     else { document.getElementById(elem).style.display = 'none'}
   }
 
-  spawnCube() {
-	  var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
-	  var randomColor = colors[Math.floor(Math.random() * colors.length)];
-	  var someString = '<a-box color="' + randomColor + '" position="0 5 0"></a-box>'
-	  var wrapper = document.createElement('div');
-	  wrapper.innerHTML = someString;
-	  var newElem = wrapper.firstChild;
-	  document.getElementById('aframe-scene').appendChild(newElem)
-    console.log(newElem);
-	  newElem.setAttribute('dynamic-body', '')
-	  newElem.setAttribute('click-drag', '')
-	}
-
-
   changeRoom() {
   	var newRoomSrc 
     var roomUrls = ['SanFrancisco4','Colosseum', 'DallasW', 'GoldenGateBridge', 'GoldenGateBridge2', 'LancellottiChapel', 'NissiBeach', 'NissiBeach2', 'Rainbow', 'SaintPetersBasilica', 'Skansen2', 'Tantolunden6'];
@@ -79,12 +64,11 @@ class App extends React.Component {
 	render() {
 		return (
     <div>
-    <Nav collapse={this.collapse} spawnCube={this.spawnCube} changeRoom={this.changeRoom.bind(this)} />
-
-    <AFrame cubeMapSrc={this.state.cubeMapSrc}/>
+    <Nav collapse={this.collapse} changeRoom={this.changeRoom.bind(this)} />
     </div>
 		)
 	}
 }
 
 ReactDOM.render(<App />, document.getElementById('app'))
+

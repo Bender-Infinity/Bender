@@ -10,7 +10,7 @@ var interim_span = '';
 if (!('webkitSpeechRecognition' in window)) {
   upgrade();
 } else {
-  recognition = new webkitSpeechRecognition();
+  var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = false;
 

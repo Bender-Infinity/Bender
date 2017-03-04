@@ -12,38 +12,15 @@
       crossorigin="anonymous">
     </script>
     <script src="https://unpkg.com/webrtc-adapter/out/adapter.js"></script>
-    <!-- <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script> -->
-    <!-- <script type="text/javascript" src="bundle.js" charset="utf-8"></script> -->
-    <!-- <script src="./build.js"></script> -->
     <script src="./speech.js"></script> 
-    <!-- <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v1.2.1/dist/aframe-physics-system.min.js"></script> -->
-    <!-- <script src="https://unpkg.com/aframe-video-billboard"></script>  -->
-    <!-- <script src="https://unpkg.com/aframe-click-drag-component"></script> -->
-
-    <!-- <script src="./aframe-cubemap-component.js"></script> -->
-    <!-- <script src="./clickdrag.js"></script> -->
   </head>
 
   <body onload="startTime()">
     <div id="app"></div>
-    <!-- nav bar -->
-    
-    <!-- A SMOKING CRATER -->
-<!--     <div class="github-TEAMBENDERBITCHES"></div>
-      <section class="experiment">
-        <div class="make-center">
-          <input type="text" id="room-id" value="abcdef" autocorrect=off autocapitalize=off size=20>
-          <button id="open-room">Open Room</button>
-          <button id="join-room">Join Room</button>
-          <button id="open-or-join-room">Auto Open Or Join Room</button>
-          <div id="room-urls"></div>
-        </div>
-      </section>          
-    </div> -->
 
     <!-- ugh -->
     <div id="videos-container"></div>
-    <!-- A frame scene will render in this div -->
+
     <!-- clock -->
     <div id="clockContainer" style="display: block">
       <div id="clock"></div>
@@ -77,32 +54,28 @@
       </div>    
 
       <script src="./bundle.js"></script>
-      
-<!--       <a-scene>
-        <a-video-billboard id="test" position="0 0 -10" width="5"></a-video-billboard>
-      </a-scene> -->
 
 			<script>
           //*********************** Drop it like it's hot *******************
-          var spawnCube = function() {
-            var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
-            var randomColor = colors[Math.floor(Math.random() * colors.length)];
-            var someString = '<a-box color="' + randomColor + '" position="0 10 0"></a-box>'
-            var wrapper = document.createElement('div');
-            wrapper.innerHTML = someString;
-            var newElem = wrapper.firstChild;
-            document.getElementById('aframe-scene').appendChild(newElem)
-            newElem.setAttribute('dynamic-body', '')
-            newElem.setAttribute('click-drag', '')
-          }
+          // var spawnCube = function() {
+          //   var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+          //   var randomColor = colors[Math.floor(Math.random() * colors.length)];
+          //   var someString = '<a-box color="' + randomColor + '" position="0 10 0"></a-box>'
+          //   var wrapper = document.createElement('div');
+          //   wrapper.innerHTML = someString;
+          //   var newElem = wrapper.firstChild;
+          //   document.getElementById('aframe-scene').appendChild(newElem)
+          //   newElem.setAttribute('dynamic-body', '')
+          //   newElem.setAttribute('click-drag', '')
+          // }
 
           //******************************* Collapse UI ************************
 
-          var collapse = function(elem) {
-            var elemDisplay = document.getElementById(elem).style.display
-            if (elemDisplay == 'none' || !elemDisplay) { document.getElementById(elem).style.display = 'block'; }
-            else { document.getElementById(elem).style.display = 'none'}
-          }
+          // var collapse = function(elem) {
+          //   var elemDisplay = document.getElementById(elem).style.display
+          //   if (elemDisplay == 'none' || !elemDisplay) { document.getElementById(elem).style.display = 'block'; }
+          //   else { document.getElementById(elem).style.display = 'none'}
+          // }
 					
           // $('#spawnCube').click(function() { spawnCube() }) ;
           
@@ -209,7 +182,10 @@
 					   }
 					   mainLoop();
 				
+<<<<<<< HEAD
 
+=======
+>>>>>>> b1cd157d62f088abceb38c9d6ed48d8b28724c9e
 					function clearIt () {
 						context.clearRect(0,0,width,height)
 						socket.emit('clear drawing');
@@ -291,6 +267,7 @@
                     width: width,
                     showOnMouseEnter: false
                 });
+
                 // console.log('CONTAINER', connection)
                 // connection.videosContainer.appendChild(mediaElement);
                 // document.getElementById('guest1').setAttribute('src', 'blahblahblah');

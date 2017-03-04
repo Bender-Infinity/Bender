@@ -1,7 +1,9 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var morgan = require('morgan');
 
+app.use(morgan('tiny'));
 
 // PRODUCTION
 // var https = require('https');
@@ -19,9 +21,7 @@ var http = require('http');
 var port = 3000;
 var server = http.createServer(app);
 
-
-
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/../public'));
 
 server.listen(port);
 console.log('Working on Bender∞ on port ' + port);

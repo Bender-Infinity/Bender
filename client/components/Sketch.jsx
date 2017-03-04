@@ -6,20 +6,23 @@ export default class Draw extends React.Component {
   }
 
   componentDidMount() {
+    //init mouse
     var mouse = { 
       click: false,
       move: false,
       pos: {x:0, y:0},
       pos_prev: false
     };
+
     // get canvas element and create context
     var canvas  = document.getElementById('canvas');
+    var container = document.getElementById('drawingContainer');
+    var width = container.offsetWidth;
+    var height = container.offsetHeight;
+
     var context = canvas.getContext('2d');
-    var width   = 290;
-    var height  = 190;
     var socket  = io.connect();
-    var radius = 10;
-    context.lineWidth = radius * 2;
+    context.lineWidth = 1;
 
     // set canvas to full browser width/height
     canvas.width = width;
@@ -30,7 +33,9 @@ export default class Draw extends React.Component {
       mouse.click = true; 
     };
     
-    canvas.onmouseup = function(e){ mouse.click = false; };
+    canvas.onmouseup = function(e) { 
+      mouse.click = false; 
+    };
 
     canvas.onmousemove = function(e) {
       // console.log('drawing')
@@ -42,8 +47,8 @@ export default class Draw extends React.Component {
 
     // draw line received from server
     socket.on('draw_line', function (data) {
-      console.log('WE DREW A LINE')
       var line = data.line;
+
       context.beginPath();
       context.moveTo(line[0].x * width, line[0].y * height);
       context.lineTo(line[1].x * width, line[1].y * height);
@@ -63,28 +68,23 @@ export default class Draw extends React.Component {
       setTimeout(mainLoop, 25);
     }
     mainLoop();
-  
-
-    function clearIt () {
-      context.clearRect(0,0,width,height)
-      socket.emit('clear drawing');
-    };
-
-    function clearResponse() {
-      context.clearRect(0,0,width,height)
-    };
 
     socket.on('clearit', function() {
-      clearResponse();
+      //all clients, including emitter, clear when signal received
+      context.clearRect(0,0,width,height)
     });
   }
+
+  clearIt () {
+    //calls for all clients to clear sketchpad
+    socket.emit('clear drawing');
+  };
+
   render() {
     return (
       <div id="drawingContainer">
-        <canvas id="canvas">
-        </canvas>
-        <input id="clearDrawing" type="button" value="Clear" name="clear" onClick={() => clearIt()} />
-        <h3>sketch</h3>
+        <canvas id="canvas"></canvas>
+        <button id="clearDrawing" onClick={() => this.clearIt()}>Clear</button>
       </div>
     )
   }    

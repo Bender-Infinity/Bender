@@ -2,6 +2,7 @@ module.exports = exports = function(app, socketCallback) {
     var listOfUsers = {};
     var shiftedModerationControls = {};
     var ScalableBroadcast;
+    var line_history = [];
 
     var io = require('socket.io');
 
@@ -104,16 +105,22 @@ module.exports = exports = function(app, socketCallback) {
 
         //
       //shared drawing socket - send drawing to user so they can see updated drawing
-        var line_history = [];
-          for(var i in line_history) {  
-            socket.emit('draw_line', {line: line_history[i]})
-          }
+        // var line_history = [];
+        //   for(var i in line_history) {  
+        //     socket.emit('draw_line', {line: line_history[i]})
+        //   }
 
-          socket.on('draw_line', function(data) {
-            console.log('server is receiving data from:', data)
-            line_history.push(data.line);
-            io.emit('draw_line', {line: data.line})
+        socket.on('init_draw', function() {
+          line_history.forEach(function(pointData) {
+            socket.emit('draw_line', {line: pointData})
           })
+        })
+
+        socket.on('draw_line', function(data) {
+          console.log('server is receiving data from:', data)
+          line_history.push(data.line);
+          io.emit('draw_line', {line: data.line})
+        })
 
         socket.on('extra-data-updated', function(extra) {
             try {

@@ -28,11 +28,6 @@ white - white;*/
   opacity: 0.5
 }
 
-#aframe-scene {
-      height: 100%;
-      width: 100%;
-}
-
 #collapseUI {
   top: 2%;
   list-style-type: none;

@@ -24,12 +24,15 @@ export default class Draw extends React.Component {
     var socket  = io.connect();
     context.lineWidth = 1;
 
+    var rect = container.getBoundingClientRect();
+    console.log(rect.top, rect.right, rect.bottom, rect.left);
+
     // set canvas to full browser width/height
     canvas.width = width;
     canvas.height = height;
 
     canvas.onmousedown = function(e){ 
-      console.log('mouse down')
+      // console.log('mouse down')
       mouse.click = true; 
     };
     
@@ -42,6 +45,7 @@ export default class Draw extends React.Component {
       // normalize mouse position to range 0.0 - 1.0
       mouse.pos.x = e.clientX / width
       mouse.pos.y = e.clientY / height
+      // console.log('coords', mouse.pos.x, mouse.pos.y)
       mouse.move = true;
     };
 
@@ -50,8 +54,10 @@ export default class Draw extends React.Component {
       var line = data.line;
 
       context.beginPath();
-      context.moveTo(line[0].x * width, line[0].y * height);
-      context.lineTo(line[1].x * width, line[1].y * height);
+      context.moveTo(line[0].x * width - rect.left, line[0].y * height - rect.top);
+      // console.log('origin coords', line[0].x * width, line[0].y * height)
+      context.lineTo(line[1].x * width - rect.left, line[1].y * height - rect.top);
+      // console.log('dest coords', line[1].x * width, line[1].y * height)
       context.stroke();
      });
 
@@ -73,6 +79,8 @@ export default class Draw extends React.Component {
       //all clients, including emitter, clear when signal received
       context.clearRect(0,0,width,height)
     });
+
+    window.onscroll = function() { rect = container.getBoundingClientRect(); }
   }
 
   clearIt () {

@@ -70,9 +70,9 @@ class App extends React.Component {
 		return (
     <div>
       <Streams />
+
       <Nav collapse={this.collapse.bind(this)}/>
       <Sketch />
-
     </div>
 		)
 	}

@@ -2,6 +2,7 @@ import React from 'react';
 
 export default (props) => (
   <div id="nav">
+    <div id="clock"></div>
     <ul id="collapseUI">
       <li className="ui">
         <img id="dcCollapse" title="Draw with friends" src="../images/icons/draw.png"/>

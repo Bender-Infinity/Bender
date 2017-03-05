@@ -14,10 +14,10 @@ white - white;*/
       /*#messages li:nth-child(odd) { background: #eee; background-opacity: 0.5 }*/
 
 #nav {
-  position: absolute;
   z-index: 999;
-  margin-top: 14px;
-  margin-left: 30%;
+  border: 1px solid red;
+  float: left;
+  width: 200px;
 }
 
 #message-log {
@@ -43,25 +43,29 @@ white - white;*/
 }
 
 #chat {
-  position: absolute;
+  border: 1px solid blue;
+  position: initial;
   width: 300px;
   bottom:0;
   margin: 5px !important;
+  float: right;
 }
 
 #videos-container {
-  height: 300px;
+  height: 150px;
   overflow: auto;
   overflow-y: hidden;
+  border: 1px solid black;
 }
 
 #drawingContainer {
   height: 500px;
   width: 500px;
-  border: 2px solid rgba(0, 0, 0, 0.7);
+  border: 2px solid green;
   border-radius: 0px;
   z-index: 999999;
-  margin: 5px !important;
+  position: relative;
+  float: left;
 }
 
 #canvas {

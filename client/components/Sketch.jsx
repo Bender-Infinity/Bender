@@ -25,7 +25,6 @@ export default class Draw extends React.Component {
     context.lineWidth = 1;
 
     var rect = container.getBoundingClientRect();
-    console.log(rect.top, rect.right, rect.bottom, rect.left);
 
     // set canvas to full browser width/height
     canvas.width = width;
@@ -43,9 +42,9 @@ export default class Draw extends React.Component {
     canvas.onmousemove = function(e) {
       // console.log('drawing')
       // normalize mouse position to range 0.0 - 1.0
-      mouse.pos.x = e.clientX / width
-      mouse.pos.y = e.clientY / height
-      // console.log('coords', mouse.pos.x, mouse.pos.y)
+      mouse.pos.x = (e.clientX - rect.left) / width
+      mouse.pos.y = (e.clientY - rect.top) / height
+      console.log('coords', mouse.pos.x, mouse.pos.y)
       mouse.move = true;
     };
 
@@ -54,9 +53,9 @@ export default class Draw extends React.Component {
       var line = data.line;
 
       context.beginPath();
-      context.moveTo(line[0].x * width - rect.left, line[0].y * height - rect.top);
+      context.moveTo(line[0].x * width, line[0].y * height);
       // console.log('origin coords', line[0].x * width, line[0].y * height)
-      context.lineTo(line[1].x * width - rect.left, line[1].y * height - rect.top);
+      context.lineTo(line[1].x * width, line[1].y * height);
       // console.log('dest coords', line[1].x * width, line[1].y * height)
       context.stroke();
      });
@@ -65,7 +64,7 @@ export default class Draw extends React.Component {
      function mainLoop() {
       // check if the user is drawing
       if (mouse.click && mouse.move && mouse.pos_prev) {
-        console.log('sending to server socket')
+        // console.log('sending to server socket', mouse.pos, mouse.pos_prev)
         // send line to to the server
         socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
         mouse.move = false;

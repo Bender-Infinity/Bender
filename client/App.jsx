@@ -67,8 +67,8 @@ class App extends React.Component {
 	render() {
 		return (
     <div>
-      <Sketch />
       <Streams />
+      <Sketch />
       <Nav />
     </div>
 		)

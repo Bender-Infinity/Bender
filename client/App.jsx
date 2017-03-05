@@ -5,6 +5,8 @@ import './lib/sockets.js';
 import Sketch from './components/Sketch.jsx';
 import Streams from './components/Streams.jsx';
 
+
+
 class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -67,9 +69,10 @@ class App extends React.Component {
 	render() {
 		return (
     <div>
-      <Sketch />
       <Streams />
-      <Nav />
+      <Nav collapse={this.collapse.bind(this)}/>
+      <Sketch />
+
     </div>
 		)
 	}

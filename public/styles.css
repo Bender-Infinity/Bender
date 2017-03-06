@@ -64,7 +64,7 @@ form button {
 #nav {
   z-index: 999;
   float: left;
-  width: 20px;
+  width: 50px;
   height: 100vh;
   top: 0;
   left: 0;
@@ -72,7 +72,6 @@ form button {
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s;
-  position: absolute;
 }
 
 /*push the page content to the right when you open the side navigation*/ 

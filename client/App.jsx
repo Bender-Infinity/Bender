@@ -55,16 +55,16 @@ export default class App extends React.Component {
   popInOut () {
     var navWidth = document.getElementById('nav').style.width
     var navMarginLeft = document.getElementById('nav').style.marginLeft
-    var mainWidth = document.getElementById('main').style.width
-    var mainMarginLeft = document.getElementById('main').style.marginLeft
+    // var mainWidth = document.getElementById('main').style.width
+    // var mainMarginLeft = document.getElementById('main').style.marginLeft
     
     if (!this.state.popOut) { 
       document.getElementById('nav').style.width = "250px";
-      document.getElementById('nav').style.marginLeft = "250px";
+      // document.getElementById('main').style.marginLeft = "250px";
     }
     else { 
-      document.getElementById('nav').style.width = "0px";
-      document.getElementById('nav').style.marginLeft = "0px";
+      document.getElementById('nav').style.width = "50px";
+      // document.getElementById('main').style.marginLeft = "50px";
     }
     console.log('did we even do anything', document.getElementById('nav').style.marginLeft, document.getElementById('nav').style.width)
   }

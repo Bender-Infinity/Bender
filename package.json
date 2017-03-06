@@ -4,9 +4,10 @@
   "description": "thesis",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "mocha",
-    "build": "webpack --config webpack.config.js --watch"
+    "start": "node ./index.js",
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.js'",
+    "build": "webpack --config webpack.config.js --watch",
+    "deploy": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,11 @@
   "homepage": "https://github.com/im-buff/bender#readme",
   "dependencies": {
     "dragula": "^3.7.2",
+    "lodash": "^4.17.4",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
     "socket.io": "^1.7.3"
   },
   "devDependencies": {
@@ -33,20 +39,10 @@
     "babel-preset-stage-0": "^6.22.0",
     "body-parser": "^1.16.1",
     "chai": "^3.5.0",
+    "chai-jquery": "^2.0.0",
     "changelog-verify": "^1.0.4",
     "exorcist": "^0.4.0",
     "express": "^4.14.1",
-    "in-publish": "^2.0.0",
-    "jasmine": "^2.5.3",
-    "mocha": "^3.2.0",
-    "morgan": "^1.8.1",
-    "nodemon": "^1.11.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-router": "^3.0.2",
-    "sinon": "^1.17.7",
-    "version-changelog": "^2.0.1",
-    "webpack": "^2.2.1",
     "grunt": "0.4.5",
     "grunt-bump": "0.7.0",
     "grunt-cli": "0.1.13",
@@ -56,6 +52,20 @@
     "grunt-contrib-uglify": "0.11.0",
     "grunt-jsbeautifier": "0.2.10",
     "grunt-replace": "0.11.0",
-    "load-grunt-tasks": "3.4.0"
+    "in-publish": "^2.0.0",
+    "jasmine": "^2.5.3",
+    "jsdom": "^9.11.0",
+    "load-grunt-tasks": "3.4.0",
+    "mocha": "^3.2.0",
+    "morgan": "^1.8.1",
+    "nodemon": "^1.11.0",
+    "react": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-router": "^3.0.2",
+    "sinon": "^1.17.7",
+    "version-changelog": "^2.0.1",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
   }
 }

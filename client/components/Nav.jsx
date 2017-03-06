@@ -1,8 +1,10 @@
 import React from 'react';
 
 export default (props) => (
+
   <div id="nav" className="sideNav">
     <button onClick={() => props.popOutHandler()}>Open/Close</button>
+
     <div id="room-id" height="100" width="100"></div>
 
     <ul id="collapseUI">

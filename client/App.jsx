@@ -9,8 +9,8 @@ import testComponent from './components/testComponent.jsx';
 import SuperContainer from './components/SuperContainer.jsx';
 
 
+export default class App extends React.Component {
 
-class App extends React.Component {
 	constructor(props) {
 		super(props);
 		
@@ -85,17 +85,12 @@ class App extends React.Component {
 		return (
     <div>
       <Streams />
-     <Nav collapse={this.collapse.bind(this)} popOutHandler={this.popOutHandler.bind(this)} />
-
-      <SuperContainer collapse={this.collapse.bind(this)}/>
+      <SuperContainer collapse={this.collapse.bind(this)} popOutHandler={this.popOutHandler.bind(this)} />
 
     </div>
 		)
 	}
 }
 
-
-
-ReactDOM.render(<App />, document.getElementById('app'))
 
 

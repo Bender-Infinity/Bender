@@ -24,6 +24,10 @@ export default class Draw extends React.Component {
     var socket  = io.connect();
     context.lineWidth = 1;
 
+
+    //define bounds
+    var rect = container.getBoundingClientRect();
+
     // set canvas to full browser width/height
     canvas.width = width;
     canvas.height = height;

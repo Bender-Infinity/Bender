@@ -12,7 +12,7 @@ export default (props) => (
   </div>
   <div>
     <form id="sendMessage" placeholder="send message">
-      <input type="text" x-webkit-speech id="m" autocomplete="off" /><button id="sendTextMessage">Send</button>
+      <input type="text" x-webkit-speech id="m" autoomplete="off" /><button id="sendTextMessage">Send</button>
     </form>
    </div>
   </div>    

@@ -12,7 +12,7 @@
       crossorigin="anonymous">
     </script>
     <script src="https://unpkg.com/webrtc-adapter/out/adapter.js"></script>
-    <script src="./speech.js"></script> 
+    <!-- <script src="./speech.js"></script>  -->
     <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
     <script>
       // Initialize Firebase
@@ -41,8 +41,10 @@
    
     <!-- <div id="room-id" height="100" width="100"></div> -->
 
-<!--     <div id="chat">
->>>>>>> ed68791cd75f8d4de60f196fe74bba93fe776bda
+
+
+
+    <div id="chat">
       <ul>
         <li><h3 style="float: inherit; margin-left: 6px;">Chat</h3></li>
         <li><h3 id="startVoice" style="float: inherit; margin-left: 6px;">Start Voice Chat</h3></li>
@@ -50,17 +52,15 @@
       </ul>
       <div id="message-log">
         <ul id="messages"></ul>
-      <div>
-        <form id="sendMessage" placeholder="send message">
-          <input type="text" x-webkit-speech id="m" autocomplete="off" /><button id="sendTextMessage">Send</button>
-        </form>
-       </div>
-<<<<<<< HEAD
+        <div>
+          <form id="sendMessage" placeholder="send message">
+            <input type="text" x-webkit-speech id="m" autocomplete="off" /><button id="sendTextMessage">Send</button>
+          </form>
+        </div>
       </div>
     </div>    
-=======
-      </div>   -->  
->>>>>>> ed68791cd75f8d4de60f196fe74bba93fe776bda
+
+
 
 
     <script src="./bundle.js"></script>
@@ -82,15 +82,15 @@ function checkTime(i) {
           var socket = io();
 
           //start voice chat
-          $('#startVoice').click(function () {
-            console.log('voice chat activated');
-            recognition.start();
-          });
+      //     $('#startVoice').click(function () {
+      //       console.log('voice chat activated');
+      //       recognition.start();
+      //     });
 
-          $('#endVoice').click(function () {
-            recognition.stop();
-            console.log('voice chat stopped');
-          })
+      //     $('#endVoice').click(function () {
+      //       recognition.stop();
+      //       console.log('voice chat stopped');
+      //     })
 
 
 			  	// $('#sendTextMessage').click(function(e){

@@ -44,7 +44,7 @@ export default class Draw extends React.Component {
       // normalize mouse position to range 0.0 - 1.0
       mouse.pos.x = (e.clientX - rect.left) / width
       mouse.pos.y = (e.clientY - rect.top) / height
-      console.log('coords', mouse.pos.x, mouse.pos.y)
+      // console.log('coords', mouse.pos.x, mouse.pos.y)
       mouse.move = true;
     };
 
@@ -80,6 +80,8 @@ export default class Draw extends React.Component {
     });
 
     window.onscroll = function() { rect = container.getBoundingClientRect(); }
+
+    socket.emit('init_draw');
   }
 
   clearIt () {

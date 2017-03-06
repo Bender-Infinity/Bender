@@ -2,6 +2,7 @@ module.exports = exports = function(app, socketCallback) {
     var listOfUsers = {};
     var shiftedModerationControls = {};
     var ScalableBroadcast;
+    var line_history = [];
 
     var io = require('socket.io');
 
@@ -91,11 +92,6 @@ module.exports = exports = function(app, socketCallback) {
           io.emit('chat message from server', msg);
         });
 
-        socket.on('clear drawing', function(){
-          console.log('clearing drawing for everyone')
-          line_history = [];
-          io.emit('clearit', true);
-        });
         //Speech recognition socket
         socket.on('voice chat', function (li) {
           console.log('server received speech chat, emitting to all clients:', li);
@@ -104,16 +100,31 @@ module.exports = exports = function(app, socketCallback) {
 
         //
       //shared drawing socket - send drawing to user so they can see updated drawing
-        var line_history = [];
-          for(var i in line_history) {  
-            socket.emit('draw_line', {line: line_history[i]})
-          }
+        // var line_history = [];
+        //   for(var i in line_history) {  
+        //     socket.emit('draw_line', {line: line_history[i]})
+        //   }
 
-          socket.on('draw_line', function(data) {
-            console.log('server is receiving data from:', data)
-            line_history.push(data.line);
-            io.emit('draw_line', {line: data.line})
-          })
+        //inits new user with current state of sketchpad
+        socket.on('init_draw', function() {
+          line_history.forEach(function(pointData) {
+            socket.emit('draw_line', {line: pointData})
+          });
+        });
+
+        //shares draw event with all users
+        socket.on('draw_line', function(data) {
+          console.log('server is receiving data from:', data)
+          line_history.push(data.line);
+          io.emit('draw_line', {line: data.line})
+        });
+        
+        //emits clear draw event for all users
+        socket.on('clear drawing', function(){
+          console.log('clearing drawing for everyone')
+          line_history = [];
+          io.emit('clearit', true);
+        });
 
         socket.on('extra-data-updated', function(extra) {
             try {

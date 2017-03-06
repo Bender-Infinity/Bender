@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Nav from './components/Nav.jsx';
 import './lib/sockets.js';
-import Sketch from './components/Sketch.jsx';
+// import Sketch from './components/Sketch.jsx';
 import Streams from './components/Streams.jsx';
-
+import SuperContainer from './components/SuperContainer.jsx';
 
 
 class App extends React.Component {
@@ -70,9 +70,7 @@ class App extends React.Component {
 		return (
     <div>
       <Streams />
-
-      <Nav collapse={this.collapse.bind(this)}/>
-      <Sketch />
+      <SuperContainer collapse={this.collapse.bind(this)}/>
     </div>
 		)
 	}

@@ -41,6 +41,10 @@ form button {
   color:white;
 }
 
+#superContainer {
+  height: 100%;
+}
+
 #messages { 
   list-style-type: none; 
   margin: 0; 

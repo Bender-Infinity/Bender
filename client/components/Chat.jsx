@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default (props) => (
-<div id="chat" style="display: none">
+<div id="chat">
   <ul>
     <li><h3>Chat</h3></li>
     <li><h3 id="startVoice">Start Voice Chat</h3></li>

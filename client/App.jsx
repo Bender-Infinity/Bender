@@ -54,7 +54,7 @@ export default class App extends React.Component {
 
   popInOut () {
     var navWidth = document.getElementById('nav').style.width
-    var navMarginLeft = document.getElementById('nav').style.marginLeft
+    // var navMarginLeft = document.getElementById('nav').style.marginLeft
     // var mainWidth = document.getElementById('main').style.width
     // var mainMarginLeft = document.getElementById('main').style.marginLeft
     

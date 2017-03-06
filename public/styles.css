@@ -62,16 +62,16 @@ form button {
 /*#messages li:nth-child(odd) { background: #eee; background-opacity: 0.5 }*/
 
 #nav {
-  z-index: 999;
-  float: left;
-  width: 50px;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  background-color: #111; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s;
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
 /*push the page content to the right when you open the side navigation*/ 
@@ -97,7 +97,7 @@ form button {
 }
 
 .ui {
-  float: left !important;
+  
   margin-left: 5px;
 }
 

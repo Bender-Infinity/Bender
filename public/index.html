@@ -34,6 +34,15 @@
     <div id="room-id" height="100" width="100"></div>
     <div id="main" style="border: 1px solid green">Stub Main Div to test side bar collapse </div>
     <div id="chat">
+
+  <body>
+<!--   <body onload="startTime()"> -->
+    <div id="app"></div>
+   
+    <!-- <div id="room-id" height="100" width="100"></div> -->
+
+<!--     <div id="chat">
+>>>>>>> ed68791cd75f8d4de60f196fe74bba93fe776bda
       <ul>
         <li><h3 style="float: inherit; margin-left: 6px;">Chat</h3></li>
         <li><h3 id="startVoice" style="float: inherit; margin-left: 6px;">Start Voice Chat</h3></li>
@@ -46,11 +55,15 @@
           <input type="text" x-webkit-speech id="m" autocomplete="off" /><button id="sendTextMessage">Send</button>
         </form>
        </div>
+<<<<<<< HEAD
       </div>
     </div>    
+=======
+      </div>   -->  
+>>>>>>> ed68791cd75f8d4de60f196fe74bba93fe776bda
 
-      <script src="./bundle.js"></script>
 
+    <script src="./bundle.js"></script>
 			<script>
 
           //*************************DISPLAY CLOCK ************************
@@ -216,8 +229,8 @@ function checkTime(i) {
                 var html = '<h2>Unique URL for your room:</h2><br>';
 
                 html += 'Hash URL: <a href="' + roomHashURL + '" target="_blank">' + roomHashURL + '</a>';
-                html += '<br>';
-                html += 'QueryString URL: <a href="' + roomQueryStringURL + '" target="_blank">' + roomQueryStringURL + '</a>';
+                // html += '<br>';
+                // html += 'QueryString URL: <a href="' + roomQueryStringURL + '" target="_blank">' + roomQueryStringURL + '</a>';
 
                 var roomURLsDiv = document.getElementById('room-urls');
                 roomURLsDiv.innerHTML = html;
@@ -280,5 +293,6 @@ function checkTime(i) {
 
 
 			</script>
+
   </body>
 </html>

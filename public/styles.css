@@ -41,6 +41,10 @@ form button {
   color:white;
 }
 
+#superContainer {
+  height: 100%;
+}
+
 #messages { 
   list-style-type: none; 
   margin: 0; 
@@ -108,7 +112,7 @@ form button {
 }
 
 #videos-container {
-  height: 150px;
+  height: 200px;
   overflow: auto;
   overflow-y: hidden;
   border: 1px solid black;

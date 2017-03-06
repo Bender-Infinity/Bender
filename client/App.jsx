@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Nav from './components/Nav.jsx';
 import './lib/sockets.js';
-import Sketch from './components/Sketch.jsx';
+// import Sketch from './components/Sketch.jsx';
 import Streams from './components/Streams.jsx';
 import testComponent from './components/testComponent.jsx';
+
+import SuperContainer from './components/SuperContainer.jsx';
 
 
 
@@ -85,11 +87,14 @@ class App extends React.Component {
     <div>
       <Streams />
      <Nav collapse={this.collapse.bind(this)} popOutHandler={this.popOutHandler.bind(this)} />
-    
+
+      <SuperContainer collapse={this.collapse.bind(this)}/>
+
     </div>
 		)
 	}
 }
+
 
 
 ReactDOM.render(<App />, document.getElementById('app'))

@@ -2,6 +2,7 @@ const config = {
   entry: './client/Index.jsx',
   output: {
     filename: 'bundle.js',
+    publicPath: '/public',
     path: './public'
   },
   module: {

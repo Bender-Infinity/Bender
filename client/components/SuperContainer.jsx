@@ -9,8 +9,7 @@ import Clock from './Clock.jsx'
 export default (props) => (
   <div id="superContainer">
     <Clock />
-    <Nav collapse={props.collapse}/>
+    <Nav collapse={props.collapse} popOutHandler={props.popOutHandler}/>
     <Sketch />
-    {/*<Chat />*/}
   </div>
 )

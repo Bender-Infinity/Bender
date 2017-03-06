@@ -24,6 +24,7 @@ export default class Draw extends React.Component {
     var socket  = io.connect();
     context.lineWidth = 1;
 
+
     //define bounds
     var rect = container.getBoundingClientRect();
 
@@ -32,7 +33,7 @@ export default class Draw extends React.Component {
     canvas.height = height;
 
     canvas.onmousedown = function(e){ 
-      // console.log('mouse down')
+      console.log('mouse down')
       mouse.click = true; 
     };
     
@@ -41,6 +42,7 @@ export default class Draw extends React.Component {
     };
 
     canvas.onmousemove = function(e) {
+      console.log('event', e)
       // console.log('drawing')
       // normalize mouse position to range 0.0 - 1.0
       mouse.pos.x = (e.clientX - rect.left) / width
@@ -55,17 +57,15 @@ export default class Draw extends React.Component {
 
       context.beginPath();
       context.moveTo(line[0].x * width, line[0].y * height);
-      // console.log('origin coords', line[0].x * width, line[0].y * height)
       context.lineTo(line[1].x * width, line[1].y * height);
-      // console.log('dest coords', line[1].x * width, line[1].y * height)
       context.stroke();
      });
 
      // main loop, running every 25ms
      function mainLoop() {
-      // check if the user is drawing
+      // check if the user iss drawing
       if (mouse.click && mouse.move && mouse.pos_prev) {
-        // console.log('sending to server socket', mouse.pos, mouse.pos_prev)
+        console.log('sending to server socket')
         // send line to to the server
         socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
         mouse.move = false;

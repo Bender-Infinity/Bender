@@ -28,10 +28,16 @@
   </head>
 
   <body>
+    <div id="app"></div>
+   
+    <div id="main" style="border: 1px solid green">Stub Main Div to test side bar collapse </div>
 <!--   <body onload="startTime()"> -->
     <div id="app"></div>
    
     <!-- <div id="room-id" height="100" width="100"></div> -->
+
+
+
 
     <div id="chat">
       <ul>
@@ -41,18 +47,33 @@
       </ul>
       <div id="message-log">
         <ul id="messages"></ul>
+        <div>
+          <form id="sendMessage" placeholder="send message">
+            <input type="text" x-webkit-speech id="m" autocomplete="off" /><button id="sendTextMessage">Send</button>
+          </form>
+        </div>
       </div>
-      <div>
-        <form id="sendMessage" placeholder="send message">
-          <input type="text" x-webkit-speech id="m" autocomplete="off" /><button id="sendTextMessage">Send</button>
-        </form>
-       </div>
-      </div>    
+    </div>    
+
+
 
 
     <script src="./bundle.js"></script>
 			<script>
 
+          //*************************DISPLAY CLOCK ************************
+function startTime() {
+  var time = new Date();
+    time = Date().substring(15, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', second:'numeric', hour12: true });
+
+    document.getElementById('clock').innerHTML = time
+      var t = setTimeout(startTime, 500);
+}
+
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
           var socket = io();
 
           //start voice chat

@@ -15,6 +15,7 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.interimResults = false;
 
   recognition.onstart = function(event) {
+    console.log('speech in client')
     var time = new Date();
     time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
     console.log('speech recognition starting ' + time)
@@ -238,6 +239,7 @@ function capitalize(s) {
 // }
 
 // recognition.start();
+
 
 
 //*************************DISPLAY CLOCK ************************

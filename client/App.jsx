@@ -4,18 +4,24 @@ import Nav from './components/Nav.jsx';
 import './lib/sockets.js';
 // import Sketch from './components/Sketch.jsx';
 import Streams from './components/Streams.jsx';
+import testComponent from './components/testComponent.jsx';
+
 import SuperContainer from './components/SuperContainer.jsx';
 
+
 export default class App extends React.Component {
+
 	constructor(props) {
 		super(props);
 		
 		this.state = {
-      dummy: 'dummy'
+      popOut: false,
+      renderMe: true
 		};
 	}
 
 	componentDidMount () {
+
 	  document.getElementById('open-room').onclick = function() {
       disableInputButtons();
       console.log('connection', connection)
@@ -46,32 +52,45 @@ export default class App extends React.Component {
     else { document.getElementById(elem).style.display = 'none'}
   }
 
-  // changeRoom() {
-  // 	var newRoomSrc 
-  //   var roomUrls = ['SanFrancisco4','Colosseum', 'DallasW', 'GoldenGateBridge', 'GoldenGateBridge2', 'LancellottiChapel', 'NissiBeach', 'NissiBeach2', 'Rainbow', 'SaintPetersBasilica', 'Skansen2', 'Tantolunden6'];
-  //   var roomSrc = 'folder: /images/textures/' + roomUrls[0] + '/';
-  //   for(var i = 0; i < roomUrls.length; i++) {
-  //   	if('folder: /images/textures/' + roomUrls[i] + '/' === this.state.cubeMapSrc) {
-		//     if(!roomUrls[i + 1]) {
-	 //    		newRoomSrc = 'folder: /images/textures/' + roomUrls[0] +'/'
-	 //    		document.getElementById('roomEnvironment').setAttribute('cubemap', newRoomSrc);
-	 //    		return
-	 //    		}
-  //   		newRoomSrc = 'folder: /images/textures/' + roomUrls[i + 1] + '/'
-  //   		this.setState({cubeMapSrc: newRoomSrc})
-  //   		document.getElementById('roomEnvironment').setAttribute('cubemap', newRoomSrc);
-  //   		return;
-  //   	}
-  //   }
-  // }
+  popInOut () {
+    var navWidth = document.getElementById('nav').style.width
+    var navMarginLeft = document.getElementById('nav').style.marginLeft
+    var mainWidth = document.getElementById('main').style.width
+    var mainMarginLeft = document.getElementById('main').style.marginLeft
+    
+    if (!this.state.popOut) { 
+      document.getElementById('nav').style.width = "250px";
+      document.getElementById('nav').style.marginLeft = "250px";
+    }
+    else { 
+      document.getElementById('nav').style.width = "0px";
+      document.getElementById('nav').style.marginLeft = "0px";
+    }
+    console.log('did we even do anything', document.getElementById('nav').style.marginLeft, document.getElementById('nav').style.width)
+  }
+
+  popOutHandler() {
+    // if(!this.state.popOut) {
+    //   this.setState({popOut = true})
+    // }
+    // else {
+    //   this.setState({popOut = false})
+    // }
+
+    this.setState({'popOut': !this.state.popOut})
+    this.popInOut();
+  }
 
 	render() {
 		return (
     <div>
       <Streams />
-      <SuperContainer collapse={this.collapse.bind(this)}/>
+      <SuperContainer collapse={this.collapse.bind(this)} popOutHandler={this.popOutHandler.bind(this)} />
+
     </div>
 		)
 	}
 }
+
+
 

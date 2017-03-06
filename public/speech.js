@@ -1,3 +1,4 @@
+
 var socket = io();
 
 //****************************** Speech recognition ******************
@@ -88,6 +89,7 @@ if (!('webkitSpeechRecognition' in window)) {
   };
 
   recognition.onresult = function(event) {
+    console.log('speech from public')
     var time = new Date();
     time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
     var interim_transcript = '';

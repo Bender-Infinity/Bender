@@ -66,7 +66,6 @@ export default class App extends React.Component {
       document.getElementById('nav').style.width = "50px";
       // document.getElementById('main').style.marginLeft = "50px";
     }
-    console.log('did we even do anything', document.getElementById('nav').style.marginLeft, document.getElementById('nav').style.width)
   }
 
   popOutHandler() {
@@ -85,6 +84,7 @@ export default class App extends React.Component {
 		return (
     <div>
       <Streams />
+      <Nav collapse={this.collapse} popOutHandler={this.popOutHandler.bind(this)}/>
       <SuperContainer collapse={this.collapse.bind(this)} popOutHandler={this.popOutHandler.bind(this)} />
 
     </div>

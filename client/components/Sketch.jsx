@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Draw extends React.Component {
+export default class Sketch extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -62,9 +62,9 @@ export default class Draw extends React.Component {
 
      // main loop, running every 25ms
      function mainLoop() {
-      // check if the user iss drawing
+      // check if the user is drawing
       if (mouse.click && mouse.move && mouse.pos_prev) {
-        console.log('sending to server socket')
+        // console.log('sending to server socket')
         // send line to to the server
         socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
         mouse.move = false;

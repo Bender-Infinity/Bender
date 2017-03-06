@@ -30,7 +30,6 @@
   <body>
 <!--   <body onload="startTime()"> -->
     <div id="app"></div>
-        <!-- <div id="clock"></div> -->
    
     <!-- <div id="room-id" height="100" width="100"></div> -->
 
@@ -51,7 +50,7 @@
       </div>   -->  
 
 
-
+    <script src="./bundle.js"></script>
 			<script>
 
           var socket = io();
@@ -204,8 +203,8 @@
                 var html = '<h2>Unique URL for your room:</h2><br>';
 
                 html += 'Hash URL: <a href="' + roomHashURL + '" target="_blank">' + roomHashURL + '</a>';
-                html += '<br>';
-                html += 'QueryString URL: <a href="' + roomQueryStringURL + '" target="_blank">' + roomQueryStringURL + '</a>';
+                // html += '<br>';
+                // html += 'QueryString URL: <a href="' + roomQueryStringURL + '" target="_blank">' + roomQueryStringURL + '</a>';
 
                 var roomURLsDiv = document.getElementById('room-urls');
                 roomURLsDiv.innerHTML = html;
@@ -268,6 +267,6 @@
 
 
 			</script>
-    <script src="./bundle.js"></script>
+
   </body>
 </html>

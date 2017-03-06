@@ -4,6 +4,7 @@ import Nav from './components/Nav.jsx';
 import './lib/sockets.js';
 import Sketch from './components/Sketch.jsx';
 import Streams from './components/Streams.jsx';
+import testComponent from './components/testComponent.jsx';
 
 
 
@@ -17,6 +18,7 @@ class App extends React.Component {
 	}
 
 	componentDidMount () {
+
 	  document.getElementById('open-room').onclick = function() {
       disableInputButtons();
       console.log('connection', connection)
@@ -47,36 +49,24 @@ class App extends React.Component {
     else { document.getElementById(elem).style.display = 'none'}
   }
 
-  // changeRoom() {
-  // 	var newRoomSrc 
-  //   var roomUrls = ['SanFrancisco4','Colosseum', 'DallasW', 'GoldenGateBridge', 'GoldenGateBridge2', 'LancellottiChapel', 'NissiBeach', 'NissiBeach2', 'Rainbow', 'SaintPetersBasilica', 'Skansen2', 'Tantolunden6'];
-  //   var roomSrc = 'folder: /images/textures/' + roomUrls[0] + '/';
-  //   for(var i = 0; i < roomUrls.length; i++) {
-  //   	if('folder: /images/textures/' + roomUrls[i] + '/' === this.state.cubeMapSrc) {
-		//     if(!roomUrls[i + 1]) {
-	 //    		newRoomSrc = 'folder: /images/textures/' + roomUrls[0] +'/'
-	 //    		document.getElementById('roomEnvironment').setAttribute('cubemap', newRoomSrc);
-	 //    		return
-	 //    		}
-  //   		newRoomSrc = 'folder: /images/textures/' + roomUrls[i + 1] + '/'
-  //   		this.setState({cubeMapSrc: newRoomSrc})
-  //   		document.getElementById('roomEnvironment').setAttribute('cubemap', newRoomSrc);
-  //   		return;
-  //   	}
-  //   }
-  // }
+  dragStart(event) {
+    console.log('dragStart event', event)
+  }
+  
 
 	render() {
 		return (
     <div>
+     <Nav collapse={this.collapse.bind(this)}/>
       <Streams />
-
-      <Nav collapse={this.collapse.bind(this)}/>
       <Sketch />
+    
     </div>
 		)
 	}
 }
 
-ReactDOM.render(<App />, document.getElementById('app'))
+
+
+
 

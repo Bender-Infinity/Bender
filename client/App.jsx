@@ -6,8 +6,7 @@ import './lib/sockets.js';
 import Streams from './components/Streams.jsx';
 import SuperContainer from './components/SuperContainer.jsx';
 
-
-class App extends React.Component {
+export default class App extends React.Component {
 	constructor(props) {
 		super(props);
 		

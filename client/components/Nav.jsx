@@ -1,7 +1,8 @@
 import React from 'react';
 
 export default (props) => (
-  <div id="nav">
+  <div id="nav" className="sideNav">
+    <button onClick={() => props.popOutHandler()}>Open/Close</button>
     <ul id="collapseUI">
       <li className="ui">
         <img id="dcCollapse" title="Sketch Pad" src="../images/icons/draw.png"/>

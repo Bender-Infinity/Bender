@@ -59,9 +59,21 @@ form button {
 
 #nav {
   z-index: 999;
-  border: 1px solid red;
   float: left;
-  width: 200px;
+  width: 20px;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s;
+  position: absolute;
+}
+
+/*push the page content to the right when you open the side navigation*/ 
+#main {
+  transition: margin-left .5s;
 }
 
 #message-log {
@@ -100,6 +112,7 @@ form button {
   overflow: auto;
   overflow-y: hidden;
   border: 1px solid black;
+  width: 100%;
 }
 
 #drawingContainer {

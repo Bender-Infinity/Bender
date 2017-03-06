@@ -13,7 +13,8 @@ class App extends React.Component {
 		super(props);
 		
 		this.state = {
-      dummy: 'dummy'
+      popOut: false,
+      renderMe: true
 		};
 	}
 
@@ -49,17 +50,41 @@ class App extends React.Component {
     else { document.getElementById(elem).style.display = 'none'}
   }
 
-  dragStart(event) {
-    console.log('dragStart event', event)
+  popInOut () {
+    var navWidth = document.getElementById('nav').style.width
+    var navMarginLeft = document.getElementById('nav').style.marginLeft
+    var mainWidth = document.getElementById('main').style.width
+    var mainMarginLeft = document.getElementById('main').style.marginLeft
+    
+    console.log('fuck you')
+    if (!this.state.popOut) { 
+      document.getElementById('nav').style.width = "250px";
+      document.getElementById('nav').style.marginLeft = "250px";
+    }
+    else { 
+      document.getElementById('nav').style.width = "0px";
+      document.getElementById('nav').style.marginLeft = "0px";
+    }
+    console.log('did we even do anything', document.getElementById('nav').style.marginLeft, document.getElementById('nav').style.width)
   }
-  
+
+  popOutHandler() {
+    // if(!this.state.popOut) {
+    //   this.setState({popOut = true})
+    // }
+    // else {
+    //   this.setState({popOut = false})
+    // }
+
+    this.setState({'popOut': !this.state.popOut})
+    this.popInOut();
+  }
 
 	render() {
 		return (
     <div>
-     <Nav collapse={this.collapse.bind(this)}/>
       <Streams />
-      <Sketch />
+     <Nav collapse={this.collapse.bind(this)} popOutHandler={this.popOutHandler.bind(this)} />
     
     </div>
 		)
@@ -67,6 +92,6 @@ class App extends React.Component {
 }
 
 
-
+ReactDOM.render(<App />, document.getElementById('app'))
 
 

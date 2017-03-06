@@ -4,12 +4,13 @@ import Sketch from './Sketch.jsx';
 import Chat from './Chat.jsx';
 import Clock from './Clock.jsx'
 
+//chat's fucked
 
 export default (props) => (
   <div id="superContainer">
     <Clock />
     <Nav collapse={props.collapse}/>
     <Sketch />
-    <Chat />
+    {/*<Chat />*/}
   </div>
 )

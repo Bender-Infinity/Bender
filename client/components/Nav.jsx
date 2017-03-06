@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default (props) => (
+export default (props) => (console.log('nav should be rendering'),
   <div id="nav">
     <div id="room-id" height="100" width="100"></div>
     <ul id="collapseUI">

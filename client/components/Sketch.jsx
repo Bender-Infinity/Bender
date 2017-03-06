@@ -38,6 +38,7 @@ export default class Draw extends React.Component {
     };
 
     canvas.onmousemove = function(e) {
+      console.log('event', e)
       // console.log('drawing')
       // normalize mouse position to range 0.0 - 1.0
       mouse.pos.x = (e.clientX - rect.left) / width

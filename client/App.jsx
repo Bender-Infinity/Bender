@@ -58,7 +58,6 @@ class App extends React.Component {
     var mainWidth = document.getElementById('main').style.width
     var mainMarginLeft = document.getElementById('main').style.marginLeft
     
-    console.log('fuck you')
     if (!this.state.popOut) { 
       document.getElementById('nav').style.width = "250px";
       document.getElementById('nav').style.marginLeft = "250px";

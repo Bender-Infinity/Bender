@@ -1,22 +1,14 @@
 import React from 'react';
 
-
-
-
 export default (props) => (
   <div id="nav">
+    <div id="clock"></div>
     <ul id="collapseUI">
       <li className="ui">
         <img id="dcCollapse" title="Draw with friends" src="../images/icons/draw.png"/>
       </li>
       <li className="ui">
         <img id="chatCollapse" onClick={() => props.collapse('chat')} title="Chat" src="../images/icons/enable_chat.png" />
-      </li>
-      <li className="ui">
-        <img title="drop it like it's hot" src="../images/icons/spawnCube.png" id="spawnCube"/>
-      </li>
-      <li className="ui"> 
-        <img title="change background" src="../images/icons/change_room.png" />
       </li>
       <li className="ui">
         <p>Room name</p>

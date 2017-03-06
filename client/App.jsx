@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Nav from './components/Nav.jsx';
 import './lib/sockets.js';
-import Draw from './components/Draw.jsx';
+import Sketch from './components/Sketch.jsx';
 import Streams from './components/Streams.jsx';
+
+
 
 class App extends React.Component {
 	constructor(props) {
@@ -68,8 +70,9 @@ class App extends React.Component {
 		return (
     <div>
       <Streams />
-      <Nav />
-      <Draw clearIt={this.clearIt}/>
+
+      <Nav collapse={this.collapse.bind(this)}/>
+      <Sketch />
     </div>
 		)
 	}

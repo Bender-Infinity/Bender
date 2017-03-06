@@ -28,7 +28,9 @@
   </head>
 
   <body>
+
     <div id="app"></div>
+    
     <div id="chat">
       <ul>
         <li><h3 style="float: inherit; margin-left: 6px;">Chat</h3></li>
@@ -45,239 +47,217 @@
       </div>
     </div>    
 
-
-
-
     <script src="./bundle.js"></script>
-			<script>
+    
+    <script>
+    var socket = io();
 
-          //*************************DISPLAY CLOCK ************************
-function startTime() {
-  var time = new Date();
-    time = Date().substring(15, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', second:'numeric', hour12: true });
+   //  start voice chat
+   //  $('#startVoice').click(function () {
+   //    console.log('voice chat activated');
+   //    recognition.start();
+   //  });
 
-    document.getElementById('clock').innerHTML = time
-      var t = setTimeout(startTime, 500);
-}
-
-function checkTime(i) {
-    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-    return i;
-}
-          var socket = io();
-
-          //start voice chat
-      //     $('#startVoice').click(function () {
-      //       console.log('voice chat activated');
-      //       recognition.start();
-      //     });
-
-      //     $('#endVoice').click(function () {
-      //       recognition.stop();
-      //       console.log('voice chat stopped');
-      //     })
+   //  $('#endVoice').click(function () {
+   //    recognition.stop();
+   //    console.log('voice chat stopped');
+   //  })
 
 
-			  	// $('#sendTextMessage').click(function(e){
-      //       e.preventDefault();
+  	// $('#sendTextMessage').click(function(e){
+   //    e.preventDefault();
 
-      //       socket.emit('chat message', $('#m').val());
-			  	// 	console.log('text message sent from socket', socket);
-				  //   $('#m').val('');
-				  //   return false;
-			  	// });
-			  		
-			  	// socket.on('chat message from server', function(msg){
-      //       console.log('chat messaged sent', msg)
-			  	// 	var time = new Date();
-    		// 		time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
-			  	// 	console.log('chatting in socket');
-				  //   var ul = document.getElementById('messages');
-				  //   var input = document.getElementById('m');
+   //    socket.emit('chat message', $('#m').val());
+  	// 	console.log('text message sent from socket', socket);
+	  //   $('#m').val('');
+	  //   return false;
+  	// });
+  		
+  	// socket.on('chat message from server', function(msg){
+   //    console.log('chat messaged sent', msg)
+  	// 	var time = new Date();
+			// time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
+  	// 	console.log('chatting in socket');
+	  //   var ul = document.getElementById('messages');
+	  //   var input = document.getElementById('m');
 
-				  //   li = document.createElement('LI');
-				  //   li.innerHTML = socket.nsp + ' says: ' + msg + '\n' + time;
-				  //   ul.appendChild(li);
-				  //   li.scrollIntoView();
-				  //   // if(ul.offsetHeight >= div.offsetHeight){
-				  //   //     ul.style.height = div.offsetHeight + "px";
-				  //   //   }
-			   // 		//$('#messages').append($('<li>').text(socket.nsp + ' says: ' + msg));
-			  	// 	console.log('message to append: ', msg)
-			  	// });
+	  //   li = document.createElement('LI');
+	  //   li.innerHTML = socket.nsp + ' says: ' + msg + '\n' + time;
+	  //   ul.appendChild(li);
+	  //   li.scrollIntoView();
+	  //   // if(ul.offsetHeight >= div.offsetHeight){
+	  //   //     ul.style.height = div.offsetHeight + "px";
+	  //   //   }
+   // 		//$('#messages').append($('<li>').text(socket.nsp + ' says: ' + msg));
+  	// 	console.log('message to append: ', msg)
+  	// });
 				  	
 				 
-           //****************************** webRTC GHETTO *********************************
-            // ......................................................
-            // .......................UI Code........................
-            // ......................................................
+   // ****************************** webRTC GHETTO *********************************
+   //  ......................................................
+   //  .......................UI Code........................
+   //  ......................................................
 
-            // document.getElementById('open-room').onclick = function() {
-            //     console.log('clicked')
-            //     disableInputButtons();
-            //     connection.open(document.getElementById('room-id').value, function() {
-            //         showRoomURL(connection.sessionid);
-            //     });
-            // };
+   //  document.getElementById('open-room').onclick = function() {
+   //      console.log('clicked')
+   //      disableInputButtons();
+   //      connection.open(document.getElementById('room-id').value, function() {
+   //          showRoomURL(connection.sessionid);
+   //      });
+   //  };
 
-            // document.getElementById('join-room').onclick = function() {
-            //     disableInputButtons();
-            //     connection.join(document.getElementById('room-id').value);
-            // };
+   //  document.getElementById('join-room').onclick = function() {
+   //      disableInputButtons();
+   //      connection.join(document.getElementById('room-id').value);
+   //  };
 
-            // document.getElementById('open-or-join-room').onclick = function() {
-            //     disableInputButtons();
-            //     connection.openOrJoin(document.getElementById('room-id').value, function(isRoomExists, roomid) {
-            //         if(!isRoomExists) {
-            //             showRoomURL(roomid);
-            //         }
-            //     });
-            // };
+   //  document.getElementById('open-or-join-room').onclick = function() {
+   //      disableInputButtons();
+   //      connection.openOrJoin(document.getElementById('room-id').value, function(isRoomExists, roomid) {
+   //          if(!isRoomExists) {
+   //              showRoomURL(roomid);
+   //          }
+   //      });
+   //  };
 
-            // ......................................................
-            // ..................RTCMultiConnection Code.............
-            // ......................................................
+   //  ......................................................
+   //  ..................RTCMultiConnection Code.............
+   //  ......................................................
 
-            var connection = new RTCMultiConnection();
+    var connection = new RTCMultiConnection();
 
-            // by default, socket.io server is assumed to be deployed on your own URL
-            connection.socketURL = '/';
+    // by default, socket.io server is assumed to be deployed on your own URL
+    connection.socketURL = '/';
 
-            connection.socketMessageEvent = 'video-conference-demo';
+    connection.socketMessageEvent = 'video-conference-demo';
 
-            connection.session = {
-                audio: true,
-                video: true
-            };
+    connection.session = {
+      audio: true,
+      video: true
+    };
 
-            connection.sdpConstraints.mandatory = {
-                OfferToReceiveAudio: true,
-                OfferToReceiveVideo: true
-            };
+    connection.sdpConstraints.mandatory = {
+      OfferToReceiveAudio: true,
+      OfferToReceiveVideo: true
+    };
 
-            connection.videosContainer = document.getElementById('videos-container');
-            
-            connection.onstream = function(event) {
-                // console.log('ONSTREAM EVENT STREAM', event.stream)
-                // window.localStorage.testStream = event.stream;
-
-                window.localStorage.MuazKhan = 'likes spaghetti'
-                console.log('window.localStorage ', window.localStorage.MuazKhan)
-
-                // var guest1Present
-                var width = 300;
-                // var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
-                // console.log('MEDIA ELEMENT', event.mediaElement.getAttribute('src'))
-                var mediaElement = getMediaElement(event.mediaElement, {
-                    title: event.userid,
-                    buttons: [],
-                    width: width,
-                    showOnMouseEnter: false
-                });
-
-                // console.log('CONTAINER', connection)
-        
-                connection.videosContainer.appendChild(mediaElement);
-                // document.getElementById('guest1').setAttribute('src', 'blahblahblah');
-
-                // setTimeout(function() {
-                //     mediaElement.media.play();
-                // }, 5000);
-
-                mediaElement.id = event.streamid;
-
+    connection.videosContainer = document.getElementById('videos-container');
     
-            };
+    connection.onstream = function(event) {
+    // console.log('ONSTREAM EVENT STREAM', event.stream)
+    // window.localStorage.testStream = event.stream;
 
-            connection.onstreamended = function(event) {
-                var mediaElement = document.getElementById(event.streamid);
-                if(mediaElement) {
-                    mediaElement.parentNode.removeChild(mediaElement);
-                }
-            };
+    window.localStorage.MuazKhan = 'likes spaghetti'
+    console.log('window.localStorage ', window.localStorage.MuazKhan)
 
-            function disableInputButtons() {
-              document.getElementById('AutoJoinRoom').disabled = true;
-              document.getElementById('open-room').disabled = true;
-              document.getElementById('join-room').disabled = true;
-              // document.getElementById('room-id').disabled = true;
-            }
+    // var guest1Present
+    var width = 300;
+    // var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
+    // console.log('MEDIA ELEMENT', event.mediaElement.getAttribute('src'))
+    var mediaElement = getMediaElement(event.mediaElement, {
+        title: event.userid,
+        buttons: [],
+        width: width,
+        showOnMouseEnter: false
+    });
 
-            // ......................................................
-            // ......................Handling Room-ID................
-            // ......................................................
+    // console.log('CONTAINER', connection)
 
-            function showRoomURL(roomid) {
-                var roomHashURL = '#' + roomid;
-                var roomQueryStringURL = '?roomid=' + roomid;
+    connection.videosContainer.appendChild(mediaElement);
+    // document.getElementById('guest1').setAttribute('src', 'blahblahblah');
 
-                var html = '<h2>Unique URL for your room:</h2><br>';
+    // setTimeout(function() {
+    //     mediaElement.media.play();
+    // }, 5000);
 
-                html += 'Hash URL: <a href="' + roomHashURL + '" target="_blank">' + roomHashURL + '</a>';
-                // html += '<br>';
-                // html += 'QueryString URL: <a href="' + roomQueryStringURL + '" target="_blank">' + roomQueryStringURL + '</a>';
+    mediaElement.id = event.streamid;
+    };
 
-                var roomURLsDiv = document.getElementById('room-urls');
-                roomURLsDiv.innerHTML = html;
+    connection.onstreamended = function(event) {
+      var mediaElement = document.getElementById(event.streamid);
+      if(mediaElement) {
+          mediaElement.parentNode.removeChild(mediaElement);
+      }
+    };
 
-                roomURLsDiv.style.display = 'block';
-            }
+    function disableInputButtons() {
+      document.getElementById('AutoJoinRoom').disabled = true;
+      document.getElementById('open-room').disabled = true;
+      document.getElementById('join-room').disabled = true;
+      // document.getElementById('room-id').disabled = true;
+    }
 
-            (function() {
-                var params = {},
-                    r = /([^&=]+)=?([^&]*)/g;
+    // ......................................................
+    // ......................Handling Room-ID................
+    // ......................................................
 
-                function d(s) {
-                    return decodeURIComponent(s.replace(/\+/g, ' '));
-                }
-                var match, search = window.location.search;
-                while (match = r.exec(search.substring(1)))
-                    params[d(match[1])] = d(match[2]);
-                window.params = params;
-            })();
+    function showRoomURL(roomid) {
+      var roomHashURL = '#' + roomid;
+      var roomQueryStringURL = '?roomid=' + roomid;
 
-            var roomid = '';
-            if (localStorage.getItem(connection.socketMessageEvent)) {
-                roomid = localStorage.getItem(connection.socketMessageEvent);
-            } else {
-                roomid = connection.token();
-            }
-            document.getElementById('room-id').value = roomid;
-            document.getElementById('room-id').onkeyup = function() {
-                localStorage.setItem(connection.socketMessageEvent, this.value);
-            };
+      var html = '<h2>Unique URL for your room:</h2><br>';
 
-            var hashString = location.hash.replace('#', '');
-            if(hashString.length && hashString.indexOf('comment-') == 0) {
-              hashString = '';
-            }
+      html += 'Hash URL: <a href="' + roomHashURL + '" target="_blank">' + roomHashURL + '</a>';
+      // html += '<br>';
+      // html += 'QueryString URL: <a href="' + roomQueryStringURL + '" target="_blank">' + roomQueryStringURL + '</a>';
 
-            var roomid = params.roomid;
-            if(!roomid && hashString.length) {
-                roomid = hashString;
-            }
+      var roomURLsDiv = document.getElementById('room-urls');
+      roomURLsDiv.innerHTML = html;
 
-            if(roomid && roomid.length) {
-                document.getElementById('room-id').value = roomid;
-                localStorage.setItem(connection.socketMessageEvent, roomid);
+      roomURLsDiv.style.display = 'block';
+    }
 
-                // auto-join-room
-                (function reCheckRoomPresence() {
-                    connection.checkPresence(roomid, function(isRoomExists) {
-                        if(isRoomExists) {
-                            connection.join(roomid);
-                            return;
-                        }
+    (function() {
+      var params = {},
+        r = /([^&=]+)=?([^&]*)/g;
 
-                        setTimeout(reCheckRoomPresence, 5000);
-                    });
-                })();
+      function d(s) {
+        return decodeURIComponent(s.replace(/\+/g, ' '));
+      }
+      var match, search = window.location.search;
+      while (match = r.exec(search.substring(1)))
+        params[d(match[1])] = d(match[2]);
+      window.params = params;
+    })();
 
-                disableInputButtons();
-            }
+    var roomid = '';
+    if (localStorage.getItem(connection.socketMessageEvent)) {
+        roomid = localStorage.getItem(connection.socketMessageEvent);
+    } else {
+        roomid = connection.token();
+    }
+    document.getElementById('room-id').value = roomid;
+    document.getElementById('room-id').onkeyup = function() {
+        localStorage.setItem(connection.socketMessageEvent, this.value);
+    };
 
+    var hashString = location.hash.replace('#', '');
+    if(hashString.length && hashString.indexOf('comment-') == 0) {
+      hashString = '';
+    }
 
-			</script>
+    var roomid = params.roomid;
+    if(!roomid && hashString.length) {
+      roomid = hashString;
+    }
 
+    if(roomid && roomid.length) {
+      document.getElementById('room-id').value = roomid;
+      localStorage.setItem(connection.socketMessageEvent, roomid);
+
+      // auto-join-room
+      (function reCheckRoomPresence() {
+        connection.checkPresence(roomid, function(isRoomExists) {
+          if(isRoomExists) {
+            connection.join(roomid);
+              return;
+          }
+        setTimeout(reCheckRoomPresence, 5000);
+      });
+    })();
+    
+    disableInputButtons();
+    }
+    </script>
   </body>
 </html>

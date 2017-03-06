@@ -40,8 +40,9 @@ export default class Draw extends React.Component {
     canvas.onmousemove = function(e) {
       // console.log('drawing')
       // normalize mouse position to range 0.0 - 1.0
-      mouse.pos.x = e.clientX / width
-      mouse.pos.y = e.clientY / height
+      mouse.pos.x = (e.clientX - rect.left) / width
+      mouse.pos.y = (e.clientY - rect.top) / height
+      // console.log('coords', mouse.pos.x, mouse.pos.y)
       mouse.move = true;
     };
 
@@ -73,6 +74,10 @@ export default class Draw extends React.Component {
       //all clients, including emitter, clear when signal received
       context.clearRect(0,0,width,height)
     });
+
+    window.onscroll = function() { rect = container.getBoundingClientRect(); }
+
+    socket.emit('init_draw');
   }
 
   clearIt () {

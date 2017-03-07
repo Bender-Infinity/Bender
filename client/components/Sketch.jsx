@@ -1,4 +1,5 @@
 import React from 'react';
+// import io from '../lib/socket.io.js'
 
 export default class Sketch extends React.Component {
   constructor(props) {

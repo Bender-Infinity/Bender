@@ -72,16 +72,15 @@ form button {
 /*#messages li:nth-child(odd) { background: #eee; background-opacity: 0.5 }*/
 
 #nav {
+
+  width: 50px;
+  height: 100vh;
   z-index: 5;
   float: left;
-  width: 200px;
-  height: 100%;
-  top: 0;
-  left: 0;
   background-color: #111; /* Black*/
   overflow: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s;
+  transition: 0.25s;
+
 }
 
 /*push the page content to the right when you open the side navigation*/ 
@@ -107,8 +106,9 @@ form button {
 }
 
 .ui {
-  float: left !important;
+
   margin-left: 5px;
+
 }
 
 #chat {
@@ -116,13 +116,13 @@ form button {
   position: absolute;
   height: 98%;
   width: 19%;
-  top: 0;
-  margin: 5px !important;
   left: 80%;
+  top:0;
+  margin: 5px !important;
 }
 
 #videos-container {
-  min-height: 200px;
+  min-height: 250px;
   height: 100%;
   overflow: auto;
   overflow-y: hidden;
@@ -135,7 +135,7 @@ form button {
   width: 66%;
   border: 2px solid green;
   border-radius: 0px;
-  left: 200px;
+  left: 150px;
   z-index: 0;
   position: absolute;
   user-select: none;
@@ -212,16 +212,11 @@ p {
   font-size: 8pt;
 }
 
-/*.ui > p {
-  color: #89f0ef
-}
-
-.ui > input {
-  border-radius: 5px
-  autocorrect: off,
-  autocapitalize="off",
-  size: 20px
-}*/
-
+#footer {
+  height: 100px;
+  background-color: pink;
+  position: absolute;
+  bottom: 0;
+  left: 150px;
 }
 

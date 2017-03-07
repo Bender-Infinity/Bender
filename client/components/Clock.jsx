@@ -5,7 +5,6 @@ export default class Clock extends React.Component {
     super(props)
   }
 
-
   startTime() {
     var time = new Date();
     time = Date().substring(15, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', second:'numeric', hour12: true });

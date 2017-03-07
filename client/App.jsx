@@ -4,7 +4,6 @@ import Nav from './components/Nav.jsx';
 import './lib/sockets.js';
 // import Sketch from './components/Sketch.jsx';
 import Streams from './components/Streams.jsx';
-import testComponent from './components/testComponent.jsx';
 
 import SuperContainer from './components/SuperContainer.jsx';
 
@@ -59,7 +58,7 @@ export default class App extends React.Component {
     // var mainMarginLeft = document.getElementById('main').style.marginLeft
     
     if (!this.state.popOut) { 
-      document.getElementById('nav').style.width = "250px";
+      document.getElementById('nav').style.width = "150px";
       // document.getElementById('main').style.marginLeft = "250px";
     }
     else { 
@@ -86,7 +85,6 @@ export default class App extends React.Component {
       <Streams />
       <Nav collapse={this.collapse} popOutHandler={this.popOutHandler.bind(this)}/>
       <SuperContainer collapse={this.collapse.bind(this)} popOutHandler={this.popOutHandler.bind(this)} />
-
     </div>
 		)
 	}

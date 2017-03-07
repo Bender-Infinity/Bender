@@ -1,5 +1,5 @@
 import React from 'react';
-import io from '../lib/socket.io.js'
+// import io from '../lib/socket.io.js'
 import recognition from '../lib/speech.js'
 
 export default class Chat extends React.Component {

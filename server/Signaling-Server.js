@@ -93,10 +93,10 @@ module.exports = exports = function(app, socketCallback) {
         });
 
         //Speech recognition socket
-        socket.on('voice chat', function (li) {
-          console.log('server received speech chat, emitting to all clients:', li);
-          io.emit('speech chat message from server',li)
-        })
+        // socket.on('voice chat', function (li) {
+        //   console.log('server received speech chat, emitting to all clients:', li);
+        //   io.emit('speech chat message from server',li)
+        // })
 
         //
       //shared drawing socket - send drawing to user so they can see updated drawing

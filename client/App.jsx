@@ -4,6 +4,7 @@ import Nav from './components/Nav.jsx';
 import './lib/sockets.js';
 // import Sketch from './components/Sketch.jsx';
 import Streams from './components/Streams.jsx';
+import Splash from './components/Splash.jsx';
 
 import SuperContainer from './components/SuperContainer.jsx';
 
@@ -82,7 +83,8 @@ export default class App extends React.Component {
 	render() {
 		return (
     <div>
-      <Streams />
+      <Splash />
+     <Streams />
       <Nav collapse={this.collapse} popOutHandler={this.popOutHandler.bind(this)}/>
       <SuperContainer collapse={this.collapse.bind(this)} />
     </div>

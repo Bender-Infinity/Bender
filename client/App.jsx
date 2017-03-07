@@ -84,7 +84,7 @@ export default class App extends React.Component {
     <div>
       <Streams />
       <Nav collapse={this.collapse} popOutHandler={this.popOutHandler.bind(this)}/>
-      <SuperContainer collapse={this.collapse.bind(this)} popOutHandler={this.popOutHandler.bind(this)} />
+      <SuperContainer collapse={this.collapse.bind(this)} />
     </div>
 		)
 	}

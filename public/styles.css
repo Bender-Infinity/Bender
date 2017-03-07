@@ -73,7 +73,7 @@ form button {
 
 #nav {
 
-  width: 50px;
+  width: 150px;
   height: 100vh;
   z-index: 5;
   float: left;
@@ -122,7 +122,7 @@ form button {
 }
 
 #videos-container {
-  min-height: 250px;
+  min-height: 175px;
   height: 100%;
   overflow: auto;
   overflow-y: hidden;
@@ -213,7 +213,7 @@ p {
 }
 
 #footer {
-  height: 100px;
+  height: 50px;
   background-color: pink;
   position: absolute;
   bottom: 0;

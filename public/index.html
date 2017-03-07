@@ -6,13 +6,12 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="./RTCMultiConnection.js"></script>
     <script src="https://cdn.webrtc-experiment.com/getMediaElement.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" 
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" 
       crossorigin="anonymous">
     </script>
     <script src="https://unpkg.com/webrtc-adapter/out/adapter.js"></script>
-    <!-- <script src="./speech.js"></script>  -->
+    <script src="./speech.js"></script> 
     <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
     <script>
       // Initialize Firebase
@@ -31,7 +30,7 @@
 
 
     
-    <div id="chat">
+<!--     <div id="chat">
       <ul>
         <li><h3 style="float: inherit; margin-left: 6px;">Chat</h3></li>
         <li><h3 id="startVoice" style="float: inherit; margin-left: 6px;">Start Voice Chat</h3></li>
@@ -45,23 +44,24 @@
           </form>
         </div>
       </div>
-    </div>    
+    </div>     -->
+
     <div id="app"></div>
     <script src="./bundle.js"></script>
     
     <script>
-    var socket = io();
+    // var socket = io();
 
-   //  start voice chat
-   //  $('#startVoice').click(function () {
-   //    console.log('voice chat activated');
-   //    recognition.start();
-   //  });
+    // start voice chat
+    // $('#startVoice').click(function () {
+    //   console.log('voice chat activated');
+    //   recognition.start();
+    // });
 
-   //  $('#endVoice').click(function () {
-   //    recognition.stop();
-   //    console.log('voice chat stopped');
-   //  })
+    // $('#endVoice').click(function () {
+    //   recognition.stop();
+    //   console.log('voice chat stopped');
+    // })
 
 
   	// $('#sendTextMessage').click(function(e){
@@ -151,7 +151,7 @@
     console.log('window.localStorage ', window.localStorage.MuazKhan)
 
     // var guest1Present
-    var width = 250;
+    var width = 225;
     // var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
     // console.log('MEDIA ELEMENT', event.mediaElement.getAttribute('src'))
     var mediaElement = getMediaElement(event.mediaElement, {

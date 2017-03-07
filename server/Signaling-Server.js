@@ -95,7 +95,7 @@ module.exports = exports = function(app, socketCallback) {
         //Speech recognition socket
         socket.on('voice chat', function (li) {
           console.log('server received speech chat, emitting to all clients:', li);
-          socket.broadcast.emit('speech chat message from server',li)
+          io.emit('speech chat message from server',li)
         })
 
         //

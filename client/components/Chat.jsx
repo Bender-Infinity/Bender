@@ -1,4 +1,6 @@
 import React from 'react';
+import io from '../lib/socket.io.js'
+import recognition from '../lib/speech.js'
 
 export default class Chat extends React.Component {
   constructor(props) {
@@ -6,6 +8,7 @@ export default class Chat extends React.Component {
   }
 
   componentDidMount() {
+    console.log('IN CHAT', io)
     var socket = io();
 
     //start voice chat
@@ -32,7 +35,7 @@ export default class Chat extends React.Component {
     });
       
     socket.on('chat message from server', function(msg){
-      console.log('chat messaged sent', msg)
+      console.log('WE GOT A CHAT MESSAGE FROM SERVER')
       var time = new Date();
       time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
       console.log('chatting in socket');

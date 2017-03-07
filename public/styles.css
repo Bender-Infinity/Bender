@@ -72,7 +72,6 @@ form button {
 /*#messages li:nth-child(odd) { background: #eee; background-opacity: 0.5 }*/
 
 #nav {
-
   width: 150px;
   height: 50%;
   z-index: 5;
@@ -126,7 +125,6 @@ form button {
 #videos-container {
   /*placeholder background*/
   background-color: beige;
-
   min-height: 200px;
   height: 100%;
   overflow: auto;
@@ -225,4 +223,70 @@ p {
   bottom: 0;
   left: 150px;
 }
+
+/*Splash page styles*/
+
+.splashDiv {
+  height: 50vh;
+  margin: auto;
+}
+
+.splashDiv div {
+  position: relative;
+  float: left;
+  padding: 0 15px 0 15px;
+
+}
+
+#tutorial {
+  /*background-image: url('/images/icons/tutorial.png');*/
+  /*background-repeat: no-repeat;
+  background-size:100% 100%;*/
+  background-color: #89f0ef; 
+}
+
+#createRoomContainer {
+  float: right;
+  display: block;
+  padding: 30px;
+}
+
+input {
+  padding: 10px;
+}
+
+#auth {
+  height:150px;
+  width: 300px
+}
+
+#moneyShot {
+  background-image: url('/images/icons/money-shot.png');
+  background-repeat: no-repeat;
+  background-size:100% 100%;
+}
+
+#splashLogo {
+  width: 20%;
+  height: auto;
+  margin: 30px
+}
+ #how {
+  font-family: eurostile;
+  font-size: 24px;
+  text-align: center;
+  color: #89f0ef;
+  padding-top: 5px;
+}
+#step1 {
+  width: 75%;
+  margin-top: 10px
+}
+
+#step2 {
+  width: 60%;
+  margin-top: 10px
+}
+
+
 

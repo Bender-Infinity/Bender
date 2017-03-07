@@ -1,4 +1,5 @@
 import React from 'react';
+// import io from '../lib/socket.io.js'
 
 export default class Sketch extends React.Component {
   constructor(props) {
@@ -22,7 +23,11 @@ export default class Sketch extends React.Component {
 
     var context = canvas.getContext('2d');
     var socket  = io.connect();
+    console.log('INITIAL CONTEXT', context)
     context.lineWidth = 1;
+    context.fillStyle="#000FFF";
+    console.log('DID WE EVEN MODIFY CONTEXT', context)
+
 
 
     //define bounds

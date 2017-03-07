@@ -116,8 +116,11 @@ form button {
   left: 80%;
   top:0;
   margin: 5px !important;
-  position: absolute;
-
+  height: 98%;
+  width: 19%;
+  top: 0;
+  margin: 5px !important;
+  left: 80%;
 }
 
 #videos-container {
@@ -129,13 +132,12 @@ form button {
 }
 
 #drawingContainer {
-  height: 490px;
-  width: 800px;
+  height: 70%;
+  width: 80%;
   border: 2px solid green;
   border-radius: 0px;
   z-index: 999999;
-  position: relative;
-  float: left;
+  position: absolute;
   user-select: none;
 }
 

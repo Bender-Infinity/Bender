@@ -4,15 +4,20 @@ white - white;*/
 
 
 
-* { 
+/** {
   margin: 0; 
   padding: 0; 
   box-sizing: border-box; 
 }
-
+*/
+/*html {
+  height: 100%;
+  width: 100%;
+}*/
+/*
 body { 
   font: 13px Helvetica, Arial; 
-}
+}*/
       
 form { 
   background: #89f0ef; 
@@ -41,6 +46,10 @@ form button {
   color:white;
 }
 
+#app {
+  width: 80%;
+}
+
 #superContainer {
   height: 100%;
 }
@@ -62,16 +71,13 @@ form button {
 /*#messages li:nth-child(odd) { background: #eee; background-opacity: 0.5 }*/
 
 #nav {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
-    top: 0;
-    left: 0;
-    background-color: #111; /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+
+  width: 100%;
+  height: 45px;
+  background-color: #111; /* Black*/
+  overflow: hidden; /* Disable horizontal scroll */
+  transition: 0.5s;
+
 }
 
 /*push the page content to the right when you open the side navigation*/ 
@@ -97,17 +103,21 @@ form button {
 }
 
 .ui {
-  
+  display: inline;
   margin-left: 5px;
+  float: left;
 }
 
 #chat {
   border: 1px solid blue;
-  position: initial;
-  width: 300px;
-  bottom:0;
+  /*position: initial;*/
+  height: 95%;
+  width: 20%;
+  left: 80%;
+  top:0;
   margin: 5px !important;
-  float: right;
+  position: absolute;
+
 }
 
 #videos-container {
@@ -119,13 +129,14 @@ form button {
 }
 
 #drawingContainer {
-  height: 500px;
-  width: 500px;
+  height: 490px;
+  width: 800px;
   border: 2px solid green;
   border-radius: 0px;
   z-index: 999999;
   position: relative;
   float: left;
+  user-select: none;
 }
 
 #canvas {
@@ -133,6 +144,7 @@ form button {
   z-index: 999999;
   /*background-color: #89f0ef;*/
   opacity: 0.5;
+  cursor: pointer;
       
 }
 
@@ -167,6 +179,7 @@ h3 {
   -webkit-text-stroke-color: white;
   -webkit-text-stroke-width: 0.25px;
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  user-select: none;
 }
 
 #startVoice, #endVoice {

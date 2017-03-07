@@ -46,6 +46,10 @@ form button {
   color:white;
 }
 
+#app {
+  width: 80%;
+}
+
 #superContainer {
   height: 100%;
 }
@@ -108,11 +112,12 @@ form button {
 
 #chat {
   border: 1px solid blue;
-  position: initial;
-  width: 300px;
-  bottom:0;
+  position: absolute;
+  height: 98%;
+  width: 19%;
+  top: 0;
   margin: 5px !important;
-  float: right;
+  left: 80%;
 }
 
 #videos-container {
@@ -124,13 +129,12 @@ form button {
 }
 
 #drawingContainer {
-  height: 490px;
-  width: 800px;
+  height: 70%;
+  width: 80%;
   border: 2px solid green;
   border-radius: 0px;
   z-index: 999999;
-  position: relative;
-  float: left;
+  position: absolute;
   user-select: none;
 }
 

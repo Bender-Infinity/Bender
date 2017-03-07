@@ -223,6 +223,13 @@ p {
 /*Splash page styles*/
 
 .splashDiv {
-  border: 1px solid black
+  border: 1px solid black;
+  height: 50vh;
+}
+
+#tutorial {
+  background-image: url('/images/icons/tutorial.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 

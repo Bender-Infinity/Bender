@@ -8,7 +8,7 @@ import Footer from './Footer.jsx';
 export default (props) => (
   <div id="superContainer">
     <Sketch />
-    <Footer />
     <Chat />
+    
   </div>
 )

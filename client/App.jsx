@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Nav from './components/Nav.jsx';
-// import Sketch from './components/Sketch.jsx';
+import Sketch from './components/Sketch.jsx';
 import Streams from './components/Streams.jsx';
 import Splash from './components/Splash.jsx';
 
@@ -74,16 +74,22 @@ export default class App extends React.Component {
     // else {
     //   this.setState({popOut = false})
     // }
-
     this.setState({'popOut': !this.state.popOut})
     this.popInOut();
   }
+
+  clearIt () {
+    var socket = io();
+    //calls for all clients to clear sketchpad
+    console.log('clearing sketchpad')
+    socket.emit('clear drawing');
+  };
 
 	render() {
 		return (
     <div>
      <Streams />
-      <Nav collapse={this.collapse} popOutHandler={this.popOutHandler.bind(this)}/>
+      <Nav collapse={this.collapse} popOutHandler={this.popOutHandler.bind(this)} clearIt={this.clearIt.bind(this)}/>
       <SuperContainer collapse={this.collapse.bind(this)} />
     </div>
 		)

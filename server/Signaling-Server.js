@@ -137,16 +137,15 @@ module.exports = exports = function(app, socketCallback) {
           console.log('server is receiving data from:', data)
           line_history.push(data.line);
           //FOR TESTING ONLY
-          if (line_history.length > 0) {
-            Sketches.find({}).then(function(result) { 
-              if (result.length <= 0) {
-                Sketches.create({ picture: line_history }).then( function() { console.log('create success?')})
-              } else {
-                Sketches.update({ picture: line_history }).then( function() { console.log('update success?'), console.log(arguments)});
-              }
-            })
-            // Sketches.update({ picture: line_history}).then( function() { console.log('update success?'), console.log(arguments)});
-          }
+          // if (line_history.length > 0) {
+          //   Sketches.find({}).then(function(result) { 
+          //     if (result.length <= 0) {
+          //       Sketches.create({ picture: line_history }).then( function() { console.log('create success?')})
+          //     } else {
+          //       Sketches.update({ picture: line_history }).then( function() { console.log('update success?'), console.log(arguments)});
+          //     }
+          //   })
+          // }
 
           io.emit('draw_line', {line: data.line})
         });
@@ -156,7 +155,13 @@ module.exports = exports = function(app, socketCallback) {
         socket.on('save drawing', function() {
           console.log('saving drawing');
           if (line_history.length > 0) {
-            Sketches.update({ picture: line_history}).then( function() { console.log('update success')});
+            Sketches.find({}).then(function(result) { 
+              if (result.length <= 0) {
+                Sketches.create({ picture: line_history }).then( function() { console.log('create success?')})
+              } else {
+                Sketches.update({ picture: line_history }).then( function() { console.log('update success?'), console.log(arguments)});
+              }
+            })
           }
         })
 
@@ -164,7 +169,13 @@ module.exports = exports = function(app, socketCallback) {
           console.log('clearing drawing for everyone')
           //save drawing data to db
           if (line_history.length > 0) {
-            Sketches.update({ picture: line_history}).then( function() { console.log('update success')});
+            Sketches.find({}).then(function(result) { 
+              if (result.length <= 0) {
+                Sketches.create({ picture: line_history }).then( function() { console.log('create success?')})
+              } else {
+                Sketches.update({ picture: line_history }).then( function() { console.log('update success?'), console.log(arguments)});
+              }
+            })
           }
           line_history = [];
           io.emit('clearit', true);

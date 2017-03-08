@@ -18,6 +18,7 @@ export default class Splash extends React.Component {
 							<form id="auth">
 								<h3>Create a Room</h3>
 								<label>will-ramsey.com/</label>
+								<input placeholder="please enter your name"/>
 								<input placeholder="pick any room name you want"/>
 								<button type="submit">Create</button>
 							</form>

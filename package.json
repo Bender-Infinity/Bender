@@ -21,10 +21,12 @@
   "homepage": "https://github.com/im-buff/bender#readme",
   "dependencies": {
     "dragula": "^3.7.2",
-    "react-dragula": "^1.1.17",
     "lodash": "^4.17.4",
+    "mongodb": "^2.2.24",
+    "mongoose": "^4.8.6",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-dragula": "^1.1.17",
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",
     "socket.io": "^1.7.3"

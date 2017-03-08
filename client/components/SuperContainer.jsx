@@ -9,5 +9,6 @@ export default (props) => (
   <div id="superContainer">
     <Sketch />
     <Footer />
+    <Chat />
   </div>
 )

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Nav from './components/Nav.jsx';
-import './lib/sockets.js';
 // import Sketch from './components/Sketch.jsx';
 import Streams from './components/Streams.jsx';
 import Splash from './components/Splash.jsx';

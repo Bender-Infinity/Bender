@@ -72,12 +72,11 @@ form button {
 /*#messages li:nth-child(odd) { background: #eee; background-opacity: 0.5 }*/
 
 #nav {
-
   width: 150px;
-  height: 100vh;
+  height: 50%;
   z-index: 5;
   float: left;
-  background-color: #111; /* Black*/
+  background-color: #7B3F00; /* not Black*/
   overflow: hidden; /* Disable horizontal scroll */
   transition: 0.25s;
 
@@ -112,9 +111,11 @@ form button {
 }
 
 #chat {
+  /*placeholder background*/
+
   border: 1px solid blue;
   position: absolute;
-  height: 98%;
+  height: 92%;
   width: 19%;
   left: 80%;
   top:0;
@@ -122,7 +123,9 @@ form button {
 }
 
 #videos-container {
-  min-height: 175px;
+  /*placeholder background*/
+  background-color: beige;
+  min-height: 200px;
   height: 100%;
   overflow: auto;
   overflow-y: hidden;
@@ -131,8 +134,8 @@ form button {
 }
 
 #drawingContainer {
-  height: 67%;
-  width: 66%;
+  height: 65.5%;
+  width: 69.5%;
   border: 2px solid green;
   border-radius: 0px;
   left: 150px;
@@ -169,7 +172,6 @@ h3 {
 }*/
 
 #clock {
-  position: absolute;
   font-size: 32px;
   z-index: 9999;
   color: #89f0ef;
@@ -213,7 +215,9 @@ p {
 }
 
 #footer {
+  border: 0.5px solid black;
   height: 50px;
+  width: 89%;
   background-color: pink;
   position: absolute;
   bottom: 0;

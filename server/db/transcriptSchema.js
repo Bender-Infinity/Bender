@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var transcriptSchema = new mongoose.Schema({
   timeStamp: String,
+  user: String,
   transcript: String
 });
 

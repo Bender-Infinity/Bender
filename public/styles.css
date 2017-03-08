@@ -230,8 +230,36 @@ p {
 .splashDiv div {
   position: relative;
   float: left;
-  padding: 0 15px 0 15px;
+  padding: 30px 5px 0 5px;
+  width: 28%;
+  margin-left:31px;
+  margin-right:15px;
 
+}
+
+.splashDiv .steps img {
+  width: 100%;
+  margin: auto;
+  padding-bottom: 20px;
+
+}
+
+h3 {
+  font-family: Eurostile, sans-serif;
+  font-size: 24px;
+  padding: 10px 0 10px 0;
+  text-align: center;
+  margin: auto;
+}
+
+.steps p {
+  color:black;
+  -webkit-text-stroke-width:0px;
+  text-shadow: none;
+  text-align: center;
+  font-size: 18px;
+  width: 80%;
+  margin: auto;
 }
 
 #tutorial {
@@ -274,15 +302,14 @@ input {
   color: #89f0ef;
   padding-top: 5px;
 }
-#step1 {
-  width: 75%;
-  margin-top: 10px
+
+#moneyShot h2 {
+  color:white;
 }
 
-#step2 {
-  width: 60%;
-  margin-top: 10px
+.titleContainer {
+  width: 80%;
+  margin: auto;
 }
-
 
 

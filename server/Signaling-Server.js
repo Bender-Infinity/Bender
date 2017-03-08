@@ -84,8 +84,6 @@ module.exports = exports = function(app, socketCallback) {
         io.on('disconnect', function() {
           console.log('user ' + socket.id + ' disconnected')
         });
-        // var sketch = new Sketches({picture: line_history});
-        // sketch.save()
 
         // io.on('chat message', function(msg){
         //   io.emit('chat message:', msg);
@@ -138,7 +136,7 @@ module.exports = exports = function(app, socketCallback) {
           line_history.push(data.line);
           //FOR TESTING ONLY
           // if (line_history.length > 0) {
-          //   Sketches.find({}).then(function(result) { 
+          //   Sketches.findOne({}).then(function(result) { 
           //     if (result.length <= 0) {
           //       Sketches.create({ picture: line_history }).then( function() { console.log('create success?')})
           //     } else {
@@ -146,16 +144,16 @@ module.exports = exports = function(app, socketCallback) {
           //     }
           //   })
           // }
+          // var sketch = new Sketches({picture: []});
+          // sketch.save()
 
           io.emit('draw_line', {line: data.line})
         });
-        
-        //emits clear draw event for all users
 
         socket.on('save drawing', function() {
           console.log('saving drawing');
           if (line_history.length > 0) {
-            Sketches.find({}).then(function(result) { 
+            Sketches.findOne({}).then(function(result) { 
               if (result.length <= 0) {
                 Sketches.create({ picture: line_history }).then( function() { console.log('create success?')})
               } else {
@@ -163,13 +161,15 @@ module.exports = exports = function(app, socketCallback) {
               }
             })
           }
+          var sketch = new Sketches({picture: []});
+          sketch.save()
         })
 
         socket.on('clear drawing', function(){
           console.log('clearing drawing for everyone')
           //save drawing data to db
           if (line_history.length > 0) {
-            Sketches.find({}).then(function(result) { 
+            Sketches.findOne({}).then(function(result) { 
               if (result.length <= 0) {
                 Sketches.create({ picture: line_history }).then( function() { console.log('create success?')})
               } else {
@@ -177,6 +177,8 @@ module.exports = exports = function(app, socketCallback) {
               }
             })
           }
+          var sketch = new Sketches({picture: []});
+          sketch.save()
           line_history = [];
           io.emit('clearit', true);
         });

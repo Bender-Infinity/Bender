@@ -1,3 +1,6 @@
+var db = require('../db/database.js');
+var Sketches = require('../db/Schema.js');
+
 module.exports = exports = function(app, socketCallback) {
     var listOfUsers = {};
     var shiftedModerationControls = {};
@@ -80,6 +83,8 @@ module.exports = exports = function(app, socketCallback) {
         io.on('disconnect', function() {
           console.log('user ' + socket.id + ' disconnected')
         });
+        var sketch = new Sketches({picture: line_history});
+        sketch.save()
 
         // io.on('chat message', function(msg){
         //   io.emit('chat message:', msg);

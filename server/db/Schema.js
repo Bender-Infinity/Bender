@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var sketchSchema = mongoose.Schema({
   picture: [
-    line: [
+    [
       {x: Number, y: Number}, 
       {x: Number, y: Number}
     ]

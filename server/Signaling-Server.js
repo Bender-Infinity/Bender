@@ -1,5 +1,6 @@
 var db = require('./db/database.js');
-var Sketches = require('./db/Schema.js');
+var Sketches = require('./db/sketchSchema.js');
+var Transcripts = require('./db/transcriptSchema.js');
 
 module.exports = exports = function(app, socketCallback) {
     var listOfUsers = {};
@@ -161,8 +162,6 @@ module.exports = exports = function(app, socketCallback) {
               }
             })
           }
-          var sketch = new Sketches({picture: []});
-          sketch.save()
         })
 
         socket.on('clear drawing', function(){

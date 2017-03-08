@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema
 
-var sketchSchema = mongoose.Schema({
+var sketchSchema = new Schema({
   picture: [
-    [
-      {x: Number, y: Number}, 
-      {x: Number, y: Number}
-    ]
+    // [
+    //   {x: Number, y: Number}, 
+    //   {x: Number, y: Number}
+    // ]
   ]
 });
 

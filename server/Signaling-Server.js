@@ -121,13 +121,14 @@ module.exports = exports = function(app, socketCallback) {
         socket.on('draw_line', function(data) {
           console.log('server is receiving data from:', data)
           line_history.push(data.line);
-          Sketches.update({ picture: line_history}).then( function() { console.log('update success')});
           io.emit('draw_line', {line: data.line})
         });
         
         //emits clear draw event for all users
         socket.on('clear drawing', function(){
           console.log('clearing drawing for everyone')
+          //save drawing data to db
+          Sketches.update({ picture: line_history}).then( function() { console.log('update success')});
           line_history = [];
           io.emit('clearit', true);
         });

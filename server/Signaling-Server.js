@@ -1,3 +1,6 @@
+var db = require('../db/database.js');
+var Sketches = require('../db/Schema.js');
+
 module.exports = exports = function(app, socketCallback) {
     var listOfUsers = {};
     var shiftedModerationControls = {};
@@ -80,6 +83,8 @@ module.exports = exports = function(app, socketCallback) {
         io.on('disconnect', function() {
           console.log('user ' + socket.id + ' disconnected')
         });
+        var sketch = new Sketches({picture: line_history});
+        sketch.save()
 
         // io.on('chat message', function(msg){
         //   io.emit('chat message:', msg);
@@ -93,10 +98,10 @@ module.exports = exports = function(app, socketCallback) {
         });
 
         //Speech recognition socket
-        socket.on('voice chat', function (li) {
-          console.log('server received speech chat, emitting to all clients:', li);
-          socket.broadcast.emit('speech chat message from server',li)
-        })
+        // socket.on('voice chat', function (li) {
+        //   console.log('server received speech chat, emitting to all clients:', li);
+        //   io.emit('speech chat message from server',li)
+        // })
 
         //
       //shared drawing socket - send drawing to user so they can see updated drawing

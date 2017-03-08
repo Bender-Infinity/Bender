@@ -273,6 +273,8 @@ h3 {
   float: right;
   display: block;
   padding: 30px;
+  margin-right: 160px;
+  margin-top: -75px;
 }
 
 input {

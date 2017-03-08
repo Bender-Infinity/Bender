@@ -14,13 +14,19 @@ export default class App extends Component {
 	}
 
 	submitHandler(e) {
-		console.log('e',e)
-    console.log('this', this)
-    console.log('this props', this.props)
+		// console.log('e',e)
+  //   console.log('this', this)
+  //   console.log('this props', this.props)
 		e.preventDefault();
-		var userName = this.saveName();
-	 var roomId = document.getElementById('createRoom').value;
-	 console.log('roomId', roomId)
+
+    var userName = document.getElementById('inputName').value;
+    window.localStorage.user = userName;
+
+    var roomId = document.getElementById('createRoom').value;
+    window.localStorage.roomId = roomId
+		// var userName = this.saveName();
+	 // var roomId = document.getElementById('createRoom').value;
+	 // console.log('roomId', roomId)
 		// connection.openOrJoin(roomId, function(isRoomExists, roomId) {
 	 //    if(!isRoomExists) {
 	 //      console.log('room does not exist');

@@ -33,7 +33,7 @@ export default (props) => (
           <h3>Disable audio</h3>
         </li>
         <li className="ui">
-          <img id="clearDrawing" title="Erase drawing" src="#" onClick={props.clearIt()}/>
+          <img id="clearDrawing" title="Erase drawing" src="#" onClick={() => {props.clearIt()}}/>
         </li>
         <li className="ui">
           <h3>View Chat session</h3>

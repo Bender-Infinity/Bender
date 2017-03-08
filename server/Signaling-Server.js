@@ -1,5 +1,5 @@
-var db = require('../db/database.js');
-var Sketches = require('../db/Schema.js');
+var db = require('./db/database.js');
+var Sketches = require('./db/Schema.js');
 
 module.exports = exports = function(app, socketCallback) {
     var listOfUsers = {};

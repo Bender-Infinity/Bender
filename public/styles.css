@@ -70,13 +70,12 @@ form button {
 
 #nav {
   width: 150px;
-  height: 50%;
+  height: 80vh;
   z-index: 5;
   float: left;
-  background-color: #7B3F00; /* not Black*/
+  background-color:black; /*#7B3F00;*/
   overflow: hidden; /* Disable horizontal scroll */
   transition: 0.25s;
-
 }
 
 /*push the page content to the right when you open the side navigation*/ 
@@ -96,15 +95,14 @@ form button {
   top: 2%;
   list-style-type: none;
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 45px !important;
   overflow:  hidden;
 
 }
 
 .ui {
-
   margin-left: 5px;
-
+  padding-bottom: 10px;
 }
 
 #chat {
@@ -126,14 +124,13 @@ form button {
   height: 100%;
   overflow: auto;
   overflow-y: hidden;
-  border: 1px solid black;
   width: 80%;
 }
 
 #drawingContainer {
   height: 65.5%;
   width: 69.5%;
-  border: 2px solid green;
+  border: 2px solid black;
   border-radius: 0px;
   left: 150px;
   z-index: 0;
@@ -200,12 +197,11 @@ p {
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
-#clearDrawing {
-  border: 0.5px solid white;
+/*#clearDrawing {
   border-radius: 5px;
   padding: 4px;
   font-size: 13pt;
-}
+}*/
 
 .chatConsole {
   font-size: 8pt;
@@ -215,7 +211,7 @@ p {
   border: 0.5px solid black;
   height: 50px;
   width: 89%;
-  background-color: pink;
+  background-color: #89f0ef;
   position: absolute;
   bottom: 0;
   left: 150px;

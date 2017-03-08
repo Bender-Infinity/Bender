@@ -4,6 +4,7 @@ import Nav from './Nav.jsx';
 import Sketch from './Sketch.jsx';
 import Streams from './Streams.jsx';
 import Splash from './Splash.jsx';
+import Footer from './Footer.jsx';
 
 import SuperContainer from './SuperContainer.jsx';
 
@@ -104,6 +105,7 @@ export default class Home extends React.Component {
         <Streams />
         <Nav collapse={this.collapse} popOutHandler={this.popOutHandler.bind(this)} clearIt={this.clearIt.bind(this)}/>
         <SuperContainer collapse={this.collapse.bind(this)} />
+        <Footer />
       </div>
 		)
 	}

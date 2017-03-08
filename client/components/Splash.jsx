@@ -16,7 +16,7 @@ export default class Splash extends React.Component {
 						<img id="splashLogo" src="/images/icons/logo.png"/>
 					</header>
 					<div>
-						<h2>Connect with your team where they are</h2>
+						<h2>Connect with your team wherever they are</h2>
 						<h3>Teamwork has never been easier</h3>
 					</div>
 					<div id="createRoomContainer">

@@ -20,7 +20,7 @@ export default class Home extends React.Component {
 	}
 
 	componentDidMount () {
-
+    console.log('home this',this)
 	  document.getElementById('open-room').onclick = function() {
       disableInputButtons();
       console.log('connection', connection)

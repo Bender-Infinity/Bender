@@ -2,9 +2,10 @@ import React from 'react';
 
 export default class Splash extends React.Component {
 
-	saveNameHandler(e) {
+	submitHandler(e) {
 		e.preventDefault();
 		this.saveName();
+		
 	}
 
 	saveName () {
@@ -34,7 +35,7 @@ export default class Splash extends React.Component {
 								{/*<label>will-ramsey.com/</label>*/}
 								<input id="inputName" placeholder="please enter your name"/>
 								<input id="createRoom" placeholder="pick any room name you want"/>
-								<button type="submit" onClick={this.saveNameHandler.bind(this)}>Create</button>
+								<button type="submit" onClick={this.submitHandler.bind(this)}>Create</button>
 							</form>
 						</div>
 					</div>

@@ -6,6 +6,7 @@ module.exports = exports = function(app, socketCallback) {
     var shiftedModerationControls = {};
     var ScalableBroadcast;
     var line_history = [];
+    var chat_history = '';
 
     var io = require('socket.io');
 
@@ -83,8 +84,8 @@ module.exports = exports = function(app, socketCallback) {
         io.on('disconnect', function() {
           console.log('user ' + socket.id + ' disconnected')
         });
-        var sketch = new Sketches({picture: line_history});
-        sketch.save()
+        // var sketch = new Sketches({picture: line_history});
+        // sketch.save()
 
         // io.on('chat message', function(msg){
         //   io.emit('chat message:', msg);
@@ -92,9 +93,23 @@ module.exports = exports = function(app, socketCallback) {
         //   //then save to the database
         // });
 
+        // socket.on('chat message', function(msg){
+        //   console.log('chat message sent: ', msg)
+        //   io.emit('chat message from server', msg);
+        // });
+
         socket.on('chat message', function(msg){
-          console.log('chat message sent: ', msg)
-          io.emit('chat message from server', msg);
+          console.log('chat message received by server: ', msg);
+
+          var rawTime = new Date().toString();
+          var timeString = rawTime.substring(16,24);
+          var verboseTime = rawTime.substring(4,24);
+
+          var transcriptMsg = '[' + verboseTime + '] ' + msg.user + ': ' + msg.message + '\n'
+          chat_history += transcriptMsg;
+
+          var formatMsg = '[' + timeString + '] ' + msg.user + ': ' + msg.message
+          io.emit('chat message from server', formatMsg);
         });
 
         //Speech recognition socket
@@ -121,6 +136,18 @@ module.exports = exports = function(app, socketCallback) {
         socket.on('draw_line', function(data) {
           console.log('server is receiving data from:', data)
           line_history.push(data.line);
+          //FOR TESTING ONLY
+          if (line_history.length > 0) {
+            Sketches.find({}).then(function(result) { 
+              if (result.length <= 0) {
+                Sketches.create({ picture: line_history }).then( function() { console.log('create success?')})
+              } else {
+                Sketches.update({ picture: line_history }).then( function() { console.log('update success?'), console.log(arguments)});
+              }
+            })
+            // Sketches.update({ picture: line_history}).then( function() { console.log('update success?'), console.log(arguments)});
+          }
+
           io.emit('draw_line', {line: data.line})
         });
         
@@ -128,13 +155,17 @@ module.exports = exports = function(app, socketCallback) {
 
         socket.on('save drawing', function() {
           console.log('saving drawing');
-          Sketches.update({ picture: line_history}).then( function() { console.log('update success')});
+          if (line_history.length > 0) {
+            Sketches.update({ picture: line_history}).then( function() { console.log('update success')});
+          }
         })
-        
+
         socket.on('clear drawing', function(){
           console.log('clearing drawing for everyone')
           //save drawing data to db
-          Sketches.update({ picture: line_history}).then( function() { console.log('update success')});
+          if (line_history.length > 0) {
+            Sketches.update({ picture: line_history}).then( function() { console.log('update success')});
+          }
           line_history = [];
           io.emit('clearit', true);
         });

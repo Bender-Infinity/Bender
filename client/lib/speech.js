@@ -1,4 +1,4 @@
-import io from './socket.io.js'
+// import io from './socket.io.js'
 
 var socket = io();
 

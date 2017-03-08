@@ -9,8 +9,6 @@ export default class Splash extends React.Component {
 	}
 
 	render(props) {
-		console.log('props in splash', this.props)
-		console.log('props in splash', this.state)
 		return (
 			<div>
 				<div className="splashDiv" id="moneyShot">

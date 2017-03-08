@@ -20,7 +20,7 @@ export default class Home extends React.Component {
 	}
 
 	componentDidMount () {
-    console.log('home this',this)
+    console.log('username',this.props.username)
 	  document.getElementById('open-room').onclick = function() {
       disableInputButtons();
       console.log('connection', connection)
@@ -88,7 +88,7 @@ export default class Home extends React.Component {
 	render() {
 		return (
       <div>
-       <Streams />
+       <Streams username={this.props.username}/>
         <Nav collapse={this.collapse} popOutHandler={this.popOutHandler.bind(this)} clearIt={this.clearIt.bind(this)}/>
         <SuperContainer collapse={this.collapse.bind(this)} />
       </div>

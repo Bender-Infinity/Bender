@@ -1,23 +1,16 @@
 import React from 'react';
+import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router'
 
 export default class Splash extends React.Component {
-
-	submitHandler(e) {
-		e.preventDefault();
-		this.saveName();
-		
+	constructor (props) {
+		super(props)
+		this.state = {
+		}
 	}
 
-	saveName () {
-		var userName
-		var name = document.getElementById('inputName').value
-		
-		window.localStorage.user = name;
-		userName = window.localStorage.user
-		console.log('current users name', userName)
-	}
-
-	render() {
+	render(props) {
+		console.log('props in splash', this.props)
+		console.log('props in splash', this.state)
 		return (
 			<div>
 				<div className="splashDiv" id="moneyShot">
@@ -35,7 +28,7 @@ export default class Splash extends React.Component {
 								{/*<label>will-ramsey.com/</label>*/}
 								<input id="inputName" placeholder="please enter your name"/>
 								<input id="createRoom" placeholder="pick any room name you want"/>
-								<button type="submit" onClick={this.submitHandler.bind(this)}>Create</button>
+								<button type="submit" onClick={this.props.submitHandler}><Link to={this.props.roomId}>Create</Link></button>
 							</form>
 						</div>
 					</div>

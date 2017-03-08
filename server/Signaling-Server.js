@@ -121,6 +121,7 @@ module.exports = exports = function(app, socketCallback) {
         socket.on('draw_line', function(data) {
           console.log('server is receiving data from:', data)
           line_history.push(data.line);
+          Sketches.update({ picture: line_history}).then( function() { console.log('update success')});
           io.emit('draw_line', {line: data.line})
         });
         

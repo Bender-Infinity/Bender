@@ -107,18 +107,17 @@ module.exports = exports = function(app, socketCallback) {
           var transcriptMsg = '[' + verboseTime + '] ' + msg.user + ': ' + msg.message + '\n'
           chat_history += transcriptMsg;
 
-          // TESTING ONLY
-          // if (chat_history.length > 0) {
-          //   Transcripts.findOne({ user: msg.user }).then(function(result) { 
-          //     if (!result || result.length <= 0) {
-          //       Transcripts.create({ user: msg.user, transcript: chat_history })
-          //         .then( function() { console.log('create success?')})
-          //     } else {
-          //       Transcripts.update({ user: msg.user }, { transcript: chat_history })
-          //         .then( function() { console.log('update success?'), console.log(arguments)});
-          //     }
-          //   })
-          // }
+          if (chat_history.length > 0) {
+            Transcripts.findOne({ user: msg.user }).then(function(result) { 
+              if (!result || result.length <= 0) {
+                Transcripts.create({ user: msg.user, transcript: chat_history })
+                  .then( function() { console.log('create success?')})
+              } else {
+                Transcripts.update({ user: msg.user }, { transcript: chat_history })
+                  .then( function() { console.log('update success?'), console.log(arguments)});
+              }
+            })
+          }
 
 
           var formatMsg = '[' + timeString + '] ' + msg.user + ': ' + msg.message
@@ -182,7 +181,7 @@ module.exports = exports = function(app, socketCallback) {
           io.emit('draw_line', {line: data.line})
         });
 
-        socket.on('save drawing', function() {
+        socket.on('save sketch', function() {
           console.log('saving drawing');
           if (line_history.length > 0) {
             Sketches.findOne({}).then(function(result) { 

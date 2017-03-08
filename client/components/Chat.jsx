@@ -8,7 +8,6 @@ export default class Chat extends React.Component {
   }
 
   componentDidMount() {
-    console.log('IN CHAT', io)
     var socket = io();
 
     //start voice chat
@@ -27,22 +26,23 @@ export default class Chat extends React.Component {
 
     $('#sendTextMessage').click(function(e){
       e.preventDefault();
-
-      socket.emit('chat message', $('#m').val());
+      socket.emit('chat message', { user: window.localStorage.user, message: document.getElementById('m').value });
+      // socket.emit('chat message', $('#m').val());
       console.log('text message sent from socket', socket);
       $('#m').val('');
       return false;
     });
       
     socket.on('chat message from server', function(msg){
-      console.log('WE GOT A CHAT MESSAGE FROM SERVER')
-      var time = new Date();
-      time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
-      console.log('chatting in socket');
+      console.log('CHAT COMPONENT MSG')
+      // var time = new Date().toString();
+      // console.log(time.substring(16,24));
+      // time = Date().substring(0, 16) + time.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true });
+      // console.log('chatting in socket');
       var ul = document.getElementById('messages');
-      var input = document.getElementById('m');
+      // var input = document.getElementById('m');
       var li = document.createElement('LI');
-      li.innerHTML = socket.nsp + ' says: ' + msg + '\n' + time;
+      li.innerHTML = msg;
       ul.appendChild(li);
       li.scrollIntoView();
       // if(ul.offsetHeight >= div.offsetHeight){

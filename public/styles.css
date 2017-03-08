@@ -62,7 +62,8 @@ form button {
 }
       
 #messages li { 
-  padding: 5px 10px 
+  padding: 5px 10px;
+  word-wrap: break-word;
 }
       
 /*#messages li:nth-child(odd) { background: #eee; background-opacity: 0.5 }*/

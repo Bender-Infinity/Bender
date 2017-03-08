@@ -1,4 +1,4 @@
-import io from './socket.io.js'
+// import io from './socket.io.js'
 
 var socket = io();
 
@@ -119,8 +119,8 @@ if (!('webkitSpeechRecognition' in window)) {
       // ul.appendChild(li);
       // li.scrollIntoView();
       //$('#messages').append($('<li>').text(socket.id + ' says: ' + final_transcript + '\n' + time));
-      socket.emit('chat message', final_transcript)
-      final_transcript = " ";
+      socket.emit('chat message', { user: window.localStorage.user, message: final_transcript })
+      final_transcript = '';
     // }
   };
   // socket.on('speech chat message from server', function (msg) {

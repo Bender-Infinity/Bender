@@ -40,6 +40,9 @@ export default class Splash extends React.Component {
 					</div>
 				</div>
 				<div className="splashDiv" id="tutorial">
+{/*					<div className="stepsHeader">
+						<h2>Here's how</h2>
+					</div>*/}
 					<div className="steps">	
 						<img id="step1" src="/images/icons/step-1.png"/>
 						<p>Step1<br/>

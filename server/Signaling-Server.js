@@ -125,6 +125,12 @@ module.exports = exports = function(app, socketCallback) {
         });
         
         //emits clear draw event for all users
+
+        socket.on('save drawing', function() {
+          console.log('saving drawing');
+          Sketches.update({ picture: line_history}).then( function() { console.log('update success')});
+        })
+        
         socket.on('clear drawing', function(){
           console.log('clearing drawing for everyone')
           //save drawing data to db

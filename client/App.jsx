@@ -21,16 +21,16 @@ export default class App extends Component {
 		var userName = this.saveName();
 	 var roomId = document.getElementById('createRoom').value;
 	 console.log('roomId', roomId)
-		connection.openOrJoin(roomId, function(isRoomExists, roomId) {
-	    if(!isRoomExists) {
-	      console.log('room does not exist');
-	    }
-	 });
+		// connection.openOrJoin(roomId, function(isRoomExists, roomId) {
+	 //    if(!isRoomExists) {
+	 //      console.log('room does not exist');
+	 //    }
+	 // });
 		this.setState({
 			username:userName,
 			roomId:roomId
 		});
-     this.props.router.push({roomId})
+     // this.props.router.push({roomId})
 	}
 
 	saveName () {

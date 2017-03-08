@@ -19,6 +19,9 @@ export default class Home extends React.Component {
 		};
 	}
 
+  componentWillMount() {
+  }
+
 	componentDidMount () {
     console.log('home this',this)
 	  document.getElementById('open-room').onclick = function() {
@@ -43,6 +46,16 @@ export default class Home extends React.Component {
 	      }
 	  	});
 		};
+
+   //  connection.openOrJoin(window.localStorage.roomId, function(isRoomExists, roomId) {
+   //    if(!isRoomExists) {
+   //      console.log('room does not exist');
+   //    }
+   // });
+         connection.open(window.localStorage.roomId, function() {
+        showRoomURL(connection.sessionid);
+        connection.onstream()
+      });
 	}
 
 	collapse(elem) {
@@ -88,7 +101,7 @@ export default class Home extends React.Component {
 	render() {
 		return (
       <div>
-       <Streams />
+        <Streams />
         <Nav collapse={this.collapse} popOutHandler={this.popOutHandler.bind(this)} clearIt={this.clearIt.bind(this)}/>
         <SuperContainer collapse={this.collapse.bind(this)} />
       </div>

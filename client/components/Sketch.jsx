@@ -89,16 +89,11 @@ export default class Sketch extends React.Component {
     socket.emit('init_draw');
   }
 
-  clearIt () {
-    //calls for all clients to clear sketchpad
-    socket.emit('clear drawing');
-  };
 
   render() {
     return (
       <div id="drawingContainer">
         <canvas id="canvas"></canvas>
-        <button id="clearDrawing" onClick={() => this.clearIt()}>Clear</button>
       </div>
     )
   }    

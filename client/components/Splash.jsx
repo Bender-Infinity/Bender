@@ -2,6 +2,20 @@ import React from 'react';
 
 export default class Splash extends React.Component {
 
+	saveNameHandler(e) {
+		e.preventDefault();
+		this.saveName();
+	}
+
+	saveName () {
+		var userName
+		var name = document.getElementById('inputName').value
+		
+		window.localStorage.user = name;
+		userName = window.localStorage.user
+		console.log('current users name', userName)
+	}
+
 	render() {
 		return (
 			<div>
@@ -17,10 +31,10 @@ export default class Splash extends React.Component {
 						<div>
 							<form id="auth">
 								<h3>Create a Room</h3>
-								<label>will-ramsey.com/</label>
-								<input placeholder="please enter your name"/>
-								<input placeholder="pick any room name you want"/>
-								<button type="submit">Create</button>
+								{/*<label>will-ramsey.com/</label>*/}
+								<input id="inputName" placeholder="please enter your name"/>
+								<input id="createRoom" placeholder="pick any room name you want"/>
+								<button type="submit" onClick={this.saveNameHandler.bind(this)}>Create</button>
 							</form>
 						</div>
 					</div>

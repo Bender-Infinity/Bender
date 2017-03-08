@@ -318,4 +318,6 @@ input {
   margin: auto;
 }
 
-
+#inputName {
+  margin-bottom: 5px
+}

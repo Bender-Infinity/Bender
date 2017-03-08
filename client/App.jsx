@@ -52,8 +52,8 @@ export default class App extends Component {
   render() {
     return (
       <Router history={hashHistory}>
-        <Route path='/' component={() => <Splash username={this.state.username} roomId={this.state.roomId} submitHandler={this.submitHandler.bind(this)} /> }  />
-        <Route path='/home' component={Home} />
+        <Route path='/' component={() => <Splash username={this.state.username} roomId={this.state.roomId} submitHandler={this.submitHandler.bind(this)} /> } />
+        <Route path='/home' component={() => <Home username={this.state.username}/>} />
         <Route path='*' component={Splash} />
       </Router>
     )

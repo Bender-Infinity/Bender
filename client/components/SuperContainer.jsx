@@ -1,14 +1,12 @@
 import React from 'react';
-import Nav from './Nav.jsx';
 import Sketch from './Sketch.jsx';
 import Chat from './Chat.jsx';
-import Footer from './Footer.jsx';
-//chat's fucked
+import History from './History.jsx';
 
 export default (props) => (
   <div id="superContainer">
     <Sketch />
     <Chat />
-    
+    <History />
   </div>
 )

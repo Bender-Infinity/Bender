@@ -86,7 +86,7 @@ export default class Home extends React.Component {
     var socket = io();
     //calls for all clients to clear sketchpad
     console.log('clearing sketchpad')
-    socket.emit('clear drawing');
+    socket.emit('clear drawing', { user: window.localStorage.user });
   };
 
 	render() {

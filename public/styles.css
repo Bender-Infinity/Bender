@@ -76,12 +76,10 @@ form button {
   background-color:black; /*#7B3F00;*/
   overflow: hidden; /* Disable horizontal scroll */
   transition: 0.25s;
+  opacity: 0.8;
 }
 
 /*push the page content to the right when you open the side navigation*/ 
-#main {
-  transition: margin-left .5s;
-}
 
 #message-log {
 	
@@ -115,6 +113,7 @@ form button {
   left: 80%;
   top:0;
   margin: 5px !important;
+  opacity: 0.8;
 }
 
 #videos-container {
@@ -125,6 +124,7 @@ form button {
   overflow: auto;
   overflow-y: hidden;
   width: 80%;
+  opacity: 0.8;
 }
 
 #drawingContainer {
@@ -215,6 +215,7 @@ p {
   position: absolute;
   bottom: 0;
   left: 150px;
+  opacity: 0.8;
 }
 
 /*Splash page styles*/
@@ -315,6 +316,12 @@ input {
   margin-bottom: 5px;
   width: 50%;
   margin-left: 20%;
+}
+
+#home {
+  background:url('/images/icons/chatroom-bg2.png');
+  background-repeat: no-repeat;
+  background-size:100% 100%;
 }
 
 

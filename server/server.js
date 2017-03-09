@@ -23,6 +23,13 @@ var server = http.createServer(app);
 
 app.use(express.static(__dirname + '/../public'));
 
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
+
 server.listen(port);
 console.log('Working on Bender∞ on port ' + port);
 

@@ -62,7 +62,6 @@ div .media-container {
   border-radius: 5px;
   background-color: #89f0ef; 
   vertical-align: bottom; 
-  bottom: 0;
 }
       
 #messages li { 
@@ -70,7 +69,7 @@ div .media-container {
   word-wrap: break-word;
 }
       
-/*#messages li:nth-child(odd) { background: #eee; background-opacity: 0.5 }*/
+#messages li:nth-child(odd) { background: grey; background-opacity: 0.015; color:white; }
 
 #nav {
   width: 150px;
@@ -80,14 +79,15 @@ div .media-container {
   background-color:black; /*#7B3F00;*/
   overflow: hidden; /* Disable horizontal scroll */
   transition: 0.25s;
-  opacity: 0.8;
+  border-radius: 20px;
+  background-opacity: 0.7;
 }
 
 /*push the page content to the right when you open the side navigation*/ 
 
 #message-log {
 	
-	height:200px;
+	height:84%;
   border-radius: 5px;
 	overflow: auto;
   opacity: 0.7;
@@ -111,9 +111,9 @@ div .media-container {
 #chat {
   /*placeholder background*/
 
-  border: 1px solid blue;
+  /*border: 1px solid blue;*/
   position: absolute;
-  height: 92%;
+  height: 100%;
   width: 19%;
   left: 80%;
   top:0;
@@ -128,7 +128,6 @@ div .media-container {
   overflow: auto;
   overflow-y: hidden;
   width: 80%;
-  opacity: 0.8;
 }
 
 #drawingContainer {
@@ -148,6 +147,7 @@ div .media-container {
   opacity:0.9;
   cursor: pointer;
   background-color:white;
+  border-radius: 10px
       
 }
 
@@ -182,16 +182,6 @@ h3 {
   -webkit-text-stroke-width: 0.25px;
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
   user-select: none;
-}
-
-#startVoice, #endVoice {
-  float: inherit;
-  margin-left: 6px;
-  border: 0.25px solid white;
-  width: 39%;
-  padding: 1px;
-  border-radius: 5px;
-  text-align: center;
 }
 
 p {

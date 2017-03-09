@@ -113,12 +113,16 @@ export default class Home extends React.Component {
 
   };
 
+  showHistory () {
+    document.getElementById('scaffolding').style.visibility = 'visible'
+  }
+
 
 	render() {
 		return (
       <div id='home' ref="home">
         <Streams/>
-        <Nav collapse={this.collapse.bind(this)} popOutHandler={this.popOutHandler.bind(this)} clearIt={this.clearIt.bind(this)}/>
+        <Nav collapse={this.collapse.bind(this)} popOutHandler={this.popOutHandler.bind(this)} clearIt={this.clearIt.bind(this)} showHistory={this.showHistory}/>
         <SuperContainer collapse={this.collapse.bind(this)} />
       </div>
 		)

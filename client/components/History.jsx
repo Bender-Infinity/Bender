@@ -25,11 +25,15 @@ export default class History extends React.Component {
       .catch((err) => { console.log('ugh', err)})
   }
 
+  hideHistory() {
+    document.getElementById('scaffolding').style.visibility = 'hidden'
+  }
+
   render() {
     return(
-      <div className="scaffolding">
+      <div id="scaffolding">
         <div id="historyContainer">
-          <button id="closeHistory">X</button>
+          <button id="closeHistory" onClick={() => {this.hideHistory()}}>X</button>
         </div>
       </div>
       )

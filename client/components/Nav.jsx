@@ -35,7 +35,7 @@ export default (props) => (
           <img id="startVoice" title="Enable Microphone" src="../images/icons/enable-mic.png"/>
         </li>
         <li className="ui">
-          <img id="disable-mic" title="Disable Microphone" src="../images/icons/disable-mic.png"/>
+          <img id="endVoice" title="Disable Microphone" src="../images/icons/disable-mic.png"/>
         </li>
         <li className="ui">
           <img id="clearDrawing" title="Erase drawing" src="../images/icons/erase.png" onClick={() => props.clearIt()}/>

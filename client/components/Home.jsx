@@ -47,16 +47,6 @@ export default class Home extends React.Component {
 	      }
 	  	});
 		};
-
-   //  connection.openOrJoin(window.localStorage.roomId, function(isRoomExists, roomId) {
-   //    if(!isRoomExists) {
-   //      console.log('room does not exist');
-   //    }
-   // });
-         connection.open(window.localStorage.roomId, function() {
-        showRoomURL(connection.sessionid);
-        connection.onstream()
-      });
 	}
 
 	collapse(elem) {

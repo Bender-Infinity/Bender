@@ -44,7 +44,7 @@ export default class Chat extends React.Component {
       var li = document.createElement('LI');
       li.innerHTML = msg;
       ul.appendChild(li);
-      li.scrollIntoView();
+      // li.scrollIntoView();
       // if(ul.offsetHeight >= div.offsetHeight){
       //     ul.style.height = div.offsetHeight + "px";
       //   }

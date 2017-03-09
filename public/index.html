@@ -61,7 +61,6 @@
  -->
     <div id="app"></div>
     <div id="splash"></div>
-    <script src="./bundle.js"></script>
     
     <script>
     // var socket = io();
@@ -158,6 +157,7 @@
     connection.videosContainer = document.getElementById('videos-container');
     
     connection.onstream = function(event) {
+      console.log('ONSTREAM EVENT', event)
     // console.log('ONSTREAM EVENT STREAM', event.stream)
     // window.localStorage.testStream = event.stream;
 
@@ -239,10 +239,10 @@
     } else {
         roomid = connection.token();
     }
-    document.getElementById('room-id').value = roomid;
-    document.getElementById('room-id').onkeyup = function() {
-        localStorage.setItem(connection.socketMessageEvent, this.value);
-    };
+    // document.getElementById('room-id').value = roomid;
+    // document.getElementById('room-id').onkeyup = function() {
+    //     localStorage.setItem(connection.socketMessageEvent, this.value);
+    // };
 
     var hashString = location.hash.replace('#', '');
     if(hashString.length && hashString.indexOf('comment-') == 0) {
@@ -272,5 +272,6 @@
     disableInputButtons();
     }
     </script>
+    <script src="./bundle.js"></script>
   </body>
 </html>

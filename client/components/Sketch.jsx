@@ -70,7 +70,7 @@ export default class Sketch extends React.Component {
       if (mouse.click && mouse.move && mouse.pos_prev) {
         // console.log('sending to server socket')
         // send line to to the server
-        socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
+        socket.emit('draw_line', { user: window.localStorage.user, line: [ mouse.pos, mouse.pos_prev ] });
         mouse.move = false;
       }
       mouse.pos_prev = {x: mouse.pos.x, y: mouse.pos.y};

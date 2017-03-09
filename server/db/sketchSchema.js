@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var sketchSchema = new mongoose.Schema({
   user: String,
-  picture: []
+  picture: Array
 });
 
 var Sketches = mongoose.model('Sketch', sketchSchema);

@@ -164,7 +164,9 @@ module.exports = exports = function(app, socketCallback) {
         //shares draw event with all users
         socket.on('draw_line', function(data) {
           console.log('server is receiving data from:', data)
+          console.log('data.line', data.line)
           line_history.push(data.line);
+          console.log(line_history)
           //FOR TESTING ONLY
           // if (line_history.length > 0) {
           //   Sketches.findOne({}).then(function(result) { 
@@ -181,33 +183,33 @@ module.exports = exports = function(app, socketCallback) {
           io.emit('draw_line', {line: data.line})
         });
 
-        socket.on('save sketch', function() {
+        socket.on('save sketch', function(data) {
           console.log('saving drawing');
           if (line_history.length > 0) {
-            Sketches.findOne({}).then(function(result) { 
+            Sketches.findOne({ user: data.user }).then(function(result) {
+                console.log('IS LINE HISTORY DEFINED', line_history)
               if (!result || result.length <= 0) {
-                Sketches.create({ picture: line_history }).then( function() { console.log('create success?')})
+                Sketches.create({ user: data.user, picture: line_history }).then( function() { console.log('create success?'); console.log(arguments)})
               } else {
-                Sketches.update({ picture: line_history }).then( function() { console.log('update success?'), console.log(arguments)});
+                Sketches.update({ user: data.user, picture: line_history }).then( function() { console.log('update success?'); console.log(arguments)});
               }
             })
           }
         })
 
-        socket.on('clear drawing', function(){
+        socket.on('clear drawing', function(data){
+          var fuckAsync = line_history
           console.log('clearing drawing for everyone')
           //save drawing data to db
           if (line_history.length > 0) {
-            Sketches.findOne({}).then(function(result) { 
+            Sketches.findOne({ user: data.user }).then(function(result) {
               if (!result || result.length <= 0) {
-                Sketches.create({ picture: line_history }).then( function() { console.log('create success?')})
+                Sketches.create({ user: data.user, picture: fuckAsync }).then( function() { console.log('create success?'); console.log(arguments)})
               } else {
-                Sketches.update({ picture: line_history }).then( function() { console.log('update success?'), console.log(arguments)});
+                Sketches.update({ user: data.user, picture: fuckAsync }).then( function() { console.log('update success?'); console.log(arguments)});
               }
             })
           }
-          var sketch = new Sketches({picture: []});
-          sketch.save()
           line_history = [];
           io.emit('clearit', true);
         });

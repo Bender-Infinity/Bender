@@ -51,6 +51,10 @@ form button {
   height: 50%;
 }
 
+div .media-container {
+  margin: 15px;
+}
+
 #messages { 
   list-style-type: none; 
   margin: 0; 
@@ -58,7 +62,6 @@ form button {
   border-radius: 5px;
   background-color: #89f0ef; 
   vertical-align: bottom; 
-  bottom: 0;
 }
       
 #messages li { 
@@ -66,26 +69,25 @@ form button {
   word-wrap: break-word;
 }
       
-/*#messages li:nth-child(odd) { background: #eee; background-opacity: 0.5 }*/
+#messages li:nth-child(odd) { background: grey; background-opacity: 0.015; color:white; }
 
 #nav {
   width: 150px;
-  height: 80vh;
+  height: 71vh;
   z-index: 5;
   float: left;
   background-color:black; /*#7B3F00;*/
   overflow: hidden; /* Disable horizontal scroll */
   transition: 0.25s;
+  border-radius: 20px;
+  background-opacity: 0.7;
 }
 
 /*push the page content to the right when you open the side navigation*/ 
-#main {
-  transition: margin-left .5s;
-}
 
 #message-log {
 	
-	height:200px;
+	height:84%;
   border-radius: 5px;
 	overflow: auto;
   opacity: 0.7;
@@ -95,7 +97,8 @@ form button {
   top: 2%;
   list-style-type: none;
   margin: 0 !important;
-  padding: 45px !important;
+  padding-left: 30%;
+  padding-top: 13%;
   overflow:  hidden;
 
 }
@@ -108,18 +111,18 @@ form button {
 #chat {
   /*placeholder background*/
 
-  border: 1px solid blue;
+  /*border: 1px solid blue;*/
   position: absolute;
-  height: 92%;
+  height: 100%;
   width: 19%;
   left: 80%;
   top:0;
   margin: 5px !important;
+  opacity: 0.8;
 }
 
 #videos-container {
   /*placeholder background*/
-  background-color: #89f0ef;
   min-height: 200px;
   height: 100%;
   overflow: auto;
@@ -130,7 +133,6 @@ form button {
 #drawingContainer {
   height: 65.5%;
   width: 69.5%;
-  border: 2px solid black;
   border-radius: 0px;
   left: 150px;
   z-index: 0;
@@ -142,8 +144,10 @@ form button {
   display: block;
   z-index: 999999;
   /*background-color: #89f0ef;*/
-  opacity: 0.5;
+  opacity:0.9;
   cursor: pointer;
+  background-color:white;
+  border-radius: 10px
       
 }
 
@@ -180,16 +184,6 @@ h3 {
   user-select: none;
 }
 
-#startVoice, #endVoice {
-  float: inherit;
-  margin-left: 6px;
-  border: 0.25px solid white;
-  width: 39%;
-  padding: 1px;
-  border-radius: 5px;
-  text-align: center;
-}
-
 p {
   font-family: Eurostile;
   color: #89f0ef;
@@ -215,6 +209,7 @@ p {
   position: absolute;
   bottom: 0;
   left: 150px;
+  opacity: 0.8;
 }
 
 /*Splash page styles*/
@@ -315,6 +310,12 @@ input {
   margin-bottom: 5px;
   width: 50%;
   margin-left: 20%;
+}
+
+body { 
+  background:url('/images/icons/chatroom-bg1.png');
+  background-repeat: no-repeat;
+  background-size:100% 100%;
 }
 
 

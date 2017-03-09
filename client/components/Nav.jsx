@@ -5,8 +5,10 @@ export default (props) => (
   <div id="nav" className="sideNav" >
     <div id="nav-container">
       <div id="room-id" height="100" width="100"></div>
-
       <ul id="collapseUI">
+        <li className="ui">
+          <p>Control Panel</p>
+        </li>
         <li className="ui">
           <img id="dcCollapse" title="Sketch Pad" src="../images/icons/draw.png"/>
         </li>
@@ -30,10 +32,10 @@ export default (props) => (
            <img id="disable-video" title="Disable Camera" src="../images/icons/disable-camera.png"/>
         </li>
         <li className="ui">
-          <img id="enable-mic" title="Enable Microphone" src="../images/icons/enable-mic.png"/>
+          <img id="startVoice" title="Enable Microphone" src="../images/icons/enable-mic.png"/>
         </li>
         <li className="ui">
-          <img id="disable-mic" title="Disable Microphone" src="../images/icons/disable-mic.png"/>
+          <img id="endVoice" title="Disable Microphone" src="../images/icons/disable-mic.png"/>
         </li>
         <li className="ui">
           <img id="clearDrawing" title="Erase drawing" src="../images/icons/erase.png" onClick={() => props.clearIt()}/>

@@ -56,11 +56,6 @@ export default class Chat extends React.Component {
   render() {
     return (
       <div id="chat">
-        <ul>
-          <li><h3>Chat</h3></li>
-          <li><h3 id="startVoice">Start Voice Chat</h3></li>
-          <li><h3 id="endVoice">End Voice Chat</h3></li>
-        </ul>
         <div id="message-log">
           <ul id="messages"></ul>
         </div>

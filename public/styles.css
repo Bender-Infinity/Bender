@@ -80,7 +80,7 @@ div .media-container {
   overflow: hidden; /* Disable horizontal scroll */
   transition: 0.25s;
   border-radius: 20px;
-  background-opacity: 0.7;
+  opacity: 0.7;
 }
 
 /*push the page content to the right when you open the side navigation*/ 
@@ -230,10 +230,15 @@ p {
 }
 
 .splashDiv .steps img {
-  width: 100%;
+  width: 77%;
   margin: auto;
   padding-bottom: 20px;
+  margin-left:50px;
+}
 
+.stepsHeader {
+  margin-left: 620px;
+  font-family: Eurostile, sans-serif;
 }
 
 h3 {
@@ -265,7 +270,7 @@ h3 {
   float: right;
   display: block;
   padding: 30px;
-  margin-right: 160px;
+  margin-right: 130px;
   margin-top: -75px;
 }
 

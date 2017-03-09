@@ -26,7 +26,7 @@ export default class Splash extends React.Component {
 								{/*<label>will-ramsey.com/</label>*/}
 								<input id="inputName" placeholder="please enter your name"/>
 								<input id="createRoom" placeholder="pick any room name you want"/>
-								<button type="submit" onClick={this.props.submitHandler}><Link to={`/home${this.props.roomId}`}>Create</Link></button>
+								<button type="submit" onClick={this.props.submitHandler}>Submit</button>
 							</form>
 						</div>
 					</div>

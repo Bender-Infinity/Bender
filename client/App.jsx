@@ -37,6 +37,8 @@ export default class App extends Component {
 			roomId:roomId
 		});
      // this.props.router.push({roomId})
+
+     hashHistory.push('/home');
 	}
 
 	saveName () {

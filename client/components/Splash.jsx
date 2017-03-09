@@ -16,7 +16,7 @@ export default class Splash extends React.Component {
 						<img id="splashLogo" src="/images/icons/logo.png"/>
 					</header>
 					<div>
-						<h2>Teamwork has never been easier</h2>
+						<h2 className="splashTitle">Teamwork has never been easier</h2>
 						<h3>Connect with your team wherever they are</h3>
 					</div>
 					<div id="createRoomContainer">
@@ -25,7 +25,7 @@ export default class Splash extends React.Component {
 								<h3>Create a Room</h3>
 								{/*<label>will-ramsey.com/</label>*/}
 								<input id="inputName" placeholder="please enter your name"/>
-								<input id="createRoom" placeholder="pick any room name you want"/>
+								<input id="createRoom" placeholder="make a room name"/>
 								<button type="submit" onClick={this.props.submitHandler}>Submit</button>
 							</form>
 						</div>

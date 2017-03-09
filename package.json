@@ -28,6 +28,7 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-dragula": "^1.1.17",
+    "react-popup": "^0.5.0",
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",
     "socket.io": "^1.7.3"

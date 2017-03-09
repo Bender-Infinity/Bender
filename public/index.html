@@ -255,8 +255,8 @@
     }
 
     if(roomid && roomid.length) {
-      document.getElementById('room-id').value = roomid;
-      localStorage.setItem(connection.socketMessageEvent, roomid);
+      // document.getElementById('room-id').value = roomid;
+      // localStorage.setItem(connection.socketMessageEvent, roomid);
 
       // auto-join-room
       (function reCheckRoomPresence() {
@@ -269,7 +269,7 @@
       });
     })();
     
-    disableInputButtons();
+    // disableInputButtons();
     }
     </script>
     <script src="./bundle.js"></script>

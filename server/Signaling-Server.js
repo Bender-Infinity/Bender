@@ -1,4 +1,3 @@
-var db = require('./db/database.js');
 var Sketches = require('./db/sketchSchema.js');
 var Transcripts = require('./db/transcriptSchema.js');
 
@@ -124,23 +123,23 @@ module.exports = exports = function(app, socketCallback) {
           io.emit('chat message from server', formatMsg);
         });
 
-        socket.on('save chat', function(user) {
-          console.log('saving chat');
+        // socket.on('save chat', function(user) {
+        //   console.log('saving chat');
 
-          if (chat_history.length > 0) {
-            Transcripts.findOne({ user: msg.user }).then(function(result) { 
-              if (!result || result.length <= 0) {
-                Transcripts.create({ user: msg.user, transcript: chat_history })
-                  .then( function() { console.log('create success?')})
-              } else {
-                Transcripts.update({ user: msg.user }, { transcript: chat_history })
-                  .then( function() { console.log('update success?'), console.log(arguments)});
-              }
-            })
-          }
-          var transcript = new Transcripts({ user: user.name, transcript: '' });
-          transcript.save()
-        });
+        //   if (chat_history.length > 0) {
+        //     Transcripts.findOne({ user: msg.user }).then(function(result) { 
+        //       if (!result || result.length <= 0) {
+        //         Transcripts.create({ user: msg.user, transcript: chat_history })
+        //           .then( function() { console.log('create success?')})
+        //       } else {
+        //         Transcripts.update({ user: msg.user }, { transcript: chat_history })
+        //           .then( function() { console.log('update success?'), console.log(arguments)});
+        //       }
+        //     })
+        //   }
+        //   var transcript = new Transcripts({ user: user.name, transcript: '' });
+        //   transcript.save()
+        // });
         //Speech recognition socket
         // socket.on('voice chat', function (li) {
         //   console.log('server received speech chat, emitting to all clients:', li);

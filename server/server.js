@@ -24,6 +24,13 @@ var server = http.createServer(app);
 
 app.use(express.static(__dirname + '/../public'));
 
+
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 var Sketches = require('./db/sketchSchema.js');
 var Transcripts = require('./db/transcriptSchema.js');
 
@@ -40,6 +47,7 @@ app.get('/transcripts', function(req,res) {
     res.send(transRes)
   })
 })
+
 
 server.listen(port);
 console.log('Working on Bender∞ on port ' + port);

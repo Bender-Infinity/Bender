@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var morgan = require('morgan');
+var db = require('./db/database.js');
 
 app.use(morgan('tiny'));
 
@@ -22,6 +23,23 @@ var port = 3000;
 var server = http.createServer(app);
 
 app.use(express.static(__dirname + '/../public'));
+
+var Sketches = require('./db/sketchSchema.js');
+var Transcripts = require('./db/transcriptSchema.js');
+
+app.get('/sketches', function(req,res) {
+  var user = req.headers.user;
+  Sketches.find({ user: user}).then(function(sketchRes) {
+    res.send(sketchRes)
+  })
+})
+
+app.get('/transcripts', function(req,res) {
+  var user = req.headers.user;
+  Transcripts.find({ user: user}).then(function(transRes) {
+    res.send(transRes)
+  })
+})
 
 server.listen(port);
 console.log('Working on Bender∞ on port ' + port);

@@ -155,6 +155,33 @@ div .media-container {
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
+.scaffolding {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  text-align:center;
+  background-color:rgba(0,0,0,0.6);
+  text-align: center;
+}
+
+#historyContainer {
+  display: inline-block;
+  height: 100%;
+  width: 80%;
+  border-radius: 10px;
+  background-color: white;
+}
+
+#closeHistory {
+  display:block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
 h3 {
   font-family: Eurostile, Courier;
   color: white;

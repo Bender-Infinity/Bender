@@ -91,11 +91,10 @@ export default class Home extends React.Component {
 
 	render() {
 		return (
-      <div id='home'>
-        <Streams />
+      <div id='home' ref="home">
+        <Streams/>
         <Nav collapse={this.collapse} popOutHandler={this.popOutHandler.bind(this)} clearIt={this.clearIt.bind(this)}/>
         <SuperContainer collapse={this.collapse.bind(this)} />
-        <Footer />
       </div>
 		)
 	}

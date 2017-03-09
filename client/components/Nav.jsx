@@ -5,8 +5,10 @@ export default (props) => (
   <div id="nav" className="sideNav" >
     <div id="nav-container">
       <div id="room-id" height="100" width="100"></div>
-
       <ul id="collapseUI">
+        <li className="ui">
+          <p>Control Panel</p>
+        </li>
         <li className="ui">
           <img id="dcCollapse" title="Sketch Pad" src="../images/icons/draw.png"/>
         </li>

@@ -3324,6 +3324,7 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
             }
 
             navigator.mediaDevices.getUserMedia(options.localMediaConstraints).then(function(stream) {
+                console.log('RTCM GUM')
                 stream.streamid = stream.streamid || stream.id || getRandomString();
                 stream.idInstance = idInstance;
                 streaming(stream);
@@ -4921,6 +4922,7 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
         };
 
         connection.invokeGetUserMedia = function(localMediaConstraints, callback, session) {
+            console.log('RTCM INVOKE GUM')
             if (!session) {
                 session = connection.session;
             }

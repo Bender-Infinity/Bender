@@ -47,13 +47,13 @@ export default class Home extends React.Component {
 	      }
 	  	});
 		};
-	}
+	};
 
 	collapse(elem) {
     var elemDisplay = document.getElementById(elem).style.display
     if (elemDisplay == 'none' || !elemDisplay) { document.getElementById(elem).style.display = 'block'; }
     else { document.getElementById(elem).style.display = 'none'}
-  }
+  };
 
   popInOut () {
     var navWidth = document.getElementById('nav').style.width
@@ -69,7 +69,7 @@ export default class Home extends React.Component {
       document.getElementById('nav').style.width = "50px";
       // document.getElementById('main').style.marginLeft = "50px";
     }
-  }
+  };
 
   popOutHandler() {
     // if(!this.state.popOut) {
@@ -80,7 +80,7 @@ export default class Home extends React.Component {
     // }
     this.setState({'popOut': !this.state.popOut})
     this.popInOut();
-  }
+  };
 
   clearIt () {
     var socket = io();
@@ -89,11 +89,36 @@ export default class Home extends React.Component {
     socket.emit('clear drawing', { user: window.localStorage.user });
   };
 
+  shareScreen () {
+    navigator.getUserMedia({
+      audio:false,
+      video:true,
+      mandatory: {
+        chromeMediaSource:'screen',
+        maxWidth:1280,
+        maxHeight:720
+      },
+    }, 
+      function(stream){
+        console.log('screen share success')
+        var sharedScreen = document.createElement('video');
+        sharedScreen.srcObject = stream;
+        var container = document.getElementById('canvas');
+        container.appendChild(sharedScreen);
+        console.log('done')
+      }, 
+        function(){
+          console.log('screen share failed')
+        })
+
+  };
+
+
 	render() {
 		return (
       <div id='home' ref="home">
         <Streams/>
-        <Nav collapse={this.collapse} popOutHandler={this.popOutHandler.bind(this)} clearIt={this.clearIt.bind(this)}/>
+        <Nav collapse={this.collapse.bind(this)} popOutHandler={this.popOutHandler.bind(this)} clearIt={this.clearIt.bind(this)}/>
         <SuperContainer collapse={this.collapse.bind(this)} />
       </div>
 		)

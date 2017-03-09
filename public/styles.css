@@ -155,7 +155,7 @@ div .media-container {
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
-.scaffolding {
+#scaffolding {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -164,6 +164,7 @@ div .media-container {
   text-align:center;
   background-color:rgba(0,0,0,0.6);
   text-align: center;
+  visibility: hidden;
 }
 
 #historyContainer {
@@ -175,11 +176,16 @@ div .media-container {
 }
 
 #closeHistory {
+  cursor: pointer;
+  top: 20px;
+  right: 20px;
+  background-color: white;
   display:block;
   height: 20px;
   width: 20px;
   border-radius: 50%;
   border: 1px solid black;
+  text-align: center;
 }
 
 h3 {

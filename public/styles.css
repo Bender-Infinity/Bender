@@ -113,10 +113,10 @@ div .media-container {
 
   /*border: 1px solid blue;*/
   position: absolute;
-  height: 100%;
+  height: 96%;
   width: 19%;
   left: 80%;
-  top:0;
+  top:2%;
   margin: 5px !important;
   opacity: 0.8;
 }

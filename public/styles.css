@@ -15,7 +15,7 @@ html {
 }
 
 body { 
-  font: 13px Helvetica, Arial; 
+  font: 13px Eurostile, sans-serif; 
   height: 100vh;
   width: 100%;
 }
@@ -155,12 +155,21 @@ div .media-container {
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
+h2 {
+  font-weight: normal;
+}
+
 h3 {
   font-family: Eurostile, Courier;
   color: white;
   margin-top:6px;
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  font-size: 24px;
+  padding: 10px 0 10px 0;
+  text-align: center;
+  margin: auto;
 }
+
 
 /*#clearDrawing {
   position: relative;
@@ -243,14 +252,6 @@ p {
 .stepsHeader {
   margin-left: 620px;
   font-family: Eurostile, sans-serif;
-}
-
-h3 {
-  font-family: Eurostile, sans-serif;
-  font-size: 24px;
-  padding: 10px 0 10px 0;
-  text-align: center;
-  margin: auto;
 }
 
 .steps p {

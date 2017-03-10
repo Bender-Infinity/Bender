@@ -7,6 +7,6 @@ export default (props) => (
   <div id="superContainer">
     <Sketch />
     <Chat />
-    <History />
+    <History transHistory={props.transcripts} sketchHistory={props.sketches}/>
   </div>
 )

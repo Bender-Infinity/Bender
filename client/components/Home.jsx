@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Nav from './Nav.jsx';
+import axios from 'axios';
+
 import Sketch from './Sketch.jsx';
 import Streams from './Streams.jsx';
 import Splash from './Splash.jsx';
@@ -16,7 +18,9 @@ export default class Home extends React.Component {
 		
 		this.state = {
       popOut: false,
-      renderMe: true
+      renderMe: true,
+      transcripts: null,
+      sketches: null
 		};
 	}
 
@@ -114,7 +118,14 @@ export default class Home extends React.Component {
   };
 
   showHistory () {
+    var context = this
     document.getElementById('scaffolding').style.visibility = 'visible'
+    axios.get('/transcripts', { headers: { user: window.localStorage.user }})
+      .then((resp) => { console.log('got transcript data', resp.data); context.setState({ transcripts: resp.data }) })
+      .catch((err) => { console.log('err', err)})
+    axios.get('/sketches', { headers: { user: window.localStorage.user }})
+      .then((resp) => { console.log('got sketch data', resp.data); context.setState({ sketches: resp.data }); console.log('home state', context.state) })
+      .catch((err) => { console.log('ugh', err)})
   }
 
 
@@ -122,8 +133,8 @@ export default class Home extends React.Component {
 		return (
       <div id='home' ref="home">
         <Streams/>
-        <Nav collapse={this.collapse.bind(this)} popOutHandler={this.popOutHandler.bind(this)} clearIt={this.clearIt.bind(this)} showHistory={this.showHistory}/>
-        <SuperContainer collapse={this.collapse.bind(this)} />
+        <Nav collapse={this.collapse.bind(this)} popOutHandler={this.popOutHandler.bind(this)} clearIt={this.clearIt.bind(this)} showHistory={this.showHistory.bind(this)}/>
+        <SuperContainer collapse={this.collapse.bind(this)} transHistory={this.state.transcripts} sketchHistory={this.state.sketches}/>
       </div>
 		)
 	}

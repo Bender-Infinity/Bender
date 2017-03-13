@@ -113,7 +113,7 @@ module.exports = exports = function(app, socketCallback) {
                   .then( function() { console.log('create success?')})
               } else {
                 Transcripts.update({ user: msg.user }, { transcript: chat_history })
-                  .then( function() { console.log('update success?'), console.log(arguments)});
+                  .then( function() { console.log('update success?')});
               }
             })
           }
@@ -165,7 +165,6 @@ module.exports = exports = function(app, socketCallback) {
           console.log('server is receiving data from:', data)
           console.log('data.line', data.line)
           line_history.push(data.line);
-          console.log(line_history)
           //FOR TESTING ONLY
           // if (line_history.length > 0) {
           //   Sketches.findOne({}).then(function(result) { 
@@ -183,10 +182,8 @@ module.exports = exports = function(app, socketCallback) {
         });
 
         socket.on('save sketch', function(data) {
-          console.log('saving drawing');
           if (line_history.length > 0) {
             Sketches.findOne({ user: data.user }).then(function(result) {
-                console.log('IS LINE HISTORY DEFINED', line_history)
               if (!result || result.length <= 0) {
                 Sketches.create({ user: data.user, picture: line_history }).then( function() { console.log('create success?'); console.log(arguments)})
               } else {

@@ -6,8 +6,7 @@ node_modules/
 npm-debug.log
 
 ## Compiled files ##
-compiled/
-public/bundle.js
+public/
 
 ## API keys ##
 client/config/keys.js

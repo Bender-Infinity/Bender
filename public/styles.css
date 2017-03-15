@@ -74,15 +74,13 @@ div .media-container {
   height: 66vh;
   z-index: 5;
   float: left;
-  background-color:black; /*#7B3F00;*/
-  overflow: hidden; /* Disable horizontal scroll */
+  background-color:black; 
+  overflow: hidden; 
   transition: 0.25s;
   border-radius: 20px;
   opacity: 0.7;
   user-select: none;
 }
-
-/*push the page content to the right when you open the side navigation*/ 
 
 #message-log {
 	
@@ -108,9 +106,6 @@ div .media-container {
 }
 
 #chat {
-  /*placeholder background*/
-
-  /*border: 1px solid blue;*/
   position: absolute;
   height: 96%;
   width: 19%;
@@ -121,7 +116,6 @@ div .media-container {
 }
 
 #videos-container {
-  /*placeholder background*/
   min-height: 200px;
   height: 100%;
   overflow: auto;
@@ -203,18 +197,6 @@ h3 {
   margin: auto;
 }
 
-
-/*#clearDrawing {
-  position: relative;
-  margin: 6px;
-  z-index: 9999;
-  background: none;
-  font-size: 16px;
-  border: none;
-  color:white;
-  font-family: Eurostile, Courier;
-}*/
-
 #clock {
   font-size: 32px;
   z-index: 9999;
@@ -237,12 +219,6 @@ p {
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
-/*#clearDrawing {
-  border-radius: 5px;
-  padding: 4px;
-  font-size: 13pt;
-}*/
-
 .chatConsole {
   font-size: 8pt;
 }
@@ -257,8 +233,6 @@ p {
   left: 150px;
   opacity: 0.8;
 }
-
-/*Splash page styles*/
 
 .splashDiv {
   height: 50vh;
@@ -298,9 +272,6 @@ p {
 }
 
 #tutorial {
-  /*background-image: url('/images/icons/tutorial.png');*/
-  /*background-repeat: no-repeat;
-  background-size:100% 100%;*/
   background-color: #89f0ef; 
   height: 55vh;
 }

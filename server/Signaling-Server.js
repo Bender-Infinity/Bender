@@ -80,24 +80,12 @@ module.exports = exports = function(app, socketCallback) {
 
         socket.userid = params.userid;
         appendUser(socket);
-        //
+
         io.on('disconnect', function() {
           console.log('user ' + socket.id + ' disconnected')
         });
 
-        // io.on('chat message', function(msg){
-        //   io.emit('chat message:', msg);
-        //   console.log('we got a chat message', msg)
-        //   //then save to the database
-        // });
-
-        // socket.on('chat message', function(msg){
-        //   console.log('chat message sent: ', msg)
-        //   io.emit('chat message from server', msg);
-        // });
-
         socket.on('chat message', function(msg){
-          console.log('chat message received by server: ', msg);
 
           var rawTime = new Date().toString();
           var timeString = rawTime.substring(16,24);
@@ -123,60 +111,14 @@ module.exports = exports = function(app, socketCallback) {
           io.emit('chat message from server', formatMsg);
         });
 
-        // socket.on('save chat', function(user) {
-        //   console.log('saving chat');
-
-        //   if (chat_history.length > 0) {
-        //     Transcripts.findOne({ user: msg.user }).then(function(result) { 
-        //       if (!result || result.length <= 0) {
-        //         Transcripts.create({ user: msg.user, transcript: chat_history })
-        //           .then( function() { console.log('create success?')})
-        //       } else {
-        //         Transcripts.update({ user: msg.user }, { transcript: chat_history })
-        //           .then( function() { console.log('update success?'), console.log(arguments)});
-        //       }
-        //     })
-        //   }
-        //   var transcript = new Transcripts({ user: user.name, transcript: '' });
-        //   transcript.save()
-        // });
-        //Speech recognition socket
-        // socket.on('voice chat', function (li) {
-        //   console.log('server received speech chat, emitting to all clients:', li);
-        //   io.emit('speech chat message from server',li)
-        // })
-
-        //
-      //shared drawing socket - send drawing to user so they can see updated drawing
-        // var line_history = [];
-        //   for(var i in line_history) {  
-        //     socket.emit('draw_line', {line: line_history[i]})
-        //   }
-
-        //inits new user with current state of sketchpad
         socket.on('init_draw', function() {
           line_history.forEach(function(pointData) {
             socket.emit('draw_line', {line: pointData})
           });
         });
 
-        //shares draw event with all users
         socket.on('draw_line', function(data) {
-          console.log('server is receiving data from:', data)
-          console.log('data.line', data.line)
           line_history.push(data.line);
-          //FOR TESTING ONLY
-          // if (line_history.length > 0) {
-          //   Sketches.findOne({}).then(function(result) { 
-          //     if (result.length <= 0) {
-          //       Sketches.create({ picture: line_history }).then( function() { console.log('create success?')})
-          //     } else {
-          //       Sketches.update({ picture: line_history }).then( function() { console.log('update success?'), console.log(arguments)});
-          //     }
-          //   })
-          // }
-          // var sketch = new Sketches({picture: []});
-          // sketch.save()
 
           io.emit('draw_line', {line: data.line})
         });

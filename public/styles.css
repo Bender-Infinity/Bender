@@ -2,8 +2,6 @@
 teal - #89f0ef;
 white - white;*/
 
-
-
 * {
   margin: 0; 
   padding: 0; 
@@ -144,7 +142,7 @@ div .media-container {
 #canvas {
   display: block;
   z-index: 999999;
-  /*background-color: #89f0ef;*/
+  background-color: #89f0ef;
   opacity:0.9;
   cursor: pointer;
   background-color:white;
@@ -156,10 +154,10 @@ div .media-container {
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
-<<<<<<< HEAD
 h2 {
   font-weight: normal;
-=======
+}
+
 #scaffolding {
   position: absolute;
   height: 100%;
@@ -192,7 +190,6 @@ h2 {
   border-radius: 50%;
   border: 1px solid black;
   text-align: center;
->>>>>>> 9388d94b19163148b5924fbf2e12866ddbabfbfd
 }
 
 h3 {

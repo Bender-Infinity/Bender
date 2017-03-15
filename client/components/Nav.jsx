@@ -7,18 +7,11 @@ export default (props) => (
       <div id="room-id" height="100" width="100"></div>
       <ul id="collapseUI">
         <li className="ui">
-          <p>Control Panel</p>
-        </li>
-        <li className="ui">
           <img id="dcCollapse" onClick={() => props.collapse('canvas')} title="Sketch Pad" src="../images/icons/draw.png"/>
         </li>
         <li className="ui">
-          <img id="shareScreen" title="share screen" src="../images/icons/enable_chat.png" />
+          <img id="showHistory" onClick={() => props.showHistory()} src="../images/icons/enable_chat.png" />
         </li>
-{/*        <li className="ui">
-          <p>Room name</p>
-          <input type="text" id="room-id"/>
-        </li>*/}
         <li className="ui">
           <img id="open-room" title="Create a Room" src="../images/icons/create-room.png"/>
         </li>

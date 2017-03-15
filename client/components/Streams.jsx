@@ -12,10 +12,10 @@ export default class Streams extends React.Component {
       }
     });
   }
+
   render() {
     return(
-
-        
+      
         <div id="videos-container"><img id="chatLogo" src="/images/icons/logo2.png"/></div>
     )
   }

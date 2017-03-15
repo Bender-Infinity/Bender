@@ -1,5 +1,5 @@
 import React from 'react';
-// import io from '../lib/socket.io.js'
+
 
 export default class Sketch extends React.Component {
   constructor(props) {
@@ -7,7 +7,6 @@ export default class Sketch extends React.Component {
   }
 
   componentDidMount() {
-    //init mouse
     var mouse = { 
       click: false,
       move: false,
@@ -15,7 +14,6 @@ export default class Sketch extends React.Component {
       pos_prev: false
     };
 
-    // get canvas element and create context
     var canvas  = document.getElementById('canvas');
     var container = document.getElementById('drawingContainer');
     var width = container.offsetWidth;
@@ -27,12 +25,8 @@ export default class Sketch extends React.Component {
     context.lineWidth = 1;
     context.fillStyle="#000FFF";
 
-
-
-    //define bounds
     var rect = container.getBoundingClientRect();
 
-    // set canvas to full browser width/height
     canvas.width = width;
     canvas.height = height;
 
@@ -46,15 +40,12 @@ export default class Sketch extends React.Component {
     };
 
     canvas.onmousemove = function(e) {
-      // console.log('drawing')
-      // normalize mouse position to range 0.0 - 1.0
+
       mouse.pos.x = (e.clientX - rect.left) / width
       mouse.pos.y = (e.clientY - rect.top) / height
-      // console.log('coords', mouse.pos.x, mouse.pos.y)
       mouse.move = true;
     };
 
-    // draw line received from server
     socket.on('draw_line', function (data) {
       var line = data.line;
 
@@ -64,26 +55,26 @@ export default class Sketch extends React.Component {
       context.stroke();
      });
 
-     // main loop, running every 25ms
-     function mainLoop() {
-      // check if the user is drawing
+
+    function mainLoop() {
+      
       if (mouse.click && mouse.move && mouse.pos_prev) {
-        // console.log('sending to server socket')
-        // send line to to the server
-        socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
+        socket.emit('draw_line', { user: window.localStorage.user, line: [ mouse.pos, mouse.pos_prev ] });
         mouse.move = false;
       }
       mouse.pos_prev = {x: mouse.pos.x, y: mouse.pos.y};
       setTimeout(mainLoop, 25);
     }
+    
     mainLoop();
 
     socket.on('clearit', function() {
-      //all clients, including emitter, clear when signal received
-      context.clearRect(0,0,width,height)
+      context.clearRect(0,0,width,height);
     });
 
-    window.onscroll = function() { rect = container.getBoundingClientRect(); }
+    window.onscroll = function() { 
+      rect = container.getBoundingClientRect(); 
+    }
 
     socket.emit('init_draw');
   }

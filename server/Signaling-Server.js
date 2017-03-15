@@ -1,4 +1,3 @@
-var db = require('./db/database.js');
 var Sketches = require('./db/sketchSchema.js');
 var Transcripts = require('./db/transcriptSchema.js');
 
@@ -114,7 +113,7 @@ module.exports = exports = function(app, socketCallback) {
                   .then( function() { console.log('create success?')})
               } else {
                 Transcripts.update({ user: msg.user }, { transcript: chat_history })
-                  .then( function() { console.log('update success?'), console.log(arguments)});
+                  .then( function() { console.log('update success?')});
               }
             })
           }
@@ -124,23 +123,23 @@ module.exports = exports = function(app, socketCallback) {
           io.emit('chat message from server', formatMsg);
         });
 
-        socket.on('save chat', function(user) {
-          console.log('saving chat');
+        // socket.on('save chat', function(user) {
+        //   console.log('saving chat');
 
-          if (chat_history.length > 0) {
-            Transcripts.findOne({ user: msg.user }).then(function(result) { 
-              if (!result || result.length <= 0) {
-                Transcripts.create({ user: msg.user, transcript: chat_history })
-                  .then( function() { console.log('create success?')})
-              } else {
-                Transcripts.update({ user: msg.user }, { transcript: chat_history })
-                  .then( function() { console.log('update success?'), console.log(arguments)});
-              }
-            })
-          }
-          var transcript = new Transcripts({ user: user.name, transcript: '' });
-          transcript.save()
-        });
+        //   if (chat_history.length > 0) {
+        //     Transcripts.findOne({ user: msg.user }).then(function(result) { 
+        //       if (!result || result.length <= 0) {
+        //         Transcripts.create({ user: msg.user, transcript: chat_history })
+        //           .then( function() { console.log('create success?')})
+        //       } else {
+        //         Transcripts.update({ user: msg.user }, { transcript: chat_history })
+        //           .then( function() { console.log('update success?'), console.log(arguments)});
+        //       }
+        //     })
+        //   }
+        //   var transcript = new Transcripts({ user: user.name, transcript: '' });
+        //   transcript.save()
+        // });
         //Speech recognition socket
         // socket.on('voice chat', function (li) {
         //   console.log('server received speech chat, emitting to all clients:', li);
@@ -164,6 +163,7 @@ module.exports = exports = function(app, socketCallback) {
         //shares draw event with all users
         socket.on('draw_line', function(data) {
           console.log('server is receiving data from:', data)
+          console.log('data.line', data.line)
           line_history.push(data.line);
           //FOR TESTING ONLY
           // if (line_history.length > 0) {
@@ -181,33 +181,31 @@ module.exports = exports = function(app, socketCallback) {
           io.emit('draw_line', {line: data.line})
         });
 
-        socket.on('save sketch', function() {
-          console.log('saving drawing');
+        socket.on('save sketch', function(data) {
           if (line_history.length > 0) {
-            Sketches.findOne({}).then(function(result) { 
+            Sketches.findOne({ user: data.user }).then(function(result) {
               if (!result || result.length <= 0) {
-                Sketches.create({ picture: line_history }).then( function() { console.log('create success?')})
+                Sketches.create({ user: data.user, picture: line_history }).then( function() { console.log('create success?'); console.log(arguments)})
               } else {
-                Sketches.update({ picture: line_history }).then( function() { console.log('update success?'), console.log(arguments)});
+                Sketches.update({ user: data.user, picture: line_history }).then( function() { console.log('update success?'); console.log(arguments)});
               }
             })
           }
         })
 
-        socket.on('clear drawing', function(){
+        socket.on('clear drawing', function(data){
+          var fuckAsync = line_history
           console.log('clearing drawing for everyone')
           //save drawing data to db
           if (line_history.length > 0) {
-            Sketches.findOne({}).then(function(result) { 
+            Sketches.findOne({ user: data.user }).then(function(result) {
               if (!result || result.length <= 0) {
-                Sketches.create({ picture: line_history }).then( function() { console.log('create success?')})
+                Sketches.create({ user: data.user, picture: fuckAsync }).then( function() { console.log('create success?'); console.log(arguments)})
               } else {
-                Sketches.update({ picture: line_history }).then( function() { console.log('update success?'), console.log(arguments)});
+                Sketches.update({ user: data.user, picture: fuckAsync }).then( function() { console.log('update success?'); console.log(arguments)});
               }
             })
           }
-          var sketch = new Sketches({picture: []});
-          sketch.save()
           line_history = [];
           io.emit('clearit', true);
         });

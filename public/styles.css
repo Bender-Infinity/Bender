@@ -81,6 +81,7 @@ div .media-container {
   transition: 0.25s;
   border-radius: 20px;
   opacity: 0.7;
+  user-select: none;
 }
 
 /*push the page content to the right when you open the side navigation*/ 
@@ -113,10 +114,10 @@ div .media-container {
 
   /*border: 1px solid blue;*/
   position: absolute;
-  height: 100%;
+  height: 96%;
   width: 19%;
   left: 80%;
-  top:0;
+  top:2%;
   margin: 5px !important;
   opacity: 0.8;
 }
@@ -155,8 +156,43 @@ div .media-container {
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
+<<<<<<< HEAD
 h2 {
   font-weight: normal;
+=======
+#scaffolding {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  text-align:center;
+  background-color:rgba(0,0,0,0.6);
+  text-align: center;
+  visibility: hidden;
+  user-select: none;
+}
+
+#historyContainer {
+  display: inline-block;
+  height: 100%;
+  width: 80%;
+  border-radius: 10px;
+  background-color: white;
+}
+
+#closeHistory {
+  cursor: pointer;
+  top: 20px;
+  right: 20px;
+  background-color: white;
+  display:block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 1px solid black;
+  text-align: center;
+>>>>>>> 9388d94b19163148b5924fbf2e12866ddbabfbfd
 }
 
 h3 {

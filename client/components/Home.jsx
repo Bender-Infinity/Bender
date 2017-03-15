@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Nav from './Nav.jsx';
+import axios from 'axios';
 import Sketch from './Sketch.jsx';
 import Streams from './Streams.jsx';
 import Splash from './Splash.jsx';
@@ -16,7 +17,9 @@ export default class Home extends React.Component {
 		
 		this.state = {
       popOut: false,
-      renderMe: true
+      renderMe: true,
+      transcripts: null,
+      sketches: null
 		};
 	}
 
@@ -24,10 +27,8 @@ export default class Home extends React.Component {
   }
 
 	componentDidMount () {
-    console.log('username',this.props.username)
 	  document.getElementById('open-room').onclick = function() {
       disableInputButtons();
-      console.log('connection', connection)
       connection.open(document.getElementById('room-id').value, function() {
       	showRoomURL(connection.sessionid);
       	connection.onstream()
@@ -57,36 +58,22 @@ export default class Home extends React.Component {
 
   popInOut () {
     var navWidth = document.getElementById('nav').style.width
-    // var navMarginLeft = document.getElementById('nav').style.marginLeft
-    // var mainWidth = document.getElementById('main').style.width
-    // var mainMarginLeft = document.getElementById('main').style.marginLeft
-    
     if (!this.state.popOut) { 
       document.getElementById('nav').style.width = "150px";
-      // document.getElementById('main').style.marginLeft = "250px";
     }
     else { 
       document.getElementById('nav').style.width = "50px";
-      // document.getElementById('main').style.marginLeft = "50px";
     }
   };
 
   popOutHandler() {
-    // if(!this.state.popOut) {
-    //   this.setState({popOut = true})
-    // }
-    // else {
-    //   this.setState({popOut = false})
-    // }
     this.setState({'popOut': !this.state.popOut})
     this.popInOut();
   };
 
   clearIt () {
     var socket = io();
-    //calls for all clients to clear sketchpad
-    console.log('clearing sketchpad')
-    socket.emit('clear drawing');
+    socket.emit('clear drawing', { user: window.localStorage.user });
   };
 
   shareScreen () {
@@ -113,13 +100,24 @@ export default class Home extends React.Component {
 
   };
 
+  showHistory () {
+    var context = this
+    document.getElementById('scaffolding').style.visibility = 'visible'
+    axios.get('/transcripts', { headers: { user: window.localStorage.user }})
+      .then((resp) => { console.log('got transcript data', resp.data); context.setState({ transcripts: resp.data }) })
+      .catch((err) => { console.log('err', err)})
+    axios.get('/sketches', { headers: { user: window.localStorage.user }})
+      .then((resp) => { console.log('got sketch data', resp.data); context.setState({ sketches: resp.data }); console.log('home state', context.state) })
+      .catch((err) => { console.log('ugh', err)})
+  }
+
 
 	render() {
 		return (
       <div id='home' ref="home">
         <Streams/>
-        <Nav collapse={this.collapse.bind(this)} popOutHandler={this.popOutHandler.bind(this)} clearIt={this.clearIt.bind(this)}/>
-        <SuperContainer collapse={this.collapse.bind(this)} />
+        <Nav collapse={this.collapse.bind(this)} popOutHandler={this.popOutHandler.bind(this)} clearIt={this.clearIt.bind(this)} showHistory={this.showHistory.bind(this)}/>
+        <SuperContainer collapse={this.collapse.bind(this)} transHistory={this.state.transcripts} sketchHistory={this.state.sketches}/>
       </div>
 		)
 	}

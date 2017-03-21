@@ -1,5 +1,6 @@
 import React from 'react';
 import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router'
+import { Button } from 'react-bootstrap';
 
 export default class Splash extends React.Component {
 	constructor (props) {
@@ -19,7 +20,7 @@ export default class Splash extends React.Component {
 						<h2>Teamwork has never been easier</h2>
 						<h3>Connect with your team wherever they are.</h3>
 					</div>
-					<div id="createRoomContainer">
+					<div id="createRoomContainer" className="col-sm-6 col-md-3 col-lg-6">
 						<div>
 							<form id="auth">
 								<h3>Create a Room</h3>

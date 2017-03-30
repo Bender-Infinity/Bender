@@ -28,7 +28,7 @@ export default class App extends Component {
 
      hashHistory.push('/home');
 	}
-
+//save name of user
 	saveName () {
 		var userName;
 		var name = document.getElementById('inputName').value;

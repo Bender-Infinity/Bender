@@ -70,6 +70,6 @@
     "sinon": "^1.17.7",
     "version-changelog": "^2.0.1",
     "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.1"
+    "webpack-dev-server": "^2.2.1"
   }
 }

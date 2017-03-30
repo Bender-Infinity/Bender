@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var CompressionPlugin = require('compression-webpack-plugin');
+//var CompressionPlugin = require('compression-webpack-plugin');
 
 const config = {
   entry: './client/Index.jsx',
